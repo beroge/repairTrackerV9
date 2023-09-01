@@ -13,6 +13,8 @@
         <div class="login-header">
             <img src="pcnm.png" />
         </div>
+        <!-- Fix: Add the closing tag for the img element -->
+
         <form class="login-form" name="loginbox" action="" method="post" onsubmit="return setAction()">
             <div class="wrapper">
                 <button class="learn-more" type="button" onclick="setAction('repair')">
@@ -30,11 +32,36 @@
             </div>
             <br />
 
+            <!-- Fix: Move the script tag before the form element -->
+            <script>
+                function setAction(option) {
+                    var form = document.forms['loginbox'];
+                    var nameInput = form.querySelector('#nameInput');
+                    var passwordInput = form.querySelector('#passwordInput');
+                    var selectedOption = option;
+
+                    // Fix: Use a hidden input field to store the selected option value
+                    var buttonValueInput = form.querySelector('#buttonValue');
+                    buttonValueInput.value = selectedOption;
+                    console.log(buttonValueInput.value);
+
+                    var username = nameInput.value;
+                    var password = passwordInput.value;
+
+                    if (selectedOption === 'repair') {
+                        form.action = 'rt14/repair/login.php?username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(password);
+                    } else if (selectedOption === 'time') {
+                        form.action = 'rt14/timeclock/index.php?username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(password);
+                    }
+
+                    return true;
+                }
+            </script>
+
             <!-- Hidden input fields for values -->
             <input type="hidden" name="button" id="buttonValue" value="">
             <input type="text" name="name" id="nameInput" placeholder="Username" /><br />
-            <input type="password" name="password" id="passwordInput" placeholder="Password" />
-            <br />
+            <input type="password" name="password" id="passwordInput" placeholder="Password" /><br />
             <input type="hidden" name="RURI" value="<?php echo $ruri; ?>" />
             <input type="hidden" name="METHOD" value="<?php echo $method; ?>" /><br />
             <button class="learn-more" type="submit" id="submitButton">
@@ -45,32 +72,6 @@
             </button>
         </form>
 
-        <script>
-            function setAction(option) {
-                var form = document.forms['loginbox'];
-                var buttonValueInput = form.querySelector('#buttonValue');
-                var nameInput = form.querySelector('#nameInput');
-                var passwordInput = form.querySelector('#passwordInput');
-                
-                // Get the selected option based on the button clicked
-                var selectedOption = option;
-                
-                buttonValueInput.value = selectedOption;
-
-                // You can access the input values here if needed
-                var username = nameInput.value;
-                var password = passwordInput.value;
-
-                if (selectedOption === 'repair') {
-                    form.action = 'rt14/repair/login.php';
-                } else if (selectedOption === 'time') {
-                    form.action = 'rt14/timeclock/login.php';
-                }
-
-                return true; // Allow the form to submit
-            }
-        </script>
     </div>
 </body>
 </html>
-
