@@ -17,7 +17,7 @@
 
         <form class="login-form" name="loginbox" action="" method="post" onsubmit="return setAction()">
             <div class="wrapper">
-                <button class="learn-more" type="button" onclick="setAction('repair')">
+                <button class="learn-more active" type="button" onclick="setAction('repair')">
                     <span class="circle" aria-hidden="true">
                         <span class="icon arrow"></span>
                     </span>
