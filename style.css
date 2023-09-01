@@ -129,7 +129,7 @@ body {
   /* Button stuff */
   .wrapper {
     display: flex;
-    justify-items: center;
+    flex-wrap:wrap;
   }
   
   button {
@@ -216,3 +216,13 @@ button.active .button-text{
   .push {
     margin-left:45px!important;
   } 
+  /*Media Querie*/
+  @media only screen and (min-width: 150px) and (max-width: 530px) {
+    button.learn-more .button-text{
+      color:#fff;
+      font-size:.8rem;
+    }
+    button.learn-more {
+
+    }
+}
