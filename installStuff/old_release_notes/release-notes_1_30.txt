@@ -1,0 +1,13 @@
+A new bugfix release of PC Repair Tracker is attached to this email.
+
+A few bugs that were affecting certain versions of php with a 
+"Parse error: syntax error, unexpected $end" error.
+
+See the update.txt file for upgrade instructions.
+
+
+
+
+
+
+

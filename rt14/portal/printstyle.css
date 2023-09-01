@@ -1,0 +1,769 @@
+body {
+margin: 0px;
+padding: 0px;
+background: #ffffff;
+COLOR: #333333;
+FONT-SIZE: 13px;
+FONT-WEIGHT: normal;
+FONT-FAMILY: Helvetica, Sans;
+TEXT-DECORATION: none;
+text-shadow: none;
+}
+
+
+
+@media print {
+
+@page {
+	size: auto;
+     	margin: 7mm;
+}
+
+body {
+	margin-top: 0mm;
+	margin-bottom: 0mm; 
+        margin-left: 0mm;
+	margin-right: 0mm
+}
+
+
+.printbar {
+    display:none;
+}
+.printfooterbar {
+    display:none;
+}
+.hideprintedlink {
+    display:none;
+}
+.infoheading {
+    display:none;
+}
+
+
+.printpage {
+	line-height:1;
+        margin-left:0px;
+        margin-right:0px;
+        margin-top:0px;
+        margin-bottom:0px;
+        width: 100%;
+        background: #ffffff;
+}
+
+.printpage80 {
+        line-height:1;
+        margin-left:0px;
+        margin-right:0px;
+        margin-top:0px;
+        margin-bottom:0px;
+        width: 100%;
+        background: #ffffff;
+}
+
+
+.printpagebg {
+	background: #ffffff;
+}
+
+
+}
+
+
+@media screen {
+.printbar {
+        position: fixed;
+        top:0px;
+	z-index:80;
+        border-top: 1px solid #aaaaaa;
+	border-bottom: 2px solid #555555;
+        width: 100%;
+	margin-bottom:30px;
+	text-align:center;
+        padding:2px 0px 2px 0px;
+	background: #eeeeee; /* old browsers */
+        box-shadow: 0px 5px 10px #000000;
+}
+
+.printfooterbar {
+	margin-top:15px;
+	border-top: 2px solid #aaaaaa;
+        width: 100%;
+        text-align:left;
+        padding:2px 0px 2px 20px;
+        background: #ffffff; /* old browsers */
+        background: linear-gradient(to top, #ffffff 0%,#f3f3f3 50%, #ededed 51%, #ffffff 100%); /* W3C */
+        box-shadow: 0px -5px 10px #000000;
+}
+
+
+.hideprintedlink:link    {text-decoration: none; color: #021693; FONT-SIZE: 13px; FONT-FAMILY: Verdana,Arial,Helvetica; border-bottom: 1px solid #669d5f;}
+.hideprintedlink:visited {text-decoration: none; color: #021693; FONT-SIZE: 13px; FONT-FAMILY: Verdana,Arial,Helvetica; border-bottom: 1px solid #669d5f;}
+.hideprintedlink:active  {text-decoration: none; color: #2863d9; FONT-SIZE: 13px; FONT-FAMILY: Verdana,Arial,Helvetica; border-bottom: 1px solid #ff0000;}
+.hideprintedlink:hover   {text-decoration: none; color: #ff0000; FONT-SIZE: 13px; FONT-FAMILY: Verdana,Arial,Helvetica; border-bottom: 1px solid #ff0000;}
+
+.infoheading {
+        padding:4px;
+	COLOR: #333333;
+        FONT-SIZE: 18px;
+        font-style: italic;
+        FONT-WEIGHT: bold;
+        FONT-FAMILY: Helvetica;
+}
+
+
+.printpage {
+	line-height:1;
+        margin-left:auto;
+        margin-right:auto;
+	margin-top:50px;
+ 	margin-bottom:50px;
+        width: 700px;
+        padding: 60px;
+        background: #ffffff;
+        box-shadow: 3px 3px 6px #000000;
+
+}
+
+.printpage80 {
+        line-height:1;
+        margin-left:auto;
+        margin-right:auto;
+        margin-top:50px;
+        margin-bottom:50px;
+        width: 260px;
+        padding: 10px;
+        background: #ffffff;
+        box-shadow: 3px 3px 6px #000000;
+
+}
+
+
+.printpagebg {
+	background: #888888;
+	padding-top: 50px;
+}
+
+
+}
+
+
+
+.lineitems {
+padding: 2px 0px;
+vertical-align: top;
+}
+
+
+body {margin: 0px; padding: 0px; }
+
+        A:link    {text-decoration: none; color: #021693; FONT-SIZE: 12px; FONT-FAMILY: Verdana,Arial,Helvetica; border-bottom: 1px solid #669d5f;}
+        A:visited {text-decoration: none; color: #021693; FONT-SIZE: 12px; FONT-FAMILY: Verdana,Arial,Helvetica; border-bottom: 1px solid #669d5f;}
+        A:active  {text-decoration: none; color: #2863d9; FONT-SIZE: 12px; FONT-FAMILY: Verdana,Arial,Helvetica; border-bottom: 1px solid #ff0000;}
+        A:hover   {text-decoration: none; color: #ff0000; FONT-SIZE: 12px; FONT-FAMILY: Verdana,Arial,Helvetica; border-bottom: 1px solid #ff0000;}
+
+        A.smalllink:link    {text-decoration: none; color: #021693; FONT-SIZE: 10px; FONT-FAMILY: Verdana,Arial,Helvetica; border-bottom: 1px solid #669d5f;}
+        A.smalllink:visited {text-decoration: none; color: #021693; FONT-SIZE: 10px; FONT-FAMILY: Verdana,Arial,Helvetica; border-bottom: 1px solid #669d5f;}
+        A.smalllink:active  {text-decoration: none; color: #2863d9; FONT-SIZE: 10px; FONT-FAMILY: Verdana,Arial,Helvetica; border-bottom: 1px solid #ff0000;}
+        A.smalllink:hover   {text-decoration: none; color: #ff0000; FONT-SIZE: 10px; FONT-FAMILY: Verdana,Arial,Helvetica; border-bottom: 1px solid #ff0000;}
+
+        A.biglink:link    {text-decoration: none; color: #021693; FONT-WEIGHT: bold; FONT-SIZE: 14px; FONT-FAMILY: Verdana,Arial,Helvetica; border-bottom: 1px solid #669d5f;}
+        A.biglink:visited {text-decoration: none; color: #021693; FONT-WEIGHT: bold; FONT-SIZE: 14px; FONT-FAMILY: Verdana,Arial,Helvetica; border-bottom: 1px solid #669d5f;}
+        A.biglink:active  {text-decoration: none; color: #2863d9; FONT-WEIGHT: bold; FONT-SIZE: 14px; FONT-FAMILY: Verdana,Arial,Helvetica; border-bottom: 1px solid #ff0000;}
+        A.biglink:hover   {text-decoration: none; color: #ff0000; FONT-WEIGHT: bold; FONT-SIZE: 14px; FONT-FAMILY: Verdana,Arial,Helvetica; border-bottom: 1px solid #ff0000;}
+
+A.giantlink:link    {text-decoration: none; color: #021693; FONT-SIZE: 30px; FONT-FAMILY: Helvetica; border-bottom: 1px solid #669d5f;FONT-WEIGHT: bold;}
+A.giantlink:visited {text-decoration: none; color: #021693; FONT-SIZE: 30px; FONT-FAMILY: Helvetica; border-bottom: 1px solid #669d5f;FONT-WEIGHT: bold;}
+A.giantlink:active  {text-decoration: none; color: #2863d9; FONT-SIZE: 30px; FONT-FAMILY: Helvetica; border-bottom: 1px solid #ff0000;FONT-WEIGHT: bold;}
+A.giantlink:hover   {text-decoration: none; color: #ff0000; FONT-SIZE: 30px; FONT-FAMILY: Helvetica; border-bottom: 1px solid #ff0000;FONT-WEIGHT: bold;}
+
+
+.hrstyle {
+        width:100%;
+        height: 2px;
+        background: #333333;
+}
+
+
+.text10 {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 10px; FONT-WEIGHT: normal; FONT-FAMILY: Helvetica; TEXT-DECORATION: none;}
+.text10b {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 10px; FONT-WEIGHT: bolder; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.text10i {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 10px; font-style: italic; FONT-WEIGHT: normal; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.text10bu {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 10px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: underline;}
+.text10bi {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 10px; FONT-WEIGHT: bold; font-style: italic; FONT-FAMILY: Helvetica; TEXT-DECORATION: none;}
+.text12 {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 12px; FONT-WEIGHT: normal; FONT-FAMILY: Helvetica; TEXT-DECORATION: none;text-shadow:none}
+.text12b {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 12px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none;text-shadow:none;}
+.text12bu {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 12px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: underline;}
+.text12bi {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 12px; FONT-WEIGHT: bold; font-style: italic; FONT-FAMILY: Helvetica; TEXT-DECORATION: none;}
+.text12i {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 12px; FONT-WEIGHT: normal; font-style: italic; FONT-FAMILY: Helvetica; TEXT-DECORATION: none;}
+
+.text14b {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 14px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.text20b {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 20px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.text30b {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 30px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.text50b {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 50px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.textidnumber {BACKGROUND: none; COLOR: #888888; FONT-SIZE: 24px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.textgray12b {BACKGROUND: none; COLOR: #555555; FONT-SIZE: 12px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none;text-shadow:none;}
+.textgray12 {BACKGROUND: none; COLOR: #555555; FONT-SIZE: 12px; FONT-WEIGHT: normal;FONT-FAMILY: Helvetica; TEXT-DECORATION: none;text-shadow:none;}
+.textgreen12i {BACKGROUND: none; COLOR: green; FONT-SIZE: 12px; FONT-WEIGHT: normal; font-style: italic; FONT-FAMILY: Helvetica; TEXT-DECORATION: none;}
+.textred16b {BACKGROUND: none; COLOR: #ff0000; FONT-SIZE: 16px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.textred12 {BACKGROUND: none; COLOR: #ff0000; FONT-SIZE: 12px; FONT-WEIGHT: normal; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.text14b {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 14px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.text16b {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 16px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.payments {font-weight:bold;border-bottom: 2px solid #000000; FONT-FAMILY: Helvetica; TEXT-DECORATION: none;FONT-SIZE: 12px;}
+.payments2 {border: 2px solid #000000; padding: 3px;border-radius:7px; FONT-FAMILY: Helvetica; TEXT-DECORATION: none; FONT-SIZE: 12px;}
+.claimticketheader {font-family:Helvetica; font-weight:bold; color:#000000; padding:4px 10px 4px 10px;font-size:24px;border-radius:10px; border:3px solid #000000;white-space: nowrap;}
+.scanheading {font-family:Helvetica; font-weight:bold; color:#000000; padding:4px;font-size:32px;border-radius:10px; border:4px solid #000000;}
+
+.pricetitle {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 16px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none; border: 2px #000000 solid; border-radius:25px; padding:2px;}
+
+.button {
+color:#333333;
+border:#cccccc 1px solid;
+background: #ffffff;
+box-shadow: 0 3px 2px -3px #333333;
+border-radius:3px;
+padding:4px 16px;
+font-size:14px;
+        display:inline-block;
+        font-weight:normal;
+        margin:2px;
+transition: all 0.3s ease 0s;
+}
+
+.button:hover {
+background: #333333;
+color:#ffffff;
+border:#000000 1px solid;
+}
+.button:active {
+        position:relative;
+        top:1px;
+}
+.button:disabled {
+background: #818181;
+        color:#eeeeee;
+border:#333333 1px solid;
+}
+
+
+
+
+
+.bigbutton {
+color:#333333;
+border:#cccccc 1px solid;
+background: #ffffff;
+box-shadow: 0 3px 2px -3px #333333;
+border-radius:3px;
+padding:4px 16px;
+font-size:30px;
+        display:inline-block;
+        font-weight:normal;
+        margin:2px;
+transition: all 0.3s ease 0s;
+}
+
+.bigbutton:hover {
+background: #333333;
+color:#ffffff;
+border:#000000 1px solid;
+}
+.bigbutton:active {
+        position:relative;
+        top:1px;
+}
+.bigbutton:disabled {
+background: #818181;
+        color:#eeeeee;
+border:#333333 1px solid;
+}
+
+
+
+
+/* this is the style for the sticky note boxes*/
+.colorboxsn {
+	text-align:left;
+        border-radius:3px;
+        padding: 4px;
+        margin: 5px 3px 5px 3px;
+}
+
+
+.paidstamp {
+padding:5px;
+margin-right:100px;
+COLOR: #009900;
+FONT-SIZE: 40px;
+FONT-WEIGHT: bold;
+text-align:left;
+FONT-FAMILY:Trebuchet MS,Helvetica,Arial;
+border: 4px solid #009900;
+border-radius:20px;
+	transform: rotate(-12deg);
+}
+
+.overduestamp {
+padding:5px;
+margin-right:100px;
+COLOR: #FFA0A0;
+FONT-SIZE: 40px;
+FONT-WEIGHT: bold;
+text-align:left;
+FONT-FAMILY:Trebuchet MS,Helvetica,Arial;
+border: 4px solid #FFA0A0;
+border-radius:20px;
+        transform: rotate(-12deg);
+}
+
+
+
+.wonote {
+        position:relative;
+        padding:12px;
+        margin:0 0 1.5em;
+        border:1px solid #333333;
+        color:#333;
+        background:#fff;
+}
+
+
+.wonote.left {
+        margin-left:30px;
+}
+
+
+.wonote.right {
+        margin-right:30px;
+}
+
+
+.wonote:before {
+        content:"";
+        position:absolute;
+        bottom:-20px; /* value = - border-top-width - border-bottom-width */
+        left:40px; /* controls horizontal position */
+    border-width:20px 20px 0;
+        border-style:solid;
+    border-color:#333333 transparent;
+    /* reduce the damage in FF3.0 */
+    display:block;
+    width:0;
+}
+
+/* creates the smaller  triangle */
+.wonote:after {
+        content:"";
+        position:absolute;
+        bottom:-16px; /* value = - border-top-width - border-bottom-width */
+        left:43px; /* value = (:before left) + (:before border-left) - (:after border-left) */
+        border-width:16px 16px 0;
+        border-style:solid;
+        border-color:#fff transparent;
+    /* reduce the damage in FF3.0 */
+    display:block;
+    width:0;
+}
+
+
+/* creates the larger triangle */
+.wonote.top:before {
+        top:-20px; /* value = - border-top-width - border-bottom-width */
+        bottom:auto;
+        left:auto;
+        right:43px; /* controls horizontal position */
+    border-width:0 20px 20px;
+}
+
+/* creates the smaller  triangle */
+.wonote.top:after {
+        top:-16px; /* value = - border-top-width - border-bottom-width */
+        bottom:auto;
+        left:auto;
+        right:47px; /* value = (:before right) + (:before border-right) - (:after border-right) */
+    border-width:0 16px 16px;
+}
+
+
+/* creates the larger triangle */
+.wonote.left:before {
+        top:10px; /* controls vertical position */
+        bottom:auto;
+        left:-10px; /* value = - border-left-width - border-right-width */
+        border-width:10px 10px 10px 0;
+        border-color:transparent #333333;
+}
+
+/* creates the smaller  triangle */
+.wonote.left:after {
+        top:10px; /* value = (:before top) + (:before border-top) - (:after border-top) */
+        bottom:auto;
+        left:-9px; /* value = - border-left-width - border-right-width */
+        border-width:10px 10px 10px 0;
+        border-color:transparent #fff;
+}
+
+
+/* Variant : right
+------------------------------------------ */
+
+/* creates the larger triangle */
+.wonote.right:before {
+        top:10px; /* controls vertical position */
+        bottom:auto;
+    left:auto;
+        right:-10px; /* value = - border-left-width - border-right-width */
+        border-width:10px 0 10px 10px;
+        border-color:transparent #333333;
+}
+
+/* creates the smaller  triangle */
+.wonote.right:after {
+        top:10px; /* value = (:before top) + (:before border-top) - (:after border-top) */
+        bottom:auto;
+    left:auto;
+        right:-9px; /* value = - border-left-width - border-right-width */
+        border-width:10px 0 10px 10px;
+        border-color:transparent #fff;
+}
+
+/* this is the style for the recent stock list */
+table.stocklist {
+        border-width: 0px;
+        border-collapse: collapse;
+}
+table.stocklist th {
+        padding: 3px 20px 3px 3px;
+        background: #cccccc;
+        text-align: left;
+        border-bottom: 5px solid #777777;
+}
+table.stocklist td {
+        padding: 5px;
+        border: 1px solid #cccccc;
+}
+
+table.stocklist tr:nth-child(odd) {
+       background: #eeeeee;
+}
+
+table.stocklist tr:nth-child(even) {
+       background: #ffffff;
+}
+
+
+table.printables {
+        border-width: 0px;
+        border-collapse: collapse;
+	width:100%;
+}
+table.printables th {
+        padding: 10px 10px 10px 10px;
+	color: #000000; 
+	FONT-SIZE: 13px; 
+	FONT-FAMILY: Helvetica;
+        text-align: left;
+	box-shadow: inset 0 0 0 1000px #dddddd; 
+	border: 1px solid #eeeeee;
+}
+table.printables td {
+        padding: 5px;
+        border-bottom: 1px solid #eeeeee;
+}
+
+table.printables td.subhead {
+        padding: 5px;
+        border-bottom: 2px solid #333333;
+        FONT-SIZE: 11px;
+        FONT-FAMILY: Helvetica;
+
+}
+
+table.printables td.bordernone {
+        padding: 5px;
+        border-bottom: 2px solid #333333;
+        FONT-SIZE: 11px;
+        FONT-FAMILY: Helvetica;
+
+}
+
+
+
+table.printables tr:nth-child(even) {
+       background: #ffffff;
+}
+
+
+
+/* For Receipt Printers */
+
+
+table.printablesrp {
+        border-width: 0px;
+        border-collapse: collapse;
+        width:100%;
+}
+
+table.printablesrp th {
+        padding: 7px 7px 7px 7px;
+        color: #000000;
+        FONT-SIZE: 10px;
+        FONT-FAMILY: Helvetica;
+        text-align: left;
+        box-shadow: inset 0 0 0 1000px #dddddd;
+        border: 1px solid #eeeeee;
+}
+table.printablesrp td {
+        padding: 3px;
+        border-bottom: 1px solid #eeeeee;
+        FONT-SIZE: 10px;
+        FONT-FAMILY: Helvetica;
+}
+
+table.printablesrp td.subhead {
+        padding: 3px;
+        border-bottom: 2px solid #333333;
+        FONT-SIZE: 9px;
+        FONT-FAMILY: Helvetica;
+}
+
+table.printablesrp td.bordernone {
+        padding: 3px;
+        border-bottom: 2px solid #333333;
+        FONT-SIZE: 9px;
+        FONT-FAMILY: Helvetica;
+
+}
+
+table.printablesrp tr:nth-child(even) {
+       background: #ffffff;
+}
+
+
+
+.sizeme10 {
+font-size: 0.77em;
+}
+
+.sizeme16 {
+font-size: 1.25em;
+}
+
+.sizeme20 {
+font-size: 1.54em;
+}
+
+.boldme {
+font-weight: bold;
+}
+
+.italme {
+font-style: italic;
+}
+
+.displayblock {
+display: block !important;
+}
+
+.floatright {
+float: right;
+}
+
+.textalignright {
+text-align: right;
+}
+
+.textalignleft {
+text-align: left;
+}
+
+.colormered {
+color:#ff3f00;
+}
+.colormegreen {
+color:#83ff00;
+}
+.colormeblue {
+color:#0050EF;
+}
+.colormewhite {
+color:#ffffff;
+}
+
+table.pad5 td {
+padding: 5px;
+}
+
+table.pad10 td {
+padding: 10px;
+}
+
+table.pad20 td {
+padding: 20px;
+}
+
+
+
+
+/* this is the style for standard list tables */
+table.standard, table.doublestandard {
+        border-collapse: collapse;
+        width:100%;
+
+}
+
+table.standard th, table.doublestandard th {
+        padding: 10px 10px 10px 10px;
+        box-shadow: inset 0 0 0 1000px #dddddd;
+        text-align: left;
+        color:black;
+        font-size: 12px;
+        box-sizing: border-box;
+}
+
+table.standard th:first-child, table.doublestandard th:first-child {
+    border-radius: 3px 0 0 0;
+}
+
+table.standard th:last-child, table.doublestandard th:last-child {
+    border-radius: 0 3px 0 0;
+}
+
+table.standard th:only-child, table.doublestandard th:only-child{
+    border-radius: 3px 3px 0 0;
+}
+
+table.standard td, table.doublestandard td {
+        padding: 5px;
+        border-bottom: 2px solid #dddddd;
+        color:black;
+        box-sizing: border-box;
+        font-size: 12px;
+}
+
+table.standard tr:nth-child(odd) {
+        box-shadow: inset 0 0 0 1000px #fcfcfc;
+}
+
+table.standard tr:nth-child(even) {
+       background: #ffffff;
+}
+
+table.lastalignright td:last-child {
+    text-align:right;
+}
+
+
+
+/* this is the style for standard list tables */
+table.bigstandard, table.bigdoublestandard {
+        border-collapse: collapse;
+}
+
+table.bigstandard th, table.bigdoublestandard th {
+        padding: 10px;
+        box-shadow: inset 0 0 0 1000px #dddddd;
+        text-align: left;
+        color:#333333;
+        font-size: 20px;
+        box-sizing: border-box;
+}
+
+table.bigstandard th:first-child, table.bigdoublestandard th:first-child {
+    border-radius: 3px 0 0 0;
+}
+
+table.bigstandard th:last-child, table.bigdoublestandard th:last-child {
+    border-radius: 0 3px 0 0;
+}
+
+table.bigstandard th:only-child, table.bigdoublestandard th:only-child{
+    border-radius: 3px 3px 0 0;
+}
+
+table.bigstandard td, table.bigdoublestandard td {
+        padding: 10px;
+        border-bottom: 2px solid #dddddd;
+        color:black;
+        box-sizing: border-box;
+        font-size: 20px;
+}
+
+table.bigstandard tr:nth-child(odd) {
+        box-shadow: inset 0 0 0 1000px #fcfcfc;
+}
+
+table.bigstandard tr:nth-child(even) {
+       background: #ffffff;
+}
+
+
+table.passbadge {
+        border-collapse: separate;
+        border-spacing:0px 5px;
+        width:100%;
+}
+
+table.passbadge td:nth-child(odd) {
+        padding: 3px;
+        box-sizing:border-box;
+        box-shadow: inset 0 0 0 1000px #eeeeee;
+        border-left: 2px #eeeeee solid;
+        border-top: 2px #eeeeee solid;
+        border-bottom: 2px #eeeeee solid;
+        vertical-align:middle;
+        text-align:center;
+        width:30px;
+        color:#333333;
+        border-radius:3px 0px 0px 3px;
+}
+
+table.passbadge td:nth-child(even) {
+        padding: 5px 5px 5px 10px;
+        border-right: 2px #eeeeee solid;
+        border-top: 2px #eeeeee solid;
+        border-bottom: 2px #eeeeee solid;
+        background:#ffffff;
+        vertical-align:top;
+        border-radius:0px 3px 3px 0px;
+}
+
+
+
+table.passbadge2 {
+        border-collapse: separate;
+        border-spacing:0px 5px;
+        width:100%;
+}
+
+table.passbadge2 td:nth-child(odd) {
+        padding: 3px;
+        box-sizing:border-box;
+        box-shadow: inset 0 0 0 1000px #aaaaaa;
+	border-left: 2px #aaaaaa solid;
+        border-top: 2px #aaaaaa solid;
+        border-bottom: 2px #aaaaaa solid;
+        vertical-align:middle;
+        text-align:center;
+        width:30px;
+        color:#333333;
+        border-radius:3px 0px 0px 3px;
+}
+
+table.passbadge2 td:nth-child(even) {
+        padding: 5px 5px 5px 10px;
+        border-right: 2px #aaaaaa solid;
+        border-top: 2px #aaaaaa solid;
+        border-bottom: 2px #aaaaaa solid;
+        background:#ffffff;
+        vertical-align:top;
+        border-radius:0px 3px 3px 0px;
+}
+
+
+
+
+.leftindent {
+border-left: 7px #dddddd solid;
+padding-left: 5px;
+}
+

@@ -1,0 +1,90 @@
+A new pipin hot release of PC Repair Tracker is attached to this email.
+
+Make sure to read this announcement complete announement before rushing off to upgrade.
+
+It is recommended to backup your database and files before doing an upgrade.
+While in previous releases, it would not hurt anything if you skipped a step in the upgrade process and
+you completed it later, this release is different. The payments backend was completely re-written. In order to
+support multiple payments per receipt, payments had to be moved to their own database table.
+
+When you run the database upgrade script, it will perform this conversion. My own database of 20,000 receipts
+converted in less that 2 seconds. Make sure you only click the upgrade link once. (still surprizes me how many
+computer savvy people double click things that should be single clicked). It is important that no sales are processed
+through the system between the time that the database upgrade is performed and the time at which you upload the new code.
+If you do, your daily reports will be off. 
+
+Here is the condensed feature list:
+*Bug Fix: Fix potential javascript problem with warning message when printing customer repair sheet.
+*Change: Use Business name as from: name for the smsglobal SMS function.
+*Feature: Re-Written Payment backend that now supports Split Transactions
+*Feature: New AuthorizeNet Card Present Payment Plugin
+*Feature: New Custom Payment Plugin - You can now define your own custom payment types
+*Feature: New PayPal Web Payments Pro Plugin
+*Feature: Better passing of customer information to checkout cart from invoices and work orders.
+*Enhancement: More fixes to reduce spamassasin scores.
+*Feature: Ability to take Deposits
+*Enhancement: Allow Repair Report to stretch to the width of the screen.
+*Enhancement: User setting to turn off auto firing print dialogs.
+*Enhancement: Allow On Service Call and Remote Support session statuses to show on touchscreen view.
+*Feature: Ability to Email Claim Tickets
+*Enhancement: Added Sticky Note view for This Week and Past Due
+*Enhancement: Added restock link from Order Planning for items added to the list from the Sold Items report.
+*Enhancement: Work Order ID search box on repair side.
+
+Split Transactions - I am already loving this myself. In order to do split transactions, I needed to change the process a little. Previously
+you would add things to the cart, select a payment method, and enter details and check it out. Now there is a "Current Customer" area that
+stores the customer details that will be recorded on the receipt. You can fill this out manually and save it, or if you checkout a system,
+ or invoice from the repair side it will populate this info for you. You then add payments. Each payment added will ask you the amount of the
+payment made with each method. Once payments are added and the total of the payments equals the receipt total, a checkout button will appear
+to finalize the sale, the payment methods will also disappear. Each payment collected will also offer and area to collect customer details,
+this is intentional, so that if the name on a credit card or check does not match the customers name, you will still have the information.
+For instance I have parents who write checks to pay for a kids bill, I have a law firm writes checks for a chiropractor.
+
+The invoice checkout process is also different, before when you checked out an invoice, it was pumped into the current cart and
+you were sent straight to pick a payment method and you never really saw the items in the cart. Now invoice items are copied to the
+cart and you check things out using the same process as any other sale.
+
+The AuthorizeNet plugin has been rewritten as well. When you add an AuthNet payment to the cart, the card is charged at that moment,
+not at the moment you click the checkout button. If you void a payment from the cart, it will reconnect to AuthNet and void it.
+This action would be visable in your AuthNet control panel on the AuthorizeNet Website.
+
+The new AuthrorizeNetCP (Card Present) plugin allows you to use AuthNet Card Present API, which has the advantage of lower rates
+because in addition to the CC number being sent, raw card track data is also sent which means you get charged lower rates. You can still
+manually key a card in, you rate will just be downgraded to the "Card Not Present Rate". I personally am in the process of switching to 
+this, and have not been able to test this plugin yet, but I expect it to be ready to go.
+
+Many of you probably popped a capacitor when you saw that there was a PayPal plugin. This plugin actually implements the 
+PayPal Website Payments Pro API. It is a high level system with PayPal that lets you take lightning fast payments without having to
+go to the PayPal website or leaving the PCRT system. This plugin is complete but untested. I too was excited to possibly use this 
+along with AuthNet after coding it, then I looked deeper into the fees. They are almost double that of what AuthorizeNetCP charges. 
+Roughly $30 per month plus .30 cents per transaction and 3%-2.2% of the sale, but there are processors that charge more than that.
+Fee Schedule here:
+
+https://cms.paypal.com/us/cgi-bin/?&cmd=_render-content&content_ID=ua/ProVT_full&locale.x=en_US
+
+You can also now setup your own custom payment options. There is a "CustomPayment.php" script. You can rename and make multiple copies 
+of this file. For instance, you could rename it to Bank.php, open it up and edit the two variables at the top of the file. 
+Edit the scriptname variable to match what you named the PHP file minus the php extension. Then enter the extra fields 
+you wish to collect info for. Then in your store/deps.php file enter the your name for the payment plugin into the payment methods array.
+
+IPAD users will be happy that they can now email claim tickets and disable the javascript print dialogs.
+
+Also there is now a new deposits feature. Take payments or partial payments, and print/email a receipt for the deposit. Then add items to 
+the cart and go to "Deposits" and add the deposit to the cart as a payment. If you add a deposit to a work order, and then procede to
+check it out, the deposit will be linked to the work order, and beneath your list of payment methods, you will see any deposits
+and be able to quickly add them to the cart.
+
+Couple final notes, be sure to play with the demo to experiment with these new features. Also if you make code modifications, be sure
+to document your changes and backup your modified files so that it will be easier to merge them back in after an update. Make sure you
+overwrite your deps.php files. 
+
+Upgrade instructions are in the update.txt file as always.
+
+Enjoy!
+-Luke
+
+
+
+
+
+

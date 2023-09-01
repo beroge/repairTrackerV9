@@ -1,0 +1,58 @@
+Attached to this email is the new v7 release of PC Repair Tracker.
+
+This release mostly contains user requested enhancements.
+
+# Highlights:
+
+* Ability to put printed descriptions on items and labor on printables.
+* Internal technician chat feature.
+* Work Order Progress Status/Indicator
+* Named Discounts
+* Work Order Promises
+
+Hope you enjoy this release!
+
+-Luke
+
+
+###############################################################################
+
+>>>>>>>>>> Change Log
+Bug Fix: Performance fix for searching large inventories
+Compatibility Fix: Updated Dymo Javascript Code for compatibility with DLS 8.7.2+
+User Request: Internal Technician Chat Feature 
+Bug Fix: Fix for manual punch out in timeclock in certain timezones
+User Request: Added a setting to the repair/deps.php file to apply a filter to sms numbers to strip a leading digit from the number and other potential future needs.
+Bug Fix: Invoice notes lost when editing invoice contents.
+User Request: Added email and address to Bench Sheet
+User Request: Selectable fields on the Bench Sheet for the Main Asset/Device Info Field Options
+User Request: Ability to add printable item descriptions that show on invoices and receipts.
+Bug Fix: Fix stock level estimations that were broken when v6 added proper quantity support.
+User Request: Switching status on a job to Checked out that has never been checked out will set the checkout date.
+User Request: Option to unset checkout date and reopen a work order within 2 weeks of original close date.
+Enhancement: Upgraded to Font Awesome 5
+User Request: Ability to set multiple on call techs per store.
+User Request: Larger boxes for the city, state/province, postcode boxes on the POS cart.
+User Request: Added link to group page to send/reset portal password with login link.
+Bug Fix: Quantity not transferred when loading a kit.
+Bug Fix: Remove a serial from the list of available serials for a stock item if the serial currently resides in the POS cart.
+User Request: Ability the specify the serial number on a stock item that has available serials. This fixes the problem with kits and being able to apply a serial
+		after it has been copied from the kit.
+User Request: Show deposit totals on open invoice viewer.
+User Request: Based off another request for a quick overview of job progress, a Progress Counter/Indicator. 
+		This can be turned on per status in the status config. Expect a slight performance hit with this.
+Update: Updated Stripe POS plugin to use card tokenization just like the saved card feature.
+BugFix: Stop Cart from showing deposits that do not belong to a customer on mobile.
+Feature: Service Promises, ability to predefine promised service times and apply them to work orders.
+User Request: Show previous password on returning checkin.
+User Request: Added link in menu back to repair from timeclock.
+User Request: Tag selector put into two columns.
+User Request: Named Discounts - Predefine Discounts or name discounts
+Enhancement: When using the section selector at the bottom of the screen it will also now open the add to cart options and send message pane.
+Enhancement: Added several mobile phone brands to the status logos.
+User Request: Ability to send asset photos via SMS and Twilio.
+Bug Fix: Several cosmetic bugfixes related to the deposit receipt emailing function.
+User Request: Added method from inventory screen to mass add ready to sell items with prices in the repair cart.
+PHP 7.3 Compatibility: Removed all uses of each()
+Bug Fix: Fixed display problems when many asset photos are present on a work order.
+Feature: Added a pre-tax calculator

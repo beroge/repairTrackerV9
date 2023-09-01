@@ -1,0 +1,10 @@
+A new bugfix release of PC Repair Tracker is attached to this email.
+
+A few harmless but potentially annoying bugs were found and fixed in this release.
+
+See the update.txt file for upgrade instructions.
+
+
+
+
+

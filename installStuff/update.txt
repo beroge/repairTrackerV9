@@ -1,0 +1,85 @@
+################################################
+PCRT Release Version 9
+################################################
+
+>>>>>>>>>> Change Log
+
+Enhancement: Cleanup on invoice view button options
+Major Feature: Ledger
+Enhancement: Ability for techs that work regularly with the status view to only show jobs assigned
+             to them to pick from the pool of available un-assigned "Waiting For Bench" jobs and
+             assign them to themselves and set status to "On the Bench" in one click
+Minor Enhancement: Added links to bench sheet from claim ticket and dymo label print screen.
+Minor Change: Some changes to the bottom work order floater. Removed old side floater.
+Change: You can now override the sms number on work orders.
+Feature: Non Inventoried Items Quick Entry
+Change: Quick Labor on work orders now prefills the labor box instead of adding it immediatley to allow you to
+        edit the printed description, edit the price or change the quantity.
+Change: Added a search selector to the add deposit dropdown on work orders
+Change: Added a search selector to the new item inventory stock category
+Minor Enhancement: Added filter on invoice viewer for multistore to only show one store.
+Feature: Absence tracker in timeclock
+Bug Fix: Fixed missing styles in timeclock
+Minor Enhancement: Show Hourly wage in Timeclock
+Enhancement: Added ajax in cart and work order form.
+Enhancement: Some redesign of Point of Sale Cart
+Change: Moved saved carts and kits to inventory list.
+Change: Updated Jquery Version for more performance.
+Feature: Added configurable per invoice terms with optional automatic late fees. Late fees can also have taxes
+	applied using the service tax rate on a given configured tax rate.
+
+>>>>>>>> Step 1
+
+MAKE SURE YOU PERFORM ALL PREVIOUS UPGRADES FIRST.
+
+You will need to run the database upgrade script "databaseupgrade-8to9.php". Log into PCRT first,
+Then copy this file in your repair folder and run it from your browser by entering your system URL in the browser address
+bar like "http://myrepairsystem.com/mysystem/repair/databaseupgrade-8to9.php". Click the "Upgrade" link. For this
+upgrade script you will need to choose the default terms for your existing invoices.
+Once you see the upgrade finished message you are done. Delete the upgrade script from your repair folder when you are finished.
+
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+
+
+>>>>>>>> Step 2
+
+Re-upload all php files EXCEPT FOR THE DEPS.PHP FILES in these folders.
+Be careful to not re-upload any of the deps.php files or other files you may have customized for your
+own purposes.
+
+repair/
+repairmobile/
+store/
+storemobile/
+timeclock/
+
+
+>>>>>>>> Step 3
+
+Upload these updated stylesheet files, images and javascript files:
+
+repair/jq/select2.min.js
+repair/jq/select2.min.css
+repair/jq/facebox.js
+repair/jq/facebox.css
+repair/jq/closelabel.png
+repair/jq/jquery.js
+
+>>>>>>>> New User Permission:
+
+Ledger Access
+Create New Ledgers
+Wage info on Timeclock
+Manage Invoice Terms
+
+>>>>>>>> Optional Step 1
+
+If you want to use the new Ledger feature, upload the ledger folder and configure the deps.php file inside.
+
+
+
+

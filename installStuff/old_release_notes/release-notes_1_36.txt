@@ -1,0 +1,100 @@
+A new release of PC Repair Tracker is attached to this email. 
+
+# Touchscreen Enhancements
+Serveral Enhancements have been made to the touchscreen view. You can now switch between various canned items with one less click, you
+can change the status of a computer from the touchscreen. A selector was also added to view any of the statuses in addition to the 
+buttons at the top for the most common working statuses.
+
+# New Main Menus
+In an effort to waste less space at the top of the screen, the toolbar at the top has been replaced with a stationary drop down menu in the
+upper left hand corner.
+
+#Signature Pad Enhancements:
+Signature pads are now available on all customer printables. They can be enabled and disabled per document type and even if 
+they are enabled, it can be hidden per document.
+
+#Color Themes
+Several new default flat color themes for the main background have been added. Also 2 alternative stylesheets have been made available.
+
+# Service Reminders
+This is one of the features I am excited about. I hope that it is feature that will be used to bring customers back
+for regular service. You can now define several things such as tuneups, anti-virus renewals, etc and add them to a PC
+and the system will prompt you to email these out to your users. I also plan on putting a discount in my own service
+reminders to encourage customers to bring their computers back in for service. 
+
+#Print Multiple Invoices & Receipts
+You can now print ranges of invoices and receipts by number up to 200 at one time.
+
+#New Work Order email and sms notifications 
+You can now check a box to send an email and/or sms notification to a PCRT user when checking in a system.
+
+# Service Request Module
+A new module is now available to add to your website for taking service requests. It has some spam control features where you
+can limit the number of submissions in a time period by IP. You can also add an optional CAPTCHA. You can assigna PCRT user to 
+receive a notification of a submission via email and SMS. The CAPTCHA feature will probably be something you want to enable
+if you have SMS enabled and spamming becomes a problem.
+
+# New Bluepay/Stripe Payment Plugins
+The Bluepay plugin was created for a PCRT/Bluepay user. The new Stripe payments plugin looks to be a nice option for people
+that do not like monthly fees. Also does not require a merchant account. At a glance it appears to be US/Canada only. 
+ 
+
+To UPGRADE, make sure you follow the directions IN ORDER in the update.txt file.
+
+
+-Luke
+
+
+Complete Changelog:
+
+
+*Bug Fix: Some ical fixes in sticky.php and stickdisplay.php
+*Bug Fix: Cost Price and Serial number not passing from invoice checkout to cart in invoice.php
+*Feature: Enhancements to the touchscreen view. In repair/touch.php repair/touchfooter.php repair/touchheader.php repair/style.css
+*Fixes: Fixes in daily repair status report for changes to status code from previous release in store/reports.php 
+*Feature: Added ability to print price tag inclusive of tax in store/stock.php
+*Feature: Added support for Clickatell SMS provider in repair/sms.php
+*Feature: Added support for Bluepay Merchant Payment Processor in store/Bluepay.php, store/deps.php
+*Change: Added direct link to edit a work order from the work order history screen in repair/pc.php
+*Enhancement: Added warning to checkout button on work orders that have charges specified in a invoice in repair/index.php
+*Feature: Tax Report that lets you specify a Fiscal Start Year in store/reports.php
+*Enhancement: Added ability to archive recurring invoices in store/rinvoices.php, store/invoices.php
+*Enhancement: Show info about customer repair status checks when hovering over eye icon in status list in repair/style.css, repair/common.php
+*Enhancement: Added some mini-mega dropdown menus to help cleanup work order screen appearance in repair/index.php, repair/style.css
+*Enhancement: More stylesheet refinements to boxes and buttons in repair/style.css
+*Enhancement: Added SMS and Email to Called/Contact Status in index.php
+*Enhancement: Added Signature Pad to Invoices, Receipts, and Deposit Receipts. Added option to enable them per document type. Added option to hide the 
+              pad per document in store/receipts.php, store/invoices.php, store/deposits.php, repair/pc.php
+*Enhancement: Added a search and pick for the Take a Deposit feature not attached to a work order in store/deposits.php, store/cart.php
+*Fix: Added check to prevent an endless loop caused by entering a non-existent stock id number in repair/repcart.php, store/cart.php
+*Change: Reworked user editor in repair/admin.php
+*Enhancement: Added some flat color themes in the Store Admin in repair/admin.php
+*Enhancement: Modified asset image retrieval code in repair/pc.php, repair/touch.php, repair/index.php
+*Major Feature: Service Reminders in repair/servicereminders.php,repair/admin.php,repair/common.php, store/common.php
+*Feature: Ability to narrow stock search by category in store/stock.php
+*Fix: Add Customer City, State, Zip to emailed invoice in store/invoices.php
+*Major Feature: Service Request module to take service requests from your website with email and sms notification in servicerequests/*
+*Enhancement: Replaced autofocus/highlight javascripts with newer html 5 methods in many files.
+*Feature: Added ability to print a range of invoices en masse, up to 200 at one time in store/invoice.php
+*Change: Made the default for new checkins to be Unassigned to any user.
+*Feature: Ability to print multiple or a range of receipts in store/reports.php, store/receipts.php
+*Change: Changed the default assigned user in work orders to unassigned in repair/pc.php
+*Enhancement: Added a feature to print a foldable price card for systems checked in and sold in your store in repair/printpricecard.php
+*Enhancement: Added some spacing between line items on printable invoices/receipts in store/receipts.php, store/invoices.php, repair/printstyle.php
+*Enhancement: Added a collision check for saving work order notes in repair/index.php, repair/pc.php, repair/touch.php
+*Enhancement: Added ability to add a title spacer to quick labor list in repair/index.php, store/cart.php, repair/admin.php
+*Enhancement: Added ability to specify quantities on work order on both inv and non-inv items in repair/index.php and repair/repcart.php
+*Enhancement: Added ability to send email and sms notifications to the assigned user on new work orders and sticky notes in repair/sticky.php
+		repair/pc.php repair/common.php repair/smsnotify.php repair/sendenotify.php
+*Enhancement: Added company field - too many files to list.
+*Bug Fix: Errors in Invoice Search Function in store/invoice.php, store/mainmenu.php
+*Enhancement: Show Quote/Invoice Number in html title.
+*Enhancement: New Payment Plugin for Stripe Payments
+*Fix: Added doctype declarations to keep IE from going wonky on printable receipts, repair reports, and receipts.
+*Change: Added changes to workarea color display so that darker colors could be used without making text hard to read.
+*Enhancement: Show assigned tech in popup info in status list.
+*Option: Added new default status box "flat" style with flat colors.
+*Option: Added new alternate stylesheet	called repair/flat.css
+*Option: Added new alternate stylesheet called repair/flatondark.css This must be used in conjunction with the new dark	box themes
+*Bug Fix: Fixed date bug in customer status check notification in repairstatus/index.php
+

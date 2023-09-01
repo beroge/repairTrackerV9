@@ -1,0 +1,84 @@
+A new release of PC Repair Tracker is attached to this email. 
+
+# Updates to Touchscreen View:
+The code for the icons in the touchscreen view was re-written and new devices were added.
+
+# Counting Inventory
+A new tool was added to help recount inventory. It can be found by clicking on "Inventory Tools" when clicking on "Inventory"
+It constists of two tools, a system to scan and count items, and a system to show you items that have positive stock counts 
+but did not get counted yet. In my own store of around 1500 items I was able to count everything in less than 2 hours. I used
+a wheeled cart with a netbook a scan gun. Google Chrome works best as it automatically hilights the stock count so that you 
+can type the new count or just hit enter if the number is the same.
+
+#Serials and Product Codes:
+You can now enter serial numbers and product codes on inventoried and non-inventoried items. If an item from inventory is added to
+the cart and it was stocked with a number it will automatically redirect and allow you pick the number from a list. 
+
+# Attachments
+You can now add attachments to PC's, Work Orders, and Groups.
+
+#Tech Docs
+A common practice in alot of shops is to print out fixes found on the Internet. You can use a third party tool like PDF creator 
+and save them as PDF, and upload them to the Tech Docs section.
+
+# SMS Canned Responses 
+You can now define mulitple canned SMS responses.
+
+# ICS Export
+You can now export the calendar as ics. This also works with syncing to (but not from) Google calendar. The links to download or sync can
+be found in the settings menu. You must login as admin and generate a hash to use this feature the first time. The hash is to allow an
+external system to access it and still provide some security.
+
+#Signed Claim Ticket text.
+A user brought up the fact that if a claim ticked is signed, that the version of those terms and conditions must be saved at that time
+so that if the text is changed what was signed off on does not. This now happens.
+
+
+To UPGRADE, make sure you follow the directions IN ORDER in the update.txt file.
+
+
+-Luke
+
+
+Complete Changelog:
+
+*Enhancement: Show a TY by the recent list if a Thank You was sent
+*Change: Make Repair Volume report show on the current store.
+*Enhancement: Add sig pad to repair report.
+*Enhancement: Added css to hide "remove signature" links from the printable copy.
+*Change: Allow quote marks in Work Area names.
+*Bug Fix: Allow Dashes and Underscores in usernames again.
+*Enhancement: Rewrote icon guessing code for touchscreen.
+*Fix: Moved anchor point to better spot in scan section.
+*Change: Make AVG repair time show, even if On the Bench Status is empty
+*Feature: New tool to recount inventory, and search for inventory that shows a stock count but is empty on the shelf.
+*Bug Fix: Link to edit owner info did not work properly with modal windows turned off.
+*User Requested: Show word "RECEIPT" on all receipts like the invoices do.
+*User Requested: Add links to print address labels on invoices, receipts, groups, and current customer on the current cart.
+*Feature: Work Order, Group, and PC Attachments
+*Feature: Technical Document Feature
+*Enhancement: Small enhancements to the Work Order View and history.
+*User Requested: Allow you to define multiple stock sms messages.
+*Feature: iCal export per sticky note
+*User Requested Feature: iCal export of entire sticky note list for import to Outlook, Windows Calendar or syncing to Google Calendar
+*Enhancement: Added "emailed receipt" as logged user action, also now show that receipt was emailed on receipt browser and day report.
+*Enhancement: Added links to asset photos and tags from claim ticket.
+*Change: Save current version of claim ticket text when it is signed with the signature pad, so that reprints show what was actually signed off on.
+*Enhancement: Handle asset images better when more the 6-7 photos are taken.
+*Enhancement: Added PAID stamp to receipts and OVERDUE stamp to invoices that are overdue.
+*Enhancement: Show short history on receipt viewer of when printable version was viewed or emailed.
+*Enhancement: Show short history at bottom of printable invoices.
+*Bug Fix: Fixed bug in tech sales report.
+*Bug Fix: Fixed bug on emailed receipts and invoices that would combine 2 different non-inv items into a quantity if the price was the same on these two items.
+*Change: Allow SMS Global to send longer sms messages and split them.
+*Update: Updated Map on printable sticky note to use new Google v3 api which no longer requires and api key.
+*Feature: Added Serial Number/Product Code tracking to Inventory and Sales.
+*Enhancement: Added double click protection to several functions.
+*Enhancement: Added Tech/Customer Notes to Touchscreen View.
+*Enhancement: Added optional left side bar that shows logged in user.
+*Enhancement: Allow you to enter labor rate as hoursXrate and have it calaculate it for you in the cart.
+*Option: Allow you to set a variable in repair/deps.php to set the number of pcs shown in the recent items list.
+*Enhancement: Small enhancements to the repair volume report
+*Fix: Fixed potential division by zero in customer source report.
+*Enhancement: Added totals to open invoice viewer.
+

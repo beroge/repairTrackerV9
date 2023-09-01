@@ -1,0 +1,79 @@
+Attached to this email is the new v4 release of PC Repair Tracker.
+
+Highlights:
+
+* The main menu bar has been updated and now contains the notifications. Main menu is now the same on the repair/sale side of the system. 
+* Register closing procedures - you can count your cash, also a report to view history.
+* Fast user switching with a 4 digit pin.
+* A bench sheet which has been frequently requested.
+* Pass/Fail System Checks.
+* Zapier Integration: Pass information from PCRT to other apps, or other apps into PCRT.
+
+Here are some example Zaps you can create:
+
+PCRT Triggers:
+New PCRT Customer Group > Google Contact
+New PCRT Customer Group > Xero Customer
+New PCRT Customer Group > Quickbooks Online Customer
+New PCRT Invoice > Xero Draft Invoice with line items (you must set the taxes in xero)
+New PCRT Work Order > EMail or Gmail
+New PCRT Work Order > Google Keep Note
+New PCRT Work Order > Evernote
+New PCRT Sticky Note > Google Keep Note
+New PCRT Sticky Note > Google Calendar
+New PCRT Sticky Note > Evernote
+New PCRT Sticky Note > Slack Channel
+
+
+PCRT Actions:
+New GMail or IMAP EMail > Create PCRT Service Request
+New GMail or IMAP EMail > Create PCRT Sticky Note
+Twilio incoming SMS > Create PCRT Service Request
+Twilio/Clickatell incoming SMS > Create PCRT Sticky Note
+New Google Contact > Create PCRT Group Contact
+New GMail Calendar Event > Create PCRT Sticky Note
+
+
+
+Be sure to follow the instuctions in the update.txt file to upgrade from v3.
+
+
+################################################
+PCRT Release Version 4
+################################################
+
+>>>>>>>>>> Change Log
+
+Feature: Added charts to monthly sales report, repair volume report, 
+	 device manufacturer report, service type sales report.
+Feature: Redesigned menu bar, main menu is now the same on both 
+	 the repair and store sides. Notifications were moved into the menu bar.
+Feature: Added fast user switching between logged in users. 
+	 You can now specify a 4 digit pin in the user manager.
+Feature: Cash counting and register closing procedures.
+Enhancement: Several Reports were cleaned up, better formatting, 
+	     improved printable views, added Net Income to several that were missing it.
+Enhancement: Revamped Current Repair Status report.
+Feature: Bench Sheet, get alot of requests for this, people that 
+	 like a sheet to printout to keep with the device while it is being serviced.
+Enhancement: You can now define a storage location for work orders.
+Enhancement: You can now switch the group id when editing a recurring invoice.
+Bug Fix: Email service reminders in utf8
+Bug Fix: Fix for duplicate strings in language table. This was largely an issue for new installs.
+Feature: Function in the language editor to search and delete duplicate strings.
+User Requested Feature: Add tel:// URI to phone numbers on work order screen in mobile.
+Enhancement: You can now link a timeclock user with a PCRT login user 
+	     and punch status will show in main PCRT interface.
+Feature: System Checks module. You can now define pass/fail checks per device type.
+Feature: In the group viewer you can search for unattached invoices 
+	 and recurring invoices and add them to the group.
+Enhancement: Added a button to un-discontinue an item in inventory.
+Bugfix: Fix in recurring invoice browser not advancing past the first page.
+Enhancement: More invoice detail on the technician sales report.
+Update: Updated Twilio SMS library to newest version.
+Change: Added settings to code to disable MySQL Strict mode 
+	that alot of hosts are starting to turn on.
+Feature: Added support for adding RepairTech TechSuite reports to PCRT via a webhook from RT.
+Update: ScanCircle code updated to latest upstream version.
+Feature: Zapier Integration
+Enhancement: Added support for clickatell rest api

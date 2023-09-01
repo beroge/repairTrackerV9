@@ -1,0 +1,3 @@
+<?php
+
+require("validate.php");

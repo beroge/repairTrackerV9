@@ -1,0 +1,3760 @@
+The instructions in this file are only for performing upgrades. It is not necessary
+to follow any instuctions here for a new or fresh install.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Release 1.0
+
+Initial Release
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Release 1.01
+*Fixed a couple relative URLS
+*Added variable for the word "Labor" for the English Gents
+*Fixed some global vars
+
+Must add the following variable to both deps.php files if you have a previous version.
+See new deps.php files for reference.
+
+#################################
+# Word for Labor i.e. Labor, Service, Labour, etc
+$t_labor = "Labor";
+#################################
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.02
+*Fixed a several global vars
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.03
+*Fixed global var in repair/index.php file
+*Fixed relative url in repair/headerstatus.php
+*Found some more monetary symbols that needed to be switched to the variable.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.04
+*Fixed global vars in store/reports.php file
+*FEATURE: added new "On Service Call" status as requested by a user
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.05
+*Fixed issues on some servers with passing blank variables to the count_lines function
+*FEATURE: Re-wrote the sales tax function to now support multiple tax rates on both goods and services
+
+Must perform the following actions to upgrade:
+DELETE the $salestax variables in both store/deps.php and repair/deps.php
+
+If you want to be able to use tax rates that are half a percent or a quarter of a percent, do the folowing:
+
+Run this SQL query:
+ALTER TABLE `taxes` CHANGE `taxrateservice` `taxrateservice`
+DECIMAL( 11, 4 ) NOT NULL DEFAULT '0.000',
+CHANGE `taxrategoods` `taxrategoods` DECIMAL( 11, 4 ) NOT NULL DEFAULT
+'0.000'
+
+Or if you use phpMyAdmin, go to the taxes table and change the
+length/values setting on the taxrategoods and taxrateservice from 11.2
+to 11.4
+
+If you have processed sales with the Point of Sale AND do not want your totals to be incorrect,
+you must edit a value in your database. Go to the "taxes" table and there should be 2 rows. The row with
+taxid = 0 is for your tax exempt purchases.  For the row with taxid = 1, you need to change the taxrategoods
+value to the same rate you have previously set the $salestax variable in the deps.php files. I would also recommend
+naming the "taxname" field to something like "Old Tax Rate". It is probably set to "Michigan" if you
+have installed a version of PCRepairTracker older than 1.05. Making this change will keep 
+any previously recorded sales totals accurate. 
+
+You can now manage your tax rates in the Admin area. You can change the tax applied by using the
+drop down selector at the top right of the current cart page.
+
+To upgrade the rest of the system, just re-upload all the php files in both the repair and store folder,
+except for the deps.php files which hold all your custom settings.
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.06
+*Changed DB schema to allow for percentage tax rates.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.08
+
+*Added new Workarea feature to classify the location of groups of PC's as requested by a user.
+*Added Remote Sessions Status
+*Added new per item tax feature.
+*Added ability to create extra custom statuses in the Repair Manager.
+*Added link to reprint claim ticket
+*Added Invoicing with the ability to save, print, and email invoices.
+*Added UPC field in Point of Sale
+*Added ability to delete empty stock categories
+*Fixed bug where PC Serial number was not printed correctly on the claim ticket.
+*Added ability to delete quicklabor entries.
+
+
+UPGRADE PROCEDURE:
+
+Must add (2) new variables to the repair/deps.php file:
+
+#Array of Work Areas in	the form of "Bench Name" => "Background color hex" Must	have at	least one value.
+$workareas = array("Main Bench" => "ccccc4","Laptop Bench" => "cccccc"); 
+
+# Custom Repair Status Definitions in the form "Number" => "Status Name". Please use a number larger than 100. 
+# Must not duplicate the same number. Use $cstatus = array(); for none
+$cstatus = array("101" => "User Defined 1","102" => "User Defined 2");
+
+Must add (3) new variables to the store/deps.php file:
+
+# Your Business Email Address
+$businessemail = "you@someplace.com";
+
+# Number of days old an invoice is considered overdue
+$invoiceoverduedays = "21";
+
+# Invoice Terms
+$invoiceterms = <<<INVOICETERMS
+<font size=4>Thank You for your patronage.</font><br>Please pay this invoice within 3 weeks of the invoice date.
+INVOICETERMS;
+
+You must also copy a new icon called invoice.png in both the repair/images and store/images folder.
+
+Then re-upload all php files to their respective folders in both the store and repair folder, except for the deps.php 
+files which hold all your custom settings.
+
+Then upload the database update script (databaseupgrade-1.06to1.08.php) to the store folder and run it from your web browser. 
+It will add the new database tables for the invoices as well as add a few new fields in existing tables to support the new features.
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.09
+*Fixed bug in custom cart price tax calculation.
+*Added missing invoice.png icon to distribution package
+*Fixed bug that prevented saved cart feature from working.
+*Fixed bug with non-inventoried item tax calculation.
+*Fixed bug in cart item discount feature.
+
+To upgrade to this version, you just need to re-upload the following files to their respective directories:
+
+store/cart.php
+repair/repcart.php
+
+You must also copy a new icon called invoice.png in both the repair/images and store/images folder.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.10
+
+*Internal Release.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.11
+*Fixed bug in printed receipts
+*Fixed typo in cart.php
+*Fixed typo in receipts
+
+To upgrade to this version, you just need to re-upload the following files to their respective directories:
+
+store/cart.php
+store/receipt.php
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.12
+*Fixed typo in receipts
+*Fixed bug when using quotes in scan printed info.
+
+To upgrade to this version, you just need to re-upload the following files to their respective directories:
+
+store/receipt.php
+repair/admin.php
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+Release 1.13
+*Fixed problem with photo upload feature for stocked items in the Point of Sale
+*Fixed cosmetic issue in Sold Items Report.
+
+To upgrade to this version, you just need to re-upload the following files to their respective directories:
+
+store/stock.php
+store/reports.php
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.14
+*Fixed missing stock_upc field in default schema
+*Fixed error with pcserial number printed on printable customer report
+*Fixed error with tax calculation on returned items in the point of sale
+*Fixed bug with non-inventoried item desc on returned items
+
+To upgrade to this version, you just need to re-upload the following files to their respective directories:
+
+repair/pc.php
+store/receipt.php
+store/cart.php
+
+* If and only if, you did a clean install using the schema provided with the 1.08-1.13 version, which was missing
+a database table field, you need to run the following command to add it:
+(most of you use phpMyAdmin, do this in the SQL box):
+
+ALTER TABLE `stock` ADD `stock_upc` INT NOT NULL DEFAULT '0'
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.15
+*Fixed cart verification check bug with large number of items in the cart
+*Fixed bug where non-inv item description was not carried to receipt
+*Fixed bug where invoice number not carried with check payments
+*Switched all php tags to long form for those servers that require it.
+*Add fixes for the upcoming depreciation of magic_quotes in PHP
+*Fix url encoding bug for adding POS items to shop list from the sold items report when item contained a # symbol or other special chars.
+*Changed stock UPC field in the default database schema to a text type so that people can use the field for parts numbers if they wish. 
+*Added missing pc serial number variable when editing a pc - thanks to james for finding this
+*Added feature to pass pc information to invoice creation on a pcwo
+
+To upgrade to this version, you need to re-upload all php files, EXCEPT for
+the deps.php files in each of the repair and store directories
+
+If your installation works fine using short php tags, no need to perform the next step:
+
+For those that need to have long style php open tags, To add the long tag to your deps.php files, 
+manually edit them and change the first line from "<?" to "<?php"
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.16
+
+*Feature - separated address fields in several places and added line for suite or apt.
+*Feature - Added variables for the labels of address fields for those outside of the US
+*Feature - Re-organized the main PC display page 
+*Feature - Add labels for call status as requested by a user
+*Feature - Added separate fields for workphone and cellphone
+*Feature - Added ability to define customer pc info fields
+*Feature - Added business address to invoices, repair sheets, and other printables
+*Feature - Print Work Order ID and Invoice ID on receipts
+*Feature - You can now touch grayed selected items to remove them in case of an accidental touch - feature request from a user 
+
+There are several new variables to add in this release. See the stock deps.php files for an example
+of where to place them.
+
+Must add new variable to repair/deps.php file: This can be the same line from your store/deps.php file
+
+# Your Street Address
+$streetaddress = "123 Someplace<br>YourTown, MI. 55555";
+#
+
+Must add the following group of variables to both the store/deps.php and repair/deps.php files:
+
+#Address Labels
+
+$pcrt_address1 = "Street Address/PO BOX";
+$pcrt_address2 = "Apt/Suite Number";
+#City, Town, Etc
+$pcrt_city = "City";
+#State, Province, Etc
+$pcrt_state = "State";
+#Zip, Postal Code, Etc
+$pcrt_zip = "ZIP";
+
+
+Must add the following new variable to the repair/deps.php file:
+
+#Custom PC Info Fields - Enter what ever you wish, Do not use same key number more than once.
+$custompcinfo = array("1" => "Windows Product Key","2" => "Operating System","3" => "Screen Size","4" => "Graphics Card","5" => "Optical Drive Type");
+
+You will also need to copy two new images to the repair/images folder named phone.png and address.png
+
+You will need to run the database upgrade script "databaseupgrade-1.15to1.16.php". Place this file in your repair or store folder and run it
+from your browser and delete it when you are finished.
+
+To upgrade to this version, you need to re-upload all php files, EXCEPT for
+the deps.php files in each of the repair and store directories
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.17
+
+*Bug Fix - Refactored some new code that was causing an error for some people with the new custom pc info feature
+*Bug Fix - Fixed mispelled variable.
+*Bug Fix - Fixed minor error in creditswipe function
+
+To upgrade to this release, just re-upload the following php files:
+
+repair/index.php
+repair/pc.php
+store/checkout.php
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.18
+
+*Bug Fix - Missing Address Label when checking in a new PC
+*Bug Fix - fixed redirect link when transferring a cart to a repair cart
+*Bug Fix - fixed missing icon with custom asset
+*User Requested Change - Make stock upc field accept text as well as numbers for those that wish to use it for other purposes
+*User Requested Change - Allow quick labor to use monetary values have 2 decimal places instead of rounding amounts.
+*Feature - Also search custom pc info when using pc search feature.
+*User Requested Feature - Focus cursor on username box login screen.
+*User Requested Feature - Added ability to delete predifined scans in the admin area that have no scans recorded
+*User Requested Feature - Added ability to add custom one time scans to individual work orders
+*User Requested Feature - Added ability to customize/add info to the default printed information on a scan
+*Feature - Started converting system to use a stylesheet to allow for easier customizing of fonts and colors - 
+    Currently only the main repair interface is stylized - this will be on going.
+*Feature - Added ability to set job priority which will show icons in the work list statuses.
+*Bug Fix - Fixed PHP Warning when viewing assets on work orders created before the feature was implemented.
+*Bug Fix - fixed error in service tax calculation subtotal on emailed invoices
+*Feature - Added links to create a new work order on pc search result page
+*Bug Fix - Fixed variable typo the prevented state being recorded properly on a new checkin
+*Feature - Added extra logic to prevent harmless php warnings when deleting scan icons on servers not running in production mode
+
+
+
+To upgrade to this release:
+
+Place the following new variable into your repair/deps.php file:
+
+#Array of PC Priority's in the form of "Status Name" => "image contained in the repair/images folder". Must have at least one value
+$pcpriority = array("High Priority" => "phigh.png","Medium Priority" => "pmedium.png","Low Priority" => "plow.png");
+
+look at the stock repair/deps.php file for reference.
+
+You will need to run the database upgrade script "databaseupgrade-1.17to1.18.php". Log into PCRT first,
+then place this file in your repair or store folder and run it from your browser and delete it when you are finished.
+
+Re-upload the all php files in both the repair and store folders AFTER running the Database upgrade script.
+
+Must also upload new stylesheet:
+
+repair/style.css
+
+Copy the following new images to the same folder in your installation
+
+repair/images/hand.png 
+repair/images/phigh.png
+repair/images/pmedium.png
+repair/images/plow.png
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.19
+
+*Feature - Added ability to print asset tag labels with a barcode, with a dymo printer
+*Feature - Added ability to print price tags with a barcode, with a dymo printer
+*Feature - Made cursor focus to pcid box when re-checking in a system for use with barcode scanner
+*Bigfix - Fixed bug where wrong service tax rate entered with quick labor item in repair cart
+
+To upgrade to this version, you just need to re-upload the following files to their respective directories:
+
+store/stock.php
+store/printpricetag.php
+repair/repcart.php
+repair/repairlabel.php
+repair/index.php
+repair/pc.php
+repair/header.php
+repair/admin.php
+
+Make sure to perform earlier upgrades first!
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.20
+
+*Feature - Added ability to set timezone for people that use their system in a different timezone than
+           the timezone of their webhost.
+*Enhancement - Added warnings on icon upload admin function if upload folder is not writable.
+*User Requested Feature - Ability to switch back and forth between a expanded and compact view for recording scans.
+*User Requested Feature - New Date Range Report for POS
+*User Requested Feature - Script for customers to check repair status on your website.
+*Enhancement - Added icons for computers from that fruity company
+*Feature - New PC Grouping Feature
+*Feature - Ability to check in new pc by copying pc information from another pc
+*Feature - Enhanced search feature to also search groups
+*Feature - Added ability to take photos of computers and assets with a desktop webcam.
+*Bug Fix - Added missing $invoiceoverduedays variable to the default store/deps.php file
+*Enhancement - Expanding Note Boxes
+*Enhancement - Refactored code to increase repair page load time on systems with a large number of scans in the database
+*Enhancement - Added stylesheet entry to be able to set the backgroud color of the main interface
+
+To upgrade to this release:
+
+Place the following new variable into your repair/deps.php and your store/deps.php file:
+
+#timezone - go to http://www.php.net/manual/en/timezones.php for accepable values.
+$pcrt_timezone = "America/Detroit";
+
+
+You will need to run the database upgrade script "databaseupgrade-1.19to1.20.php". Log into PCRT first,
+then place this file in your repair or store folder and run it from your browser and delete it when you are finished.
+
+Re-upload the all php files except for the deps.php files in both the repair and store folders AFTER 
+running the Database upgrade script.
+Be careful to not re-upload any of the deps.php files or the style.css stylesheet if you have customized it.
+
+You will also need to upload some new/updated icon/javascript files:
+
+repair/images/pcs/apple.png
+repair/images/pcs/apple_l.png
+repair/images/pcs/apple_t.png
+repair/images/pcs/compaq.png
+repair/images/pcs/hp.png
+repair/images/pcs/gateway.png
+repair/images/pcs/emachine.png
+repair/images/pcs/acer.png
+repair/images/pcs/dell.png
+repair/images/pcs/toshiba.png
+repair/images/sync.png
+repair/images/cam.png
+repair/textarea.js
+repair/images/gdblueline.png
+store/images/gdblueline.png
+
+You will need to also upload a few new files for the asset webcam feature:
+
+repair/webcam.js
+repair/webcam.swf
+repair/tooltip.js
+repair/shutter.mp3
+
+You will also need create a "pcphotos" directory in the same directory as the repair and store folders and set permissions to writable to
+store the photos.
+
+Add this line to the end of your /repair/style.css file and edit the hex color value to set the main backgroud color of the system:
+
+table.interface {background-color:#999999; width:100%; border:0px; padding:0px }
+
+If you haven't customized the style.css file previously, you can just re-upload the file from the distrubution package.
+
+
+REPAIR STATUS FEATURE: There is also a new "repairstatus" folder. This contains a simple script to allow your customers to check the
+status of their repairs. Only upload this folder if you wish to use this feature. You can place this folder
+anywhere on your website, separate from the main PC Repair Tracker Installation. You must edit the settings
+in the deps.php file in this folder for the script to work. Some fairly empty header and footer files are also
+provided so that you can customize it with your own websites template to make it integrate nicely. There is also
+a separate stylesheet.
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.21
+
+*Enhancement - Small visual cleanups and stylesheet work.
+*Bug Fix - Fixed Repair Volume Report
+*Bug Fix - Added missing updated pc icons to distribution package.
+*Feature - Added out of stock report to POS
+*Feature - Add barcode to claim ticket and added "Checkout" feature to pull up the workorder
+
+Re-upload the all php files except for the deps.php files in both the repair and store folders.
+Be careful to not re-upload any of the deps.php files or the style.css stylesheet if you have customized it.
+
+You will also need to upload some updated artwork:
+
+repair/images/pcs/apple.png
+repair/images/pcs/apple_l.png
+repair/images/pcs/apple_t.png
+repair/images/pcs/compaq.png
+repair/images/pcs/hp.png
+repair/images/pcs/gateway.png
+repair/images/pcs/emachine.png
+repair/images/pcs/acer.png
+repair/images/pcs/dell.png
+repair/images/pcs/toshiba.png
+repair/images/sync.png
+repair/images/cam.png
+repair/images/print.png
+repair/images/trash.png
+repair/images/gdblueline.png
+repair/images/1called.png
+repair/images/2called.png
+repair/images/3called.png
+repair/images/4called.png
+repair/images/new.png
+repair/images/return.png
+repair/images/checkout.png
+repair/images/stats.png
+repair/images/reports.png
+repair/images/logout.png
+repair/images/invoice.png
+
+store/images/reports.png
+store/images/invoice.png
+store/images/logout.png
+store/images/cart.png
+store/images/del.png
+store/images/scart.png
+store/images/dcart.png
+store/images/trash.png
+store/images/print.png
+store/images/home.png
+store/images/gdblueline.png
+
+Upload the updated repair/style.css file
+
+If you have customized the style.css file previously, we recommend that you backup your 
+modified version file and merge your changes as their have been a ton of changes and new
+additions to this file.
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.22
+
+*Enhancement - Lots of stylesheet work.
+*Enhancement - Added sample htaccess file in the pcphotos folder so you can use the asset photo feature to safely take photos
+	       of things like windows product keys.
+*Enhancement - Added barcodes to receipts and invoices that encode the reciept and invoice number.
+
+Re-upload the all php files except for the deps.php files in both the repair and store folders.
+Be careful to not re-upload any of the deps.php files.
+
+Upload the updated repair/style.css file
+
+If you have customized the style.css file previously, we recommend that you backup your
+modified version file and merge your changes as their have been a ton of changes and new
+additions to this file.
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.23
+
+*Feature - Permissions Feature to block access user access to certain features. Go the the user admin to set these
+*Enhancement - Switched the soon to be depreciated php ereg functions to preg functions
+*Enhancement - Cleanups to reduce warnings and notices thrown in http server log
+*Feature - Added the ability to email Customer Repair Sheets
+*Feature - Added the ability to email Receipts.
+*Enhancement - Added edit link to recent workorders list on bottom left side of system to quickly modify orders 
+	       that were checked out and need to be re-tweaked
+*Feature - added some basic user tracking and reporting
+*Bug Fix - Properly set variable to pull username to keep the current carts separate by user.
+*Enhancement - Consolidated Receipt Search to one box
+*Enhancement - Moved Item/Inventory search to same box as Add item.
+*Enhancement - Made PC set to checked out when checking out a repair invoice.
+
+You will need to run the database upgrade script "databaseupgrade-1.22to1.23.php". Log into PCRT first,
+then place this file in your repair or store folder and run it from your browser and delete it when you are finished.
+
+You must add the following code to the bottom of both the repair/deps.php and store/deps.php files. It is in the
+area below the line that says "Do not modify anything below this line" ;)
+
+if (array_key_exists("username", $_COOKIE)) {
+$ipofpc = $_COOKIE['username'];
+}
+
+Look at the example deps.php file to see exactly where it should be placed, if this step is not done,
+the user activity tracking feature will not function properly.
+
+Re-upload all php files except for the deps.php files in both the repair and store folders.
+Be careful to not re-upload any of the deps.php files. 
+
+You must add the following new variable to the repair/deps.php file. This can be an exact copy of the email
+variable in the store/deps.php file.
+
+# Your Business Email Address
+$businessemail = "info@pcrepairtracker.com";
+
+Also upload the following new/modified icons, javascript files and stylesheet:
+store/email.png
+repair/email.png
+repair/style.css
+repair/tooltip.js
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.24
+
+>>>>>>>>>> Change Log
+*Change - Moved the empty cart feature form the toolbar to the main current cart page
+*Enhancement - Added printable option to many POS reports
+*Change - Created top level Inventory link to main nav bar. Moved add stock link to the Manage Inventory page.
+*Change - Made City and State display even if Postal Code is empty.
+*Bug Fix - Fixed potential problem where a non-inventoried item in the cart wouldn't transfer to the sold items table
+*Enhancement - Added a link, viewable only by admins to view php config info to aid with troubleshooting.
+*Change - Changed the "Admin" link to "Settings"
+*Enhancement - Added ability to customize the touchscreen refresh timeout. Any value less than 10, disables the feature.
+*Enhancement - Added icons next to custom scans to make the feature stand out better.
+*Feature - Added ability for admins to delete customers and or workorders.
+*Enhancement - Added some safety/protection logic to certain database actions/functions
+*Enhancement - Show date & time a user was last seen in admin user manager
+*Enhancement - Show list of currently logged in users at bottom of system
+*Feature - Customer Source tracking feature. Allows you to track where your jobs come from. 
+           Includes management in the settings interface, and a report. 
+*Feature - Simple function to generate text list of all email addresses in the system. 
+*Bug Fix - Fixed bug broke the ability to delete quicklabor items.
+*Enhancement - Added some css style to the repair volume and technician activity tracking reports.
+*Enhancement - Display text printed on customer repair sheet when hovering over the title.
+
+>>>>>>>>>> Step 1
+Must add new variable to the repair/deps.php file: 
+
+#Array of Customer Source Icons
+$custsourceicons = array("billboard.png","emailornewsletter.png","facebook.png","flyer.png","googleadwords.png","linkedin.png","phonebook.png","regularcustomer.png","sponsor.png","storedriveby.png","unknown.png","wordofmouth.png","www.png","yp.png","newspaper.png");
+
+>>>>>>>>>> Step 2
+You will need to run the database upgrade script "databaseupgrade-1.23to1.24.php". Log into PCRT first,
+then place this file in your repair or store folder and run it from your browser and delete it when you are finished.
+
+>>>>>>>>>> Step 3
+Re-upload all php files except for the deps.php files in both the repair and store folders.
+Be careful to not re-upload any of the deps.php files.
+
+
+>>>>>>>>> Step 4
+Also upload the following new/modified icons and stylesheet:
+store/invedit.png
+store/restock.png
+store/delphoto.png
+store/camera.png
+store/pricetag.png
+repair/scan.png
+repair/installicon.png
+repair/notesicon.png
+repair/actionicon.png
+repair/style.css
+
+And a new folder of icons:
+
+repair/images/custsources
+
+Upload the whole custsources folder to the repair/images/ folder.
+
+
+>>>>>>>>>>Step 5
+
+New Permissions you may want to enable per user:
+1. Manage Customer Sources
+2. View Customer Source Reports
+3. View Customer Email List
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.25
+
+>>>>>>>>>> Change Log
+*Enhancement - Pass customer info from invoice checkout to checkout process.
+*Feature - Add simple customer browser
+*Feature - Option to print address label
+*Feature - Add CSV Export to many POS reports.
+*Feature - Added textbox focus style change using jQuery
+*Feature - Added optional modal window feature that can be turned on/off in the settings area. This
+	   setting is per user.
+*Change - Make copy cart to repair cart feature show customers in all status except checked out 
+	  and ready to sell status.
+*Change - Make technician activity report show the user being viewed in the drop down as requested by 
+	  a user.
+*Change - Switched asset photo tooltip hover to jQuery function
+*Change - Show printable logo on quotes
+*Feature - New Common Problems/Requests feature
+
+
+>>>>>>>>>> Step 1
+You will need to run the database upgrade script "databaseupgrade-1.24to1.25.php". Log into PCRT first,
+then place this file in your repair or store folder and run it from your browser and delete it when you are finished.
+
+>>>>>>>>>> Step 2
+Re-upload all php files except for the deps.php files in both the repair and store folders.
+Be careful to not re-upload any of the deps.php files.
+
+
+>>>>>>>>> Step 3
+Also upload the following new/modified icons, javascript files and stylesheet:
+
+repair/style.css
+store/images/csv.png
+repair/images/customers.png
+repair/tooltip2.js
+
+>>>>>>>>> Step 4
+Must upload new jq folder including its contents:
+
+repair/jq
+
+
+>>>>>>>>>>Step 5
+
+New Permissions/Options you may want to enable per user:
+1. Manage Common Problems/Requests - found in Admin user manager
+2. Use Modal Javascript Windows - found in the settings menu
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.26
+
+>>>>>>>>>> Change Log
+*Change - Open asset photos when clicked in modal window.
+*Enhancement - Show extra info when hovering over "Waiting for Bench", "Pending", and "Ready
+		for Pickup" status.
+*Change - Print customer phone number on the invoice as requested by a user.
+*Feature - Ability to edit contact info on invoices that are still open.
+*Feature - Added user preference for touchscreen tile width.
+*Enhancement - Show workarea on touchscreen tiles per user request.
+*Enhancement - Show Common problems on claim ticket, touchscreen and repairstatus script.
+*Feature - Download Customer list in CSV format. Link in Marketing Reports area.
+*Enhancement - When login cookie expires, redirect to request page after login for all $_GET requests.
+*Enhancement - Show password in "On the Bench" status list as requested by a user.
+*Enhancement - Put extra search boxes in main POS and Repair toolbars
+*Minor Fix - Switch depreciated ereg function to preg function in common.php files.
+*Enhancement - Show more detailed info on inventory report.
+*Bug Fix - Reconfigured array functions to handle browsers that do not set a var when it is an empty 
+	   array which can cause a php warning. 
+*Feature - Prepaid invoices on Work Orders. You can now add a prepaid invoice in addition to the final invoice.
+*Bug Fix - Fix potential array warning in customer source report.
+*Feature - Current Repair Status Report - shows all computer status, and list of computers 
+           checked in and out that day at the time the report is viewed. 
+*Bug Fix - Allow monetary symbol to be set in price tag printing script.
+*Change - Change the default tax rate to tax exempt for new users in the db schema.
+*Enhancement - Show customer name above "Notes for Customer" box as requested by a user.
+*Enhancement - Show name of logged in technician in title and by logout button.
+*Enhancement - Show default tax preference on settings page.
+*Bug Fix - Do not group into a quantity sold non-inventoried items that have the same price on invoices and reciepts.
+*Feature - New Sticky Notes Feature
+
+
+>>>>>>>>>> Step 1
+You will need to run the database upgrade script "databaseupgrade-1.25to1.26.php". Log into PCRT first,
+then place this file in your repair or store folder and run it from your browser and delete it when you are finished.
+
+>>>>>>>>>> Step 2
+Re-upload all php files except for the deps.php files in both the repair and store folders.
+Be careful to not re-upload any of the deps.php files.
+
+
+>>>>>>>>> Step 3
+Also upload the following new/modified icons, javascript files and stylesheet:
+
+repair/style.css
+repair/images/sticky.png
+repair/images/stickyadd.png
+
+>>>>>>>>>>Step 4
+
+New Permissions/Options you may want to enable/change per user:
+1. Manage Sticky Note Types - found in Admin user manager
+2. Touchsceen Tile Width - found in the settings menu
+3. Sticky Note Tile Width - found in the settings menu
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.27
+
+>>>>>>>>>> Change Log
+
+*Bug Fix: Properly encode quick labor items when adding to the repair cart.
+*Feature: SMS Messaging
+*Feature: Printable sticky note view.
+*Bug Fix: Fixed stylesheet bug (thanks todd)
+*Bug Fix: Fixed PHP Notice in upgrade script.
+*Bug Fix: Fixed PHP Notice in new sticky notes feature.
+*Bug Fix: Fixed non critical bug in store/invoice.php 
+*Enhancement: Added optional footer text variable in Customer Repair Report.
+*Enhancement: Added "Preferred Contact Method" to check-in process.
+*Enhancement: Added extra header info to email functions to reduce spam scores in spamassassin
+*Bug Fix: Fix call to server variable that required register globals to be on in stickydisplay.php
+*Enhancement: Use smaller font in touchscreen for long passwords to keep touchscreen view from getting wacky
+*Enhancement: Set table width sooner so on slower servers the page doesn't jerk around when rendering.
+*Change: Allow printed claim ticket to fill page width, also fixed some html bugs. (Thanks Dan)
+
+>>>>>>>> Step 1
+You will need to run the database upgrade script "databaseupgrade-1.26to1.27.php". Log into PCRT first,
+then place this file in your repair or store folder and run it from your browser and delete it when you are finished.
+
+
+>>>>>>>> Step 2
+
+Upload the following new/modified icons, javascript files and stylesheet:
+
+repair/jq/jquery.limit-1.2.js
+repair/jq/jquery.gmap-1.1.0-min.js
+repair/style.css
+repair/images/sms.png
+
+
+>>>>>>>> Step 3
+
+Add the following new variable to the repair/deps.php file:
+
+$customerrepairsheetfooter = <<<CUSTOMER_REPAIR_SHEET_FOOTER
+Your custom footer text here......
+CUSTOMER_REPAIR_SHEET_FOOTER;
+
+
+
+>>>>>>>> Step 4
+
+Add the following new settings to your repair/deps.php file:
+
+
+
+#SMS Gateway to use: allowed values: redoxygen, bulksms, smsglobal, none
+
+$mysmsgateway = "smsglobal";
+$mydefaultsmsmessage = "Your repair is completed and ready for pickup.";
+$mysmsprefix = "1-";
+
+#SMS Global settings
+$smsglobalusername = "myusername";
+$smsglobalpassword = "mypassword";
+
+#BulkSMS settings
+$bulksmsusername = "yourusername";
+$bulksmspassword = "yourpassword";
+
+#Red Oxygen SMS Settings
+$SMS_Data["AccountID"] = "CI000000000";
+$SMS_Data["Email"] = "you@someplace.com";
+$SMS_Data["Password"] = "mypassword";
+
+# Google Maps API Key:
+$googlemapsapikey = "";
+# You must signup for one to use this feature here:
+# http://code.google.com/intl/en-US/apis/maps/signup.html
+
+
+>>>>>>>> Step 5 
+
+This is optional, you only really need to add this if you wish to hide these fields
+
+Add the following new settings to your repair/deps.php file:
+
+#Show PC Info Fields: Allowed Values: yes or no
+$show__memory = "yes";
+$show__cpu = "yes";
+$show__hd = "yes";
+$show__pccond = "yes";
+$show__pcserial = "yes";
+
+
+>>>>>>>> Step 6
+
+Re-upload all php files except for the deps.php files in both the repair and store folders.
+Be careful to not re-upload any of the deps.php files or other files you may have customized for your
+own purposes.
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.28
+
+>>>>>>>>>> Change Log
+
+*Bug Fix: Fix potential javascript problem with warning message when printing customer repair sheet.
+*Change: Use Business name as from: name for the smsglobal SMS function.
+*Feature: Re-Written Payment backend that now supports Split Transactions
+*Feature: New AuthorizeNet Card Present Payment Plugin
+*Feature: New Custom Payment Plugin - You can now define your own custom payment types
+*Feature: New PayPal Web Payments Pro Plugin
+*Feature: Better passing of customer information to checkout cart from invoices and work orders.
+*Enhancement: More fixes to reduce spamassasin scores.
+*Feature: Ability to take Deposits
+*Enhancement: Allow Repair Report to stretch to the width of the screen.
+*Enhancement: User setting to turn off auto firing print dialogs.
+*Enhancement: Allow On Service Call and Remote Support session statuses to show on touchscreen view.
+*Feature: Ability to Email Claim Tickets
+*Enhancement: Added Sticky Note view for This Week and Past Due
+*Enhancement: Added restock link from Order Planning for items added to the list from the Sold Items report.
+*Enhancement: Work Order ID search box on repair side.
+
+>>>>>>>> Step 1
+You will need to run the database upgrade script "databaseupgrade-1.27to1.28.php". Log into PCRT first,
+then place this file in your repair or store folder and run it from your browser and delete it when you are finished.
+
+Make sure you do not process any sales between running this script and uploading the new php code.
+
+>>>>>>>> Step 2
+
+Add the following new settings to your store/deps.php file:
+
+#Secure Location of the store folder:
+$securedomain = "https://www.yoursite.com/store";
+
+I would recommend putting it near the top by the $domain variable
+
+>>>>>>>> Step 3
+
+Add the following new settings to your store/deps.php file:
+
+###############################
+#Payment Methods
+###############################
+#Below are all the plugins currently available, remove the ones you do not plan on using.
+# Possible Values:  = array('Cash','Check','GenericCreditCard','AuthorizeNet','AuthorizeNetCP','PayPal','CustomPayment');
+$paymentplugins = array('Cash','Check','GenericCreditCard','AuthorizeNet','AuthorizeNetCP','PayPal','CustomPayment');
+
+#Checks written over this amount with require the user to enter a drivers license number.
+$pcrt_driverslc_minimum = 50;
+
+
+#AuthorizeNet Settings does not apply to "generic" credit card or AuthorizeNetCP
+#$AuthorizeNetUrl = "https://test.authorize.net/gateway/transact.dll";
+$AuthorizeNetUrl = "https://secure.authorize.net/gateway/transact.dll";
+$AuthorizeNetLoginID = "";
+$AuthorizeNetTranKey = "";
+
+
+#AuthorizeNetCP (Card Present) Settings does not apply to "generic" credit card or AuthorizeNet
+$AuthorizeNetUrlCP = "https://cardpresent.authorize.net/gateway/transact.dll";
+$AuthorizeNetLoginIDCP = "";
+$AuthorizeNetTranKeyCP = "";
+
+#PayPal Website Payments Pro Settings
+$PayPalenvironment = 'sandbox'; // or 'beta-sandbox' or 'live' or 'sandbox'
+$PayPalUsername = "";
+$PayPalPassword = "";
+$PayPalSignature = "";
+$PayPalCountryCode = "US";      // US or other valid country code
+$PayPalCurrencyCode = "USD";    // or other currency ('GBP', 'EUR', 'JPY', 'CAD', 'AUD')
+
+#Custom Payment Definitions
+#Do not print these fields with these names on receipts
+$CustomPaymentPrintExclude = array('Bank Account Number','Routing Number');
+
+###############################
+
+You can remove these variables from the store/deps.php file and put the above in its place:
+
+#Credit Card Processor: Values: authorize,skipjack,generic
+$ccprocessor = "generic";
+
+#AuthorizeNet Settings does not apply to "generic" credit card setting
+$auth_net_login_id = "";
+$auth_net_tran_key = "";
+
+
+>>>>>>>> Step 4
+
+Add the following your store/deps.php file:
+
+# Your deposit receipt footer, prints on bottom of deposit receipts.
+$depositfooter = <<<DEPOSITFOOTER
+<font size=1><b>Deposit Policy:</b> Please keep this receipt for your own records.</font>
+DEPOSITFOOTER;
+
+>>>>>>>> Step 5
+Upload the following files:
+store/images/deposits.png
+repair/images/deposits.png
+repair/style.css
+
+
+>>>>>>>> Step 6
+
+Re-upload all php files except for the deps.php files in both the repair and store folders.
+Be careful to not re-upload any of the deps.php files or other files you may have customized for your
+own purposes.
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.29
+
+>>>>>>>>>> Change Log
+
+*Bug Fix: Fix bug in payment plugins that would double insert info into the Current Customer database table
+
+
+>>>>>>>Step 1
+
+Re-upload the following php files:
+
+repair/style.css
+
+
+store/AuthorizeNet.php
+store/AuthorizeNetCP.php
+store/Cash.php
+store/Check.php
+store/CustomPayment.php
+store/GenericCreditCard.php
+store/Paypal.php
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.30
+
+>>>>>>>>>> Change Log
+
+*Bug Fix: Fix bug on POS system. A semicolon was missing in the footer.php file that cause errors with php on some servers.
+*Change: Added variable to repair/deps.php for smsglobal plugin.
+*Enhancement: Fill empty fields in "Current Customer" field with information entered in payment plugins if the corresponding field is blank.
+
+
+
+>>>>>>> Step 1
+
+Re-upload all of the php files in both the store and repair folders, but not the deps.php files.
+
+
+>>>>>>> Step 2
+
+Add this variable to the SMS Global section IF you use the SMS Global SMS function to repair/deps.php
+
+#SMS source/from: MSIDSN or Sender ID that the message will appear from. Eg: 61409317436 (Do not use + before the country code)
+$smsglobalsource = "";
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.31
+
+>>>>>>>>>> Change Log
+
+*Enhancement: Search UPC field when searching for a stocked item.
+*Bug Fix: Fixed variable in custom scan that in correctly recorded the person that entered the scan. (Thanks Corey)
+*Bug Fix: Do not show blank work order number on receipt_view
+*Feature: Added QR Code to printed claim ticket
+*Enhancement: Added link to repair status from claim ticket
+*Enhancement: Reworked Printed Claim ticket to accomodate QR Code, and added customer address and checkin date.
+*Fixed potential problem in asset label script
+*Major Feature: Expanded the Grouping Feature.
+*Enhancement: Parse custom PC info for hyperlinks
+*Enhancement: Added cellphone and work phone fields to csv customer list export
+*Enhancement: Show Repair Cart Total on Waiting for Payment Status
+*Enhancement: Add back button to touchscreen when you forget to select a scan.
+*Enhancement: Show checkmark by repair report, claim ticket and invoices if previously emailed.
+*Enhancement: Redirect after email is sucessfully sent after 2 seconds for claim tickets and repair reports.
+*Feature: Database Backup  - Click link in settings menu while logged in as admin to download your database.
+*Feature: Allow asset photos to be uploaded instead of using a webcam.
+*Bug Fix: Fixed missing closing tag on cart copy to repair cart feature which broke with FireFox4 
+*Enhancement: User and Sticky Note Type filters on Calendar view.
+*Enhancement: Show discount on emailed and printed receipts and invoices.
+*Enhancement: Show Deposit Totals on Daily Report, hide totals for the day that are zero
+*Feature: Current Cart Customer Picker for those quick sales with no work order.
+*Enhancement: Show work order number on invoice if it exists.
+*Feature: Work Order Action History Viewer
+*Enhancement: Added CSS for Gradients for Opera and IE 10
+*Enhancement: Added CSS for Box Shadows in Opera
+*Feature: Floating bar that shows customer name in work order view. Can be turned off or on in Settings menu.
+*Feature: Allow quantity to be added to cart.
+
+>>>>>>>> Step 1
+
+You will need to run the database upgrade script "databaseupgrade-1.30to1.31.php". Log into PCRT first,
+Then place this file in your repair or store folder and run it from your browser and delete it when you are finished.
+
+
+
+
+>>>>>>> Step 2
+
+Re-upload all of the php files in both the store and repair folders, but not the deps.php files.
+
+
+
+
+>>>>>>> Step 3
+
+Add this new variable to your repair/deps.php file. If you do not use the repairstatus feature, you can leave
+this variable empty.
+
+#Location of the repair status script: example: http://pcrepairtracker.com/repairstatus/index.php
+$pcrt_repairstatusscript = "";
+
+
+
+
+>>>>>>> Step 4
+
+Upload the following new files and images:
+
+repair/images/syncleft.png
+repair/images/syncright.png
+repair/images/group.png
+repair/style.css
+
+
+
+>>>>>>> Step 5
+
+Re-upload all of the php files in both the store and repair folders, but not the deps.php files.
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.32
+
+>>>>>>>>>> Change Log
+
+*Enhancement: Show user on work order action report
+*Enhancement: New variable to set Tax label
+*Feature: Support for the PHP Pear Mail function
+*Enhancement: Addition of stylesheet for printables.
+*Feature: New Sage Payments plugin
+*Feature: Invoice Notes
+*Enhancement: Show Applied Deposits and a Grand Total Total less Applied Deposits in the Day Report.
+*Enhancement: Added ability for admin user to delete groups that do not contain any PC's
+*Enhancement: Allow items to be added to repair cart using product upc.
+*Enhancement: Added phone number to floating bar.
+*Change: Receipt Search now shows newest receipts first.
+*Enhancement: Ability to edit items on an invoice.
+*Bug Fix: Fixed bug in refunded tax total on date range span report
+*Enhancement: Several updates to POS reports.
+*Enhancement: Change the default of all users tax rate to a current rate if only one rate is configured or a rate is disabled.
+*Enhancement: Set default dates on reports if left empty to avoid potential issue.
+*Bug Fix: Fixed bug where invoice contact information was not passed the the current cart from the invoice search feature. 
+*Enhancement: Show stock counts of items on open invoices when browsing inventory categories.
+*Enhancement: Allow sorting of printable inventory list by stock id
+*Bugfix: Fixed typo that prevented deposits from being allow to be deleted for AuthorizeNet and PayPal payment plugins
+
+*Major Feature: Multi Store Support
+* Manage Store definitions and Workarea definitions in Admin Settings
+* Added logic to shift user default stores to active stores if a given store gets disabled. 
+* Keep Work Orders Separate by Store in Status List and Touchscreen
+* Track Store on receipts and invoices.
+* Ability to Edit the assigned store on the work order.
+* Show store on invoice list viewer
+* Allow POS reports to show report by store or all stores.
+* Track inventory by store.
+* Allow Sticky Notes to view by store or all stores
+
+
+
+
+>>>>>>>> Step 1
+
+You will need to run the database upgrade script "databaseupgrade-1.31to1.32.php". Log into PCRT first,
+Then place this file in your repair or store folder and run it from your browser and delete it when you are finished.
+
+
+
+
+>>>>>>> Step 2
+
+Add this new block of variables repair/deps.php and store/deps.php file. If your system sends email fine or you do not wish
+to use the pear library to send email, you can skip this step and the system will default to the built in php mailer. 
+In a lot ways this is like you are setting up a mail client on a customer computer for smtp. 
+
+# Email Mailer Settings
+# $pcrt_mailer: valid settings are ( mail | pearsmtp | pearphpmailer | pearsmtpauth )
+# "mail" uses the builtin php mail function,
+# "pearsmtp" uses the default pear smtp method,
+# "pearphpmailer" the native php mailer through pear,
+# "pearsmtpauth" uses pear and allows you to specify any smtp server with a username and password and/or custom port
+# If you choose to use the pearsmtpauth you must specify your server host, username, password, and port number
+$pcrt_mailer = "mail";
+# SMTP Server Hostname. Default: localhost Prefix with ssl:// to send securely if your server supports it
+$pcrt_pear_host = "localhost";
+# SMTP Port: (25,587,465)
+$pcrt_pear_port = "25";
+# SMTP Username
+$pcrt_pear_username = "my_smtp_username";
+# SMTP Password
+$pcrt_pear_password = "my_smtp_password";
+
+
+>>>>>>> Step 3
+
+Add this new variable to your repair/deps.php and store/deps.php file. 
+
+# Word for Tax i.e. Tax, VAT, etc
+$t_tax = "Tax";
+
+
+>>>>>>> Step 4
+
+Upload the following new/updated files:
+
+repair/printstyle.css
+repair/style.css
+repair/jq/jquery.autogrow-textarea.js
+
+>>>>>>> Step 5
+
+Re-upload all of the php files in both the store and repair folders, but not the deps.php files.
+
+>>>>>>> Step 6 (optional)
+
+If you wish to use the new Sage Payments plugin, add this variable block to your store/deps.php file:
+
+#Sage Payments Settings
+#Merchant ID
+$SagePayments_mid = "";
+#Merchant Key
+$SagePayments_mkey = "";
+
+And add "SagePayments" to your list of $paymentplugins in store/deps.php
+
+>>>>>>> Step 7
+
+Login as admin and go to Settings->Admin Stores to edit your store/business details and bench definitions
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.33
+
+>>>>>>>>>> Change Log
+
+*Enhancement: Pass stock id to shop list from out of stock report.
+*Enhancement: Go back to work order after creating a sticky from a work order.
+*Enhancement: prefill field with email address when emailing a receipt.
+*Feature: Offer to record cost of non inventoried items
+*Feature: Record most recent stock cost with each item sold for future reporting purposes
+*Feature: Show estimated net sales on daily report if sales report permissions are assigned to your user.
+*Feature: Show stocking history on stock detail page if inventory permissions are assigned to your user.
+*Feature: Show estimated net sales on day range report
+*User Requested Feature: Ability to do a No Charge Invoice and Sale
+*Enhancement: Make search feature on left side also search Group Information.
+*Fix: Make Work Order Invoice print links return to the work order after printing.
+*User Requested Feature: Allow Invoicing System to be used for Quotes.
+*User Requested: Show Credit Card Transaction ID on receipts and receipt viewer
+*Enhancement: Pass PC Name as default name when creating a new group.
+*Bug Fix: Clear return receipt id on receipt when admin deletes a receipt with items returned.
+*Enhancement: Allow you to disable item return buttons if the sale day has been over X number of days ago for all users but the admin user.
+*Customer Request: Search PC Make field when using the "Search for Computer" box.
+*Feature: Modified Work Order Lookup box to also be Search box that searches the Problem, Customer Notes, Tech Note fields of Work Orders.
+*Enhancement: Display product name on restock/transfer stock screens.
+*Enhancement: Checkbox to create PC group with new checkin.
+*Feature: Record Date and Time a work order is placed in the Ready for Pickup status for future reporting.
+*Feature: Show Average time in days from when a work order is created and when it is placed in the Ready for Pickup Status
+*Change: Show Grand total plus received deposits minus applied deposits to give more accurate total of what was taken in.
+*Change: Make Empty Cart feature also clear the current customer.
+*Bug Fix: Fixed bug that broke email link from printable claim ticket
+*Experimental Feature: Signature pad on claim ticket.
+*Enhancement: Use new HTML required attribute on several fields
+*Enhancement: Refactored ordering code on Scan admin
+*Enhancement: Allow you to arrange the sorting order of the Quick Labor items.
+*Change: Sort Stickies in order of duedate not the order they were added.
+*Feature: Show how many times a customer has checked repair status, and the last time they checked.
+*Feature: Show eyeball icon in status list if the customer has checked repair status at lease once.
+*Enhancement: Show notice on receipt viewer if items are in cart ready for return to prompt user to go to the Current Cart
+*Enhancement: Allow you to choose which Common Problems get printed on customer sheets so that you can also specify
+	      technician only internal actions in the common problems list.
+*User Requested Feature: Add Notes field to groups 
+*Enhancement: Allow Work orders to be assigned to a technician, allow status list to display whole store or only a technicians assigned jobs.
+*Enhancement: New "Technician Sales Report" that shows total sales, invoices and assigned work orders per user.
+*Feature: External Tools, a new thing to add iframed links to commonly used tools on the web.
+*Enhancement: If un-applied deposits exist on a work order, show balance due on final invoice.
+*Enhancement: Thank You letters.
+*Enhancement: Added warning to Admin page if your server is running with php magic quotes turned on
+*Enhancement: Pass WO problem description to sticky note field from work order.
+*User Requested Enhancement: Display both Work Order Number and PCID Number on status list for people that prefer to work from the work order number.
+*Change: Re-orginized the work order viewer to keep customer contact details on the left, and work order details on the right.
+*Change: Refactored status list shop time to show hours and minutes.
+*User Requested Feature: Notes field on PC (in addition to the existing note field on the work order)
+*User Requested Change: Hide Refund total on receipt if it is zero
+*Feature: Basic Color themes per store that can be set in the Store Admin.
+*Feature: New print bar on customer printables, removed visable links from printouts.
+*Change: Moved footer texts from deps files to Store config.
+*Enhancement: Added PC Make, PC Phone, and Work Order id as variables passed to the asset label script that can be used in customizing the label.
+
+>>>>>>>> Step 1
+
+You will need to run the database upgrade script "databaseupgrade-1.32to1.33.php". Log into PCRT first,
+Then place this file in your repair or store folder and run it from your browser and delete it when you are finished.
+
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+
+>>>>>>>> Step 2
+
+Add this code to your store/deps.php file:
+
+#Number	of days	after sale that	returns	are allowed only by the	admin user.
+$returndays = 14;
+
+>>>>>>>> Step 3
+
+Must upload new files:
+
+repair/images/eyespy.png
+repair/images/tools.png
+repair/images/labelprinter.png
+repair/printstyle.css
+repair/style.css
+
+
+>>>>>>>> Step 4
+
+Re-upload all php files except for the deps.php files in both the repair and store folders.
+Be careful to not re-upload any of the deps.php files or other files you may have customized for your
+own purposes.
+
+
+>>>>>>>> Step 5
+
+These are all steps that can be formed from the settings menu in PCRT:
+
+Go to the Common Problems admin and set which items you wish to be customer viewable.
+
+You can now re-order your quick labor items
+
+Get a copy of both your repair/deps.php and store/deps.php files handy, all invoice, receipt, claim ticket, deposit, etc footer
+texts have been moved to the Store Admin.
+
+
+
+>>>>>>>> Optional Step 6
+
+If you use the repair status scripts you must perform these steps
+
+Add this to the repairstatus/deps.php file.
+#timezone - go to http://www.php.net/manual/en/timezones.php for accepable values.
+$pcrt_timezone = "America/Detroit";
+
+This can be a copy of what already exists in your other deps.php files.
+
+Update the repairstatus/index.php file with the new version from the installtion package.
+
+
+>>>>>>>> Optional Step 7
+
+If you want to play with the expiramental signature pad, you must perform these steps:
+
+Add this to the repair/deps.php file to enable the signature pad
+#Claim Ticket Signature Pad
+$enablesignaturepad = "yes";
+
+Also must copy/install this folder:
+repair/jq/signature
+
+
+
+Make sure your refresh all client browsers to get he updated stylesheets after performing
+the upgrade.
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.34
+
+>>>>>>>>>> Change Log
+
+*Enhancement: Show a TY by the recent list if a Thank You was sent
+*Change: Make Repair Volume report show on the current store.
+*Enhancement: Add sig pad to repair report.
+*Enhancement: Added css to hide "remove signature" links from the printable copy.
+*Change: Allow quote marks in Work Area	names.
+*Bug Fix: Allow Dashes and Underscores in usernames again.
+*Enhancement: Rewrote icon guessing code for touchscreen.
+*Fix: Moved anchor point to better spot in scan section.
+*Change: Make AVG repair time show, even if On the Bench Status is empty
+*Feature: New tool to recount inventory, and search for inventory that shows a stock count but is empty on the shelf.
+*Bug Fix: Link to edit owner info did not work properly with modal windows turned off.
+*User Requested: Show word "RECIEPT" on all receipts like the invoices do.
+*User Requested: Add links to print address labels on invoices, receipts, groups, and current customer on the current cart.
+*Feature: Work Order, Group, and PC Attachments
+*Feature: Technical Document Feature
+*Enhancement: Small enhancements to the Work Order View and history.
+*User Requested: Allow you to define multiple stock sms messages. 
+*Feature: iCal export per sticky note
+*User Requested Feature: iCal export of entire sticky note list for import to Outlook, Windows Calendar or syncing to Google Calendar
+*Enhancement: Added "emailed receipt" as logged user action, also now show that receipt was emailed on receipt browser and day report.
+*Enhancement: Added links to asset photos and tags from claim ticket.
+*Change: Save current version of claim ticket text when it is signed with the signature pad, so that reprints show what was actually signed off on.
+*Enhancement: Handle asset images better when more the 6-7 photos are taken.
+*Enhancement: Added PAID stamp to receipts and OVERDUE stamp to invoices that are overdue.
+*Enhancement: Show short history on receipt viewer of when printable version was viewed or emailed.
+*Enhancement: Show short history at bottom of printable invoices.
+*Bug Fix: Fixed bug in tech sales report.
+*Bug Fix: Fixed bug on emailed receipts and invoices that would combine 2 different non-inv items into a quantity if the price was the same on these two items.
+*Change: Allow SMS Global to send longer sms messages and split them.
+*Update: Updated Map on printable sticky note to use new Google v3 api which no longer requires and api key.
+*Feature: Added Serial Number/Product Code tracking to Inventory and Sales.
+*Enhancement: Added double click protection to several functions.
+*Enhancement: Added Tech/Customer Notes to Touchscreen View.
+*Enhancement: Added optional left side bar that shows logged in user.
+*Enhancement: Allow you to enter labor rate as hoursXrate and have it calaculate it for you in the cart.
+*Option: Allow you to set a variable in repair/deps.php to set the number of pcs shown in the recent items list.
+*Enhancement: Small enhancements to the repair volume report
+*Fix: Fixed potential division by zero in customer source report.
+*Enhancement: Added totals to open invoice viewer.
+
+
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+
+>>>>>>>> Step 1
+
+You will need to run the database upgrade script "databaseupgrade-1.33to1.34.php". Log into PCRT first,
+Then copy this file in your repair folder and run it from your browser by entering your system URL in the browser address
+bar like "http://myrepairsystem.com/mysystem/repair/databaseupgrade-1.33to1.34.php". Click the "Upgrade" link. 
+Once you see the upgrade finished message you are done. Delete the upgrade script from your repair folder when you are finished.
+
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+
+
+
+
+>>>>>>>> Step 2
+
+Re-Upload these new and updated files to their respective location in your system:
+
+store/images/tools.png
+repair/images/cam.png
+repair/images/attachment.png
+repair/images/attachments.png
+repair/images/camera.png
+repair/jq/jquery.gmap.min.js
+repair/printstyle.css
+repair/style.css
+
+And the entire contents of:
+repair/images/pcs/
+
+
+
+
+>>>>>>>> Step 2
+
+You must copy the new folder "attachments" to your system. It should be at the same directory level as your repair and store folders.
+Permissions must be set on this folder to make it writable. 
+Also keep in mind this folder is not empty, it has a .htaccess file that must be there or your attachments might be made public.
+You should also try browsing to this folder in your web browser to make sure you get a access denied message to make sure it is not public.
+
+
+>>>>>>>> Step 3
+
+Re-upload all php files except for the deps.php files in both the repair and store folders.
+Be careful to not re-upload any of the deps.php files or other files you may have customized for your
+own purposes such as label scripts.
+
+>>>>>>>> Step 4
+A new permission was added to allow users to modify the default sms texts, be sure to give yourself permission to edit these.
+
+
+>>>>>>>> Optional Steps
+
+The Google maps API key is no longer necessary. You can remove this information from your repair/deps.php file if you wish.
+
+This may be deleted:
+
+# Google Maps API Key:
+$googlemapsapikey = "";
+# You must signup for one to use this feature here:
+# http://code.google.com/intl/en-US/apis/maps/signup.html
+
+
+
+
+
+If you use the PayPal, Authorize or Sage pagement plugins and are having to re-login when processing a payment over SSL, 
+add this code to your store/deps.php file.
+
+# Uncomment this line if you are having problems having to login again when processing ssl payments. Make sure to not remove the leading dot.
+#$cookiedomain = ".mydomain.com";
+
+
+
+
+If you would like to adjust the number of recent jobs shown at the bottom of the status list, add this code to your repair/deps.php file.
+
+#Number	of Recent Jobs to show at bottom of status list
+$showrecentjobs	= 15;
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.35
+
+>>>>>>>>>> Change Log
+
+*Bug Fix: Made a slight change in repair/brandicon.php to avoid a warning on newer php versions.
+*Fix: Fixed permissions error message in repair/attachments.php 
+*Enhancement: Show max file upload size configured on the server when uploading attachements in repair/attachments.php.
+*Bug Fix: Fixed warning when creating a new user account in repair/admin.php.
+*Minor Fix: Fix vertical alignment of pc info text in work order history in repair/pc.php
+*Minor Fix: Show PC Notes on work order history in repair/pc.php
+*Minor Fix: Put Monetary symbol variable on invoice totals in store/invoice.php
+*Feature: Added new asset image upload method that is currently only supported by Android 3.0+ in repair/pc.php
+*Feature: Added Datepicker to Sticky Notes and Invoice Editor in repair/sticky.php and store/invoice.php
+*Enhancement: Updated Stylesheet for Customer Status in repairstatus/index.php and repairstatus/style.css
+*Change: Added Signature enabling variable to repair/deps.php
+*Enhancement: Allow x X and @ for labor quantity symbols in repair/repcart.php and store/cart.php
+*Fix: Reactivate submit button on Check Plugin after failing to enter drivers license on large purchase in store/Check.php 
+*Bug Fix: Our Cost not passing between an invoice and a receipt on checkout in store/invoice.php
+*Feature: Added ability to customize status box colors and add custom status in the admin interface in repair/style.css, repair/defaultstyles.php, 
+	repair/index.php, repair/common.php, store/common.php, store/invoice.php, repairstatus/index.php  
+*Enhancement: Added Overdue stamp to overdue emailed invoices in store/invoices.php
+*Enhancement: Add logins and logouts to user activity report and record IP address and browser agent in store/loglogin.php store/login.php 
+	store/common.php repair/common.php store/reports.php store/logout.php repair/logout.php
+*Feature: Added ability to email or print multiple invoices from the invoice list in store/invoices.php.
+*Enhancement: Make invoice actions in group view return to group view instead of master invoice list in repair/group.php
+*Major Feature: Added Recurring Invoices in store/rinvoices.php, store/invoices.php, repair/group.php, store/cart.php, repair/header.php, 
+	store/header.php, repair/common.php, store/common.php.
+*Change: Clear Cart after creating an Invoice in store/invoice.php
+*Enhancement: Add link to create new invoice from group viewer in repair/group.php
+*Bug Fix: Fixed PHP warning on applied invoice list in store/deposits.php
+*Changes: Updated some heading styles in repair/style.css
+*Enhancement: Added permission to delete recent invoices from the invoice list in repair/common.php, store/common.php, store/invoice.php
+*Enhancement: Show category on stock detail page in store/stock.php
+*Feature: You can now specify an email address in the Store Admin, to have all emailed invoices, receipts, and reports carbon copied to in
+	repair/common.php, store/common.php, store/invoice.php, store/deposits.php, store/receipts.php, repair/pc.php
+*Change: Only show a months worth of jobs Waiting for Pickup. Link to view them all at top of status. Changes in repair/common.php
+*Change: Allow spaces in the phone number in the repair status scripts in repairstatus/index.php
+*Change: Added button on the touchscreen to jump to the Point of Sale in repair/touch.php
+*Change: Add work order status changes to Work Order Action Log.
+*Enhancement: Added link to send Thank You emails from the Recent Work List.
+*Enhancement: Fixed a few vendor specific styles for the Opera Browser in repair/style.css
+*Enhancement: Show current store by checkout button, to help avoid processing sale in wrong store in store/cart.php
+*Change: Remove outline on some printed report, switch to different font style that looks better printed.
+*Enhancement: Add "Email" to preferred contact list in repair/pc.php, repair/group.php, repair/index.php
+*Bug Fix: Fixed some CSS/doctype oddities for IE in repair/style.css and store/login.php
+*Bug Fix: Fixed some php warnings in the email receipt function in store/receipt.php
+*Enhancement: Moved location of login failure message in store/login.php
+*Feature: Added the ability to add discounts to repair carts in repair/index.php, repair/repcart.php
+*Change: Show address2 field in group list viewer in repair/group.php
+*Change: Sort invoices by date in open invoice viewer in store/invoice.php
+*Change: Allow all asset photos to be printed on the report with a new button added in the toolbar in repair/pc.php
+*Bug Fix: Do not allow stock search feature to show discontinued items in store/stock.php Thanks to Silvano ;)
+*Feature: Option to add PayPal payment link to bottom of all emailed invoices with no deposits in store/invoice.php, store/deps.php
+*Bug Fix: Fixed bug where improper call status was logged to the user activity log.
+
+
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+
+
+>>>>>>>> Step 1
+
+You will need to run the database upgrade script "databaseupgrade-1.34to1.35.php". Log into PCRT first,
+Then copy this file in your repair folder and run it from your browser by entering your system URL in the browser address
+bar like "http://myrepairsystem.com/mysystem/repair/databaseupgrade-1.34to1.35.php". Click the "Upgrade" link.
+Once you see the upgrade finished message you are done. Delete the upgrade script from your repair folder when you are finished.
+
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+
+>>>>>>>> Step 2
+
+Re-Upload these new and updated files to their respective location in your system:
+
+store/images/rinvoice.png
+repair/images/rinvoice.png
+repair/jq/datepickr.js
+repair/style.css
+repair/printstyle.css
+
+
+
+>>>>>>>> Step 3
+
+Re-upload all php files except for the deps.php files in both the repair and store folders.
+Be careful to not re-upload any of the deps.php files or other files you may have customized for your
+own purposes such as label scripts.
+
+>>>>>>>> Step 4
+A new permission was added to allow users to process recurring invoices and delete recently created invoices, if you plan on using
+this feature give you and your users permission to do this.
+
+>>>>>>>> Step 5
+
+Feel free to customize your status box styles. Login as admin, and go to the setting menu and look for "Box/Status Box Color Styles". Feel free to play
+with the styles.
+
+>>>>>>>> Step 6
+
+Make sure to do	a browser refresh on all clients on any	regular	work order page, and on	a printable page to get	the updated versions of	the stylesheets	sent
+to the web browser.
+
+
+
+
+>>>>>>>> Optional Step 1
+
+If you use the repair status scripts, re-upload everything in the "repairstatus" folder except the deps.php file. There is an updated stylesheet
+and new code to recognize your custom statuses.
+
+
+>>>>>>>> Optional Step 2
+
+To add a paypal payment link to the bottom of all emailed invoices, add this code to the payment section of store/deps.php
+
+# Paypal Payment Link for Emailed Invoices
+# Your Paypal Email Address
+$paypalonlineemail = "";
+# Your Currency Code:
+# Common Values: USD = US Dollars, EUR = Euro, AUD = Austrailian Dollar, CAD = Canadian Dollar, GBP = Pound Sterling
+$paypalcountrycurrencycode = "USD";
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Release 1.36
+
+>>>>>>>>>> Change Log
+
+*Bug Fix: Some ical fixes in sticky.php and stickdisplay.php
+*Bug Fix: Cost Price and Serial number not passing from invoice checkout to cart in invoice.php
+*Feature: Enhancements to the touchscreen view. In repair/touch.php repair/touchfooter.php repair/touchheader.php repair/style.css
+*Fixes: Fixes in daily repair status report for changes to status code from previous release in store/reports.php 
+*Feature: Added ability to print price tag inclusive of tax in store/stock.php
+*Feature: Added support for Clickatell SMS provider in repair/sms.php
+*Feature: Added support for Bluepay Merchant Payment Processor in store/Bluepay.php, store/deps.php
+*Change: Added direct link to edit a work order from the work order history screen in repair/pc.php
+*Enhancement: Added warning to checkout button on work orders that have charges specified in a invoice in repair/index.php
+*Feature: Tax Report that lets you specify a Fiscal Start Year in store/reports.php
+*Enhancement: Added ability to archive recurring invoices in store/rinvoices.php, store/invoices.php
+*Enhancement: Show info about customer repair status checks when hovering over eye icon in status list in repair/style.css, repair/common.php
+*Enhancement: Added some mini-mega dropdown menus to help cleanup work order screen appearance in repair/index.php, repair/style.css
+*Enhancement: More stylesheet refinements to boxes and buttons in repair/style.css
+*Enhancement: Added SMS and Email to Called/Contact Status in index.php
+*Enhancement: Added Signature Pad to Invoices, Receipts, and Deposit Receipts. Added option to enable them per document type. Added option to hide the 
+              pad per document in store/receipts.php, store/invoices.php, store/deposits.php, repair/pc.php
+*Enhancement: Added a search and pick for the Take a Deposit feature not attached to a work order in store/deposits.php, store/cart.php
+*Fix: Added check to prevent an endless loop caused by entering a non-existent stock id number in repair/repcart.php, store/cart.php
+*Change: Reworked user editor in repair/admin.php
+*Enhancement: Added some flat color themes in the Store Admin in repair/admin.php
+*Enhancement: Modified asset image retrieval code in repair/pc.php, repair/touch.php, repair/index.php
+*Major Feature: Service Reminders in repair/servicereminders.php,repair/admin.php,repair/common.php, store/common.php
+*Feature: Ability to narrow stock search by category in store/stock.php
+*Fix: Add Customer City, State, Zip to emailed invoice in store/invoices.php
+*Major Feature: Service Request module to take service requests from your website with email and sms notification in servicerequests/*
+*Enhancement: Replaced autofocus/highlight javascripts with newer html 5 methods in many files.
+*Feature: Added ability to print a range of invoices en masse, up to 200 at one time in store/invoice.php
+*Feature: Ability to print multiple or a range of receipts in store/reports.php, store/receipts.php
+*Change: Changed the default assigned user in work orders to unassigned in repair/pc.php
+*Enhancement: Added a feature to print a foldable price card for systems checked in and sold in your store in repair/printpricecard.php
+*Enhancement: Added some spacing between line items on printable invoices/receipts in store/receipts.php, store/invoices.php, repair/printstyle.php
+*Enhancement: Added a collision check for saving work order notes in repair/index.php, repair/pc.php, repair/touch.php
+*Enhancement: Added ability to add a title spacer to quick labor list in repair/index.php, store/cart.php, repair/admin.php
+*Enhancement: Added ability to specify quantities on work order on both inv and non-inv items in repair/index.php and repair/repcart.php
+*Enhancement: Added ability to send email and sms notifications to the assigned user on new work orders and sticky notes in repair/sticky.php
+		repair/pc.php repair/common.php repair/smsnotify.php repair/sendenotify.php
+*Enhancement: Added company field - too many files to list.
+*Bug Fix: Errors in Invoice Search Function in store/invoice.php, store/mainmenu.php
+*Enhancement: Show Quote/Invoice Number in html title.
+*Enhancement: Allow editing of non-inventoried items on work orders and the current cart.
+*Enhancement: Ability to print serial code on price tag.
+*Enhancement: If an emailed invoice has been payed, show a message that it has been payed and do not show the paypal payment link.
+*Enhancement: Allow discounts to be removed from a cart to restore the original price.
+*Enhancement: Add date pickers to reports page in store/reports.php
+*Enhancement: New Payment Plugin for Stripe Payments   
+*Fix: Added doctype declarations to keep IE from going wonky on printable receipts, repair reports, and receipts.
+*Change: Added changes to workarea color display so that darker colors could be used without making text hard to read.
+*Enhancement: Show assigned tech in popup info in status list.
+*Option: Added new default status box "flat" style with flat colors.
+*Option: Added new alternate stylesheet called repair/flat.css
+*Option: Added new alternate stylesheet called repair/flatondark.css This must be used in conjunction with the new dark	box themes
+*Bug Fix: Fixed date bug in customer status check notification in repairstatus/index.php
+*Change: Show serial numbers on emailed receipts.
+*Change: Sort serial numbers in add to cart picker.
+
+
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+
+
+>>>>>>>> Step 1
+
+You will need to run the database upgrade script "databaseupgrade-1.35to1.36.php". Log into PCRT first,
+Then copy this file in your repair folder and run it from your browser by entering your system URL in the browser address
+bar like "http://myrepairsystem.com/mysystem/repair/databaseupgrade-1.35to1.36.php". Click the "Upgrade" link.
+Once you see the upgrade finished message you are done. Delete the upgrade script from your repair folder when you are finished.
+
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+
+
+
+>>>>>>>> Step 2
+
+Re-Upload these new or updated files to their respective location in your system:
+
+repair/images/pmedium.png
+repair/images/phigh.png
+repair/images/customeredit.png
+repair/images/groupremove.png
+repair/images/groupadd.png
+repair/images/reminder.png
+repair/images/woedit.png
+repair/images/womove.png
+repair/images/wohistory.png
+repair/images/woaction.png
+repair/images/5called.png
+repair/images/6called.png
+repair/style.css
+repair/printstyle.css
+repair/flat.css
+repair/flatondark.css
+repair/images/touchscreen.png
+repair/images/search.png
+store/images/search.png
+store/images/receipts.png
+store/images/discount.png
+store/images/remdiscount.png
+store/ani.css
+pcphotos/.htaccess
+repairstatus/index.php
+
+>>>>>>>> Step 3
+
+Add this text to the repair/deps.php file. This can replace the $enablesignaturepad variable in your repair/deps.php file (if you have it).
+
+#Claim Ticket Signature Pad
+$enablesignaturepad_claimticket = "no";
+#Repair Report Signature Pad
+$enablesignaturepad_repairreport = "no";
+
+
+Add this text to your store/deps.php file:
+
+#Receipt Signature Pad
+$enablesignaturepad_receipt = "no";
+#Invoice Signature Pad
+$enablesignaturepad_invoice = "no";
+#Deposit Receipt Signature Pad
+$enablesignaturepad_deposits = "no";
+
+
+
+>>>>>>>> Step 4
+
+Re-upload all php files EXCEPT FOR THE DEPS.PHP FILES in both the repair and store folders.
+Be careful to not re-upload any of the deps.php files or other files you may have customized for your
+own purposes such as label scripts.
+
+>>>>>>>> Step 5
+
+Make sure to do a browser refresh on all clients on any regular work order page, and on a printable page to get the updated versions of the stylesheets sent
+to the web browser.
+
+
+>>>>>>>> Step 6
+A new permissions were added to allow the following items. Go to the user admin to add these permissions as desired to your
+user accounts.
+
+Manage Service Reminder Messages
+Send/Process Service Reminders
+Manage On Call Users
+
+>>>>>>>> Step 7
+If you plan on using some of the new notification features, go to the user manager and enter the email addresses and mobile phone 
+numbers of all of your technicians.
+
+
+>>>>>>>> Optional Step 8
+
+There is a new "servicerequests" folder. You can add this to your website to accept service requests from your
+visitors. This is much like the repairstatus folder, it has some empty header and footer files that you can use for your
+template or you could insert this in an iframe in your website. You will also need to configure your database settings
+in the deps.php file in this folder. There are other options that will need to be configured as well. There is
+a throttling mechanism that limits the number of submissions by IP address over X number of days that can be 
+altered. There is also a captcha that can be optionally configured. I would probably recommend using the captcha
+if you use the sms notification.  Also do not forget to set your oncall user for each store in the settings menu.
+
+
+>>>>>>>> Optional Step 9
+
+If you plan on using the new Stripe Payment Plugin, you will need to also upload the "stripe" file into
+the store folder.
+
+
+>>>>>>>> Optional Step 9
+
+If you plan on using the new Stripe Payment Plugin, you will need to also upload the "stripe" folder into
+the store folder. You will also need to add these lines to to your store/deps.php file:
+
+#Stripe Settings
+$stripe_api_key = "";
+$stripe_currency = "usd";
+
+
+
+
+>>>>>>>> Optional Step 10
+
+If you plan on using the new Bluepay Payment Plugin, you will also need to add these lines to to your store/deps.php file:
+
+#Bluepay Settings
+$BluepayNetUrl = "https://secure.bluepay.com/gateway/transact.dll";
+$BluepayAccountId = "";
+$BluepaySecretKey = "";
+
+
+
+>>>>>>>> Optional Step 11
+
+If you plan on using the new Clickatell SMS Plugin, you will also need to add these lines to to your repair/deps.php file:
+
+#Clickatell SMS Settings
+$clickatelluser = "yourusername";
+$clickatellpassword = "yourpassword";
+$clickatell_api_id = "api_id";
+$clickatellbaseurl = "http://api.clickatell.com";
+
+
+
+>>>>>>>> Optional Step 12
+
+If you would like to try the new "Flat" css style, you will also need to add these lines to to your repair/deps.php and store/deps.php files
+
+# Alternate PCRT Stylesheet
+$pcrt_stylesheet = "flat.css";
+
+
+
+################################################
+Release 1.37
+################################################
+
+>>>>>>>>>> Change Log
+
+*Bug Fix: Fixed bug in PayPal.php plugin that would cause wrong plugin to be called when attempting to void a payment.
+*Bug Fix: Allow Current Customer to be edited without losing ability to save the Recurring Invoice 
+*Bug Fix: Fix ability to delete a canned service reminder entry.
+*Bug Fix: Fix pickup date not getting set correctly in some circumstances.
+*Enhancement: Added experimental resize code for the scan icon creator.
+*Bug Fix: Fixed bug that completely broke the csv export of the quarterly report in store/reports.php
+*Bug Fix: Fix bug in display of store address in printed deposit receipt in store/deposit.php
+*Major Feature: Added translation system that allows for translation of the interface as well as customization of all strings.
+*Major Feature: Added support for UTF-8 Encoding
+*Enhancement: Added JQuery function to load work order screen prior to status list.
+*Enhancement: Added some indexes to the database to help increase speed for systems with large amounts of userlog data.
+*Enhancement: Added number formatting function for formatting numbers to make it easier to change.
+*Enhancement: Increased precision of tax calculations to reduce rounding discrepencies in totals.
+*Fix: Clear invoice number from receipt if invoice is converted to quote and then deleted.
+*Enhancement: Added Deposit button to claim ticket.
+*Enhancement: Added box to search again for a PC.
+*Fix: Urlencode the price before sending to the price tag script
+*Customer Request: Add company name to status list
+*Enhancement: Search group company field when searching for a PC/Customer.
+*Enhancement: Change method for loading inventory images so that external access can be blocked.
+*Fix: Un-apply an applied deposit when admin deletes a receipt.
+*Enhancement: Show total count of returning computers checked in on Repair volume report.
+*Enhancement: Added permissions to hide delete and edit links on sticky notes for notes not assigned to the logged in user.
+*Feature: Script to figure markups when adding or editing inventory.
+*Feature: Show markup percentage if the user has Inventory permissions.
+*Feature: Foldable price card for inventory items.
+*Feature: Added optional Checkout/Collection Receipt
+*Feature: Ability to choose what status a work order switches to when processing a payment through the current cart.
+*Enhancement: Re-written work order notes allowing multiple notes with timestamp.
+*Feature Request: Show individual deposits on work order invoice.
+*Feature Request: Added support for FreeSMSGateway.com, unable to recieve any messages with it, even though it says they were sent.
+*Customer Request: Added links to mark service requests as sent or delete service requests from the process service requests list.
+*Feature Request: Ability to renotify assigned tech via sms or email.
+*Enhancement: Revamped search feature on POS and Repair sides
+*Enhancement: Added ajax search inventory search on work order screen. 
+*Enhancement: Added support for Dymo Javascript API
+*Enhancement: You can now set a custom labor price discount.
+*Feature Request: Untested, experimental pluging for MyVirtualMerchant (elevon)
+*Feature Request: Added support for MyMobileAPI SMS Gateway
+*New Feature: d7 Report Integration
+
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+
+
+>>>>>>>> Step 1
+
+You will need to run the database upgrade script "databaseupgrade-1.36to1.37.php". Log into PCRT first,
+Then copy this file in your repair folder and run it from your browser by entering your system URL in the browser address
+bar like "http://myrepairsystem.com/mysystem/repair/databaseupgrade-1.36to1.37.php". Click the "Upgrade" link.
+Once you see the upgrade finished message you are done. Delete the upgrade script from your repair folder when you are finished.
+
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+
+
+
+>>>>>>>> Step 2
+
+Re-Upload these new or updated files to their respective location in your system:
+
+repair/jq/DYMO.Label.Framework.latest.js
+repair/style.css
+repair/flat.css
+repair/flatondark.css
+repair/printstyle.css
+
+
+
+>>>>>>>> Step 3
+
+Add this text to the repair/deps.php file.
+
+#Checkout Receipt Signature Pad
+$enablesignaturepad_checkoutreceipt = "yes";
+
+
+
+
+>>>>>>>> Step 4
+
+Add this new text to the repair/deps.php and store/deps.php files. Yes, we are gonna be modifying text in the area that says:
+
+#######################################
+#Do not modify anything below this line
+#######################################
+
+
+Locate these two lines:
+
+$rs_connect = @mysql_connect($dbhost, $dbuname, $dbpass) or die("Couldn't connect the db");
+$rs_select_db = @mysql_select_db($dbname, $rs_connect) or die("Couldn't select the db");
+
+
+
+And right below them, add this line:
+
+mysql_query("SET NAMES utf8");
+
+
+
+
+
+
+
+Also in all your deps files: repair/deps.php, store/deps.php, repairstatus/deps.php, servicerequests/deps.php
+
+Add these lines near the top, after the database info
+
+
+#Array of Available Languages. Do not Remove the en-us default language. 
+$pcrtmasterlanguagelist = array("en-us" => "English (United States)","en-gb" => "English (Great Britian)");
+
+#PCRT System Language. Choose a value from above.
+$mypcrtlanguage = "en-us";
+
+
+
+
+>>>>>>>> Step 5
+
+Re-upload all php files EXCEPT FOR THE DEPS.PHP FILES in both the repair and store folders.
+Be careful to not re-upload any of the deps.php files or other files you may have customized for your
+own purposes such as label scripts.
+
+MAKE SURE YOU BACKUP ANY MODIFIED DYMO LABEL SCRIPTS!!!
+
+It would be a good idea to download a sample label file of your address, asset, and pricetag label if you have customized them, so that you can use them
+as a starting point for any new customizations.
+
+
+
+
+
+
+>>>>>>>> Step 6
+
+Make sure to do a browser refresh on all clients on any regular work order page, and on a printable page to get the updated versions of the stylesheets sent
+to the web browser.
+
+
+
+
+
+
+
+>>>>>>>> Step 7
+A new permissions were added to allow the following items. Go to the user admin to add these permissions as desired to your
+user accounts.
+
+Delete Sticky Notes Assigned to other Techs
+Edit Sticky Notes Assigned to other Techs
+
+
+
+>>>>>>>> Optional Step 8
+
+If you use the service request module, repair status module, you must update the php files from this new release. The changes to the
+service request files are to add translatability, the changes to the repairstatus scripts are to add translatability and support for the new
+way customer notes are handled.
+
+
+
+>>>>>>>> Optional Step 9
+
+If you would like to customize your asset,address, or price tag labels you can download a sample label like before in PCRT, and go to the store admin, 
+and click on Manage Dymo Label Templates, and customize it by plugging in the special place holder variables within the Dymo Label designer software.
+Then save your label file, and open it with notepad, copy and paste the template to the template boxes in PCRT. 
+
+
+
+
+
+
+>>>>>>>> Optional Step 10
+
+You can enter text in the Store Admin for the new optional Checkout Receipt
+
+
+
+
+>>>>>>>> Optional Step 11
+
+Translation. If you would like to change text labels or translate to your language, in the admin section their is a new Language Strings Editor.
+As you view various screens in PCRT, this database will be populated and you will be able to translate or modify various strings.
+
+If you would like to add a new language, first add your new language to all deps.php files in the variable:
+
+$pcrtmasterlanguagelist
+
+Then set your new language setting to the variable:
+
+$mypcrtlanguage
+
+
+Optional Step 12
+
+d7 Report Integration - If you would like to be able to have d7 send its reports to PCRT as an attachment, do as follows:
+
+# Setup:
+
+1. In PCRT copy the d7 folder to the location that you will use to FTP the reports to from d7. Preferably this would be a location that is not web accessible.
+
+2. Create a FTP account on your server that d7 can use to connect to. It should be locked down so that it has no access to folders other than the PCRT d7
+   folder. The FTP server root should be set to go directly to the PCRT d7 folder.
+
+3. Add this variable to your repair/deps.php file:
+
+#d7 Integration - Report Upload Folder
+$d7_report_upload_directory = "../d7/";
+
+   This can be an absolute path on your server or a relative path. Make sure to set the permissions to 777 on this folder.
+   To allow PCRT to be able to delete and move the reports.
+
+4. Now in d7, go to Config->Reports and check the box for "Prompt for Client Name/Ticket/Work Order #". This will make d7 prompt on
+   start up for the client name and work order number. You should not use special character in the client name as this name will be
+   used to form the filename of the uploaded attachment. If you wish to change this after it is initially set, on the main d7 startup
+   screen, click on the set client name to modify it.
+
+5. On the Report config screen, you will probably want to specify the "Reports Directory Naming Convention" to:
+
+%number%_%name%_%date%
+
+6. Go to Config -> "dCloud/FTP Server" and enter your FTP server details. If you setup your special FTP account root folder to go
+   directly to the PCRT d7 folder, you should only have set the "Reports Directory" to "/". You will also need to check the box that
+   says "Zip Reports Before Upload"
+
+# Usage:
+
+1. Transferring the reports from d7 to PCRT: To transfer the reports, you can either choose "Move Reports to FTP" from the
+   top d7 FTP menu, or you can set it as a d7 "Shutdown Action" when closing d7.
+
+2. Once the reports have been sent to PCRT a link will appear at the top of the status menus that reports are ready. On the
+   following screen, you will have the option to attach them one at a time to an "open" work order, or as long as you have
+   specified the work order number in d7, that can be attached en masse.
+
+# Security Concerns
+
+1. The d7 Folder in the PCRT package contains a .htaccess file that should block any web access to the folder, but it is better
+   to not place it in a web accessible folder anyways.
+
+2. d7 has optional features to create reports with user web browser passwords and other sensitive information. While this
+   information can be vital during a repair, ask yourself if it is really necessary to store it in PCRT perminently.
+
+3. Make sure you create a special FTP account and change the password from time to time. If you were to forget and leave d7
+   on a customers computer, they could potential have access to your FTP server. But better yet, do not ever copy d7 to a
+   customers computer if not necessary.
+
+
+
+
+
+################################################
+Release 1.38
+################################################
+
+>>>>>>>>>> Change Log
+
+*Enhancement: Added ability to add a customer without a work order.
+*Enhancement: Added more user friendly warning about missing pear library.
+*Enhancement: Changed the notification after email is sent - added to notification area at top of status list.
+*Fix - Remove serials from the list of available serials for items that linger in repair carts of open workorders and open invoices.
+*Enhancement: Search Customer Notes for Links
+*Enhancement: You can now define multiple asset/device types, each with their own list of asset accessores, and custom spec fields all in the admin interface.
+  You can also map these fields to fields in the d7 info report.
+  You can also choose which of the spec fields are displayed on the claim ticket, repair report, checkout receipt, and price cards.
+  This enhancement also means several changes away from "PC" centric terms. PCID's are now Asset Id's, Several places that used to be
+  labeled "Computer" or "PC" have been renamed to Asset/Device. Customer Items are now referred to as "Asset Accessories"
+
+*Feature: Support for Tax Groups, this feature allows you to apply multiple tax rates per item, as long as the rates are defined as part of a group rate.
+*Feature: Added support for Dymo Twin Turbo label printers. You can now choose whether to print from the left or right label, and also choose the print speed/quality.
+*Feature: Ability to specify a "Scheduled Date" for work orders as well as selector to choose which types of jobs to view.
+  This new selector is comprised of 4 buttons.
+  1st Button: Shows all jobs in the store with a job total.
+  2nd Button: Shows all jobs assigned to the logged in user in the store with a job total.
+  3rd Button: Shows all jobs in the store with a scheduled date. Job total does not include jobs from Waiting for Payment or Completed.
+  4th Button: Shows all jobs in the store assigned to the logged in user with a scheduled date. Job total does not include jobs from Waiting for Payment or Completed.
+
+  Job totals do not include jobs that have been in completed status for more than 30 days
+  Scheduled Jobs will start to appear the day prior to the scheduled date when the 1st or 2nd button is selected.
+
+*Change: Use basic time picker designed for Scheduled Jobs on sticky notes feature.
+*Bug Fix: Fixed comments in hover info in status list for Ready for Pickup/Completed and Waiting for Payment Status
+*Change: PC Make field is no longer a required field. This change made for people that are creating a work order with no device.
+*Enhancement: Show selector color swatch on status box editor.
+*Enhancement: Make status list popup titles use selector color for background for better readability
+*Enhancement: Add direct link to Sticky Calendar in main repair menu.
+*Enhancement: Show scheduled work orders on sticky calendar.
+*Enhancement: A link in the inventory system to show list of open work orders or open invoices that an inventoried item is attached to.
+*Enhancement: Narrow receipt option for printing sales receipts, deposit receipts and claim tickets on 80MM receipt printers.
+*Bug Fix: Redirect error after deleting quote.
+*Enhancement: A new routine, restricted by user permission, to allow you to move a receipt to a different store and adjust inventory accordingly.
+*Feature: New Timer feature that also allows you to bill it to the repair cart.
+*Feature: Map link on Work Order.
+*Feature: CSV Import feature to import customer contact info into PCRT.
+*Security Enhancement: After 4 failed login attempts, block attempts for a period of time.
+*Enhancement: Added 2 alternate image conversion methods to stock image upload. Enhanced error messages to better pinpoint the point of failure.
+*Enhancement: Allow stock recounting tool to use UPCs as well as stock id.
+*Change: Replace the stock in inventory when deleting a receipt.
+*Change: Removed all vendor specific CSS for gradients, box shadows, and border-radii
+*Change: Load work orders from status list via ajax for faster load.
+*Option: Added new "light" stylesheet option, looks best with a white store background theme.
+*Change: Added box border to "Flat" box style to complement the new "Light" stylesheet.
+*Enhancement: Show change on printed receipts and receipt viewer
+*Fix: Do not reset invoice date when modifying invoice items.
+*Major Feature: Block of Time Contracts for group contacts.
+*Bug Fix: When deleting notes from the touchscreen, clicking cancel on the confirm did not cancel.
+*Change: Show most recent password on asset touchscreen	view.
+*Bug Fix: Error on no charge items placed in the waiting for payment status.
+*Change: Store and maintain an average cost of goods value for more accurate reporting on stock items.
+*Change: Pass pc contact info when creating a new group.
+*Enhancement: Create new sticky from Group Page
+*Enhancement: New report that shows inventory based on average cost of goods. 
+*Enhancement: Added FontAwesome icons to several buttons.
+*Enhancement: 2 New payment reports that show date range or monthly payment report by payment type.
+*Change: New light.css stylesheet change to be the default PCRT stylesheet.
+*Enhancement: Added Cost of Goods figure to many reports.
+*Bug Fix: Added missing code for the Twilio option in the sms tech notification scripts
+*Enhancement: You can use the UPC field in Dymo templates for price tags
+*Enhancement: New inventory report, you can now search for a specific sold non inventory item.
+*Enhancement: New inventory report, you can now search a date range for all sold non-inventory items.
+*Enhancement: Show warning on current cart and repair cart if an added item is currently out of stock.
+
+
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+
+
+>>>>>>>> Step 1
+
+You will need to run the database upgrade script "databaseupgrade-1.37to1.38.php". Log into PCRT first,
+Then copy this file in your repair folder and run it from your browser by entering your system URL in the browser address
+bar like "http://myrepairsystem.com/mysystem/repair/databaseupgrade-1.37to1.38.php". Click the "Upgrade" link.
+Once you see the upgrade finished message you are done. Delete the upgrade script from your repair folder when you are finished.
+
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+
+
+
+>>>>>>>> Step 2
+
+Re-Upload these new or updated files to their respective location in your system:
+
+/repair/images/assets/carcharger.png
+/repair/images/assets/installdiscs.png
+/repair/images/assets/phonecase.png
+/repair/images/assets/simcards.png
+/repair/images/assets/synccord.png
+/repair/images/assets/usbcharger.png
+/repair/images/clock.png
+/repair/images/calendar.png
+/repair/images/narrowreceipts.png
+/repair/images/widereceipts.png
+/repair/images/prog_store.png
+/repair/images/prog_store_sked.png
+/repair/images/prog_user.png
+/repair/images/prog_user_sked.png
+/repair/images/widereceipts.png
+/repair/images/narrowreceipts.png
+/repair/images/pcs/ticket.png
+/repair/images/pcs/router.png
+/repair/images/tranimage.png
+/repair/jq/jquery.js
+/repair/jq/DYMO.Label.Framework.latest.js
+/repair/style.css
+/repair/flat.css
+/repair/light.css
+/repair/printstyle.css
+/repair/flatondark.css
+
+
+And this entire, new folder:
+
+repair/fa
+
+
+>>>>>>>> Step 3
+
+Replace these lines with the existing lines in your repair/deps.php file.
+
+#Array of Customer Assets with icons stored in images/assets/
+$custassets = array("Laptop Power Adapter" => "charger.png","Laptop Bag" => "laptopbag.png","Power Cord" => "powercord.png","Printer" => "printer.png","System Discs" => "rdisc.png","Display" => "monitor.png","Modem" => "modem.png","Router" => "router.png","Flash Drive" => "flashdrive.png","External HD or CD" => "exthd.png" ,"Mouse" => "mouse.png","Keyboard" => "keyboard.png","AirCard" => "aircard.png","Charger" => "usbcharger.png","USB Sync/Charge Cord" => "synccord.png","Phone Case" => "phonecase.png","Sim Card" => "simcards.png","Car Charger" => "carcharger.png","Install Discs" => "installdiscs.png");
+
+
+>>>>>>>> Step 4
+
+Re-upload all php files EXCEPT FOR THE DEPS.PHP FILES in both the repair and store folders.
+Be careful to not re-upload any of the deps.php files or other files you may have customized for your
+own purposes.
+
+
+
+>>>>>>>> Step 5
+
+Make sure to do a browser refresh on all clients on any regular work order page, and on a printable page to get the updated versions of the stylesheets sent
+to the web browser.
+
+
+
+>>>>>>>> Optional Step 6
+
+Re-upload the entire repair/jq/signature/ if you use the signature pad feature to fix scrolling issues on surface tablets.
+
+
+>>>>>>>> Optional Step 7
+
+If you use the repairstatus scripts you'll need to also update:
+
+repairstatus/index.php
+
+
+
+
+
+
+################################################
+Release 1.39
+################################################
+
+>>>>>>>>>> Change Log
+
+Feature: Start of Date localization
+Feature: Suppliers database - Allows you to specify a list of suppliers. 
+Feature: Special Order feature - Allows you to better track special order parts on Work Orders.
+Feature: Ability to refund labor in the cart.
+Feature: Additions to the technician report to show assigned work orders and current status.
+Change: Minor rearrangement of repair cart area on work order screen.
+Feature: Ability to add multiple work order carts to one invoice. System will offer to add items to the cart of other open work orders in the same Group.
+Feature: Ability to checkout multiple work order carts on one receipt from Work Order Checkout Page
+Feature: Ability to checkout multiple invoices on one receipt from the open invoice viewer.
+User Requested Change: You can now translate the name of the payment plugin on the Cart.
+Feature: Stock management, Specify minimum and max stock levels, choose which inventory items to monitor, printable report on what needs to be reordered.
+Enhancement: Expansion of the Saved cart feature to be able to use it for kits. It now also shows current inventory, prices with totals. 
+Enhancement: Option to show if price in saved cart has changed in inventory and update the price to the current price.
+Enhancement: Added driving directions from current store location to map from work order screen.
+Feature: Mileage log on work order. Calculates miles automatically using gmaps from store location.
+Enhancement: Ability to specify a custom return rate.
+Feature: Employee Timeclock
+Enhancement: Ability to filter the daily report based on user that performed the checkout.
+Change: Added permissions to restrict access to the receipt browser and day reports.
+Change: Added some ajax to the work order notes.
+
+
+
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+
+
+>>>>>>>> Step 1
+
+You will need to run the database upgrade script "databaseupgrade-1.38to1.39.php". Log into PCRT first,
+Then copy this file in your repair folder and run it from your browser by entering your system URL in the browser address
+bar like "http://myrepairsystem.com/mysystem/repair/databaseupgrade-1.38to1.39.php". Click the "Upgrade" link.
+Once you see the upgrade finished message you are done. Delete the upgrade script from your repair folder when you are finished.
+
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+
+
+
+>>>>>>>> Step 2
+
+Re-Upload these new or updated files to their respective location in your system:
+
+store/images/suppliers.png
+store/images/specialorders.png
+repair/jq/gmap3.js
+repair/jq/datepickr2.js
+repair/light.css
+repair/flat.css
+repair/style.css
+repair/printstyle.css
+
+>>>>>>>> Step 3
+
+Add the following code to the repair/deps.php and store/deps.php files. You can look at the stock deps.php files to see where you can place this.
+As long as it is not in the middle of any other settings, or before the "Do not modify anything below this line", it will be fine.
+
+# Date/Time Settings
+# Month Options: FULL_MONTH_NAME ABBR_MONTH_NAME NUMBERIC_MONTH_LEADING_ZERO NUMERIC_MONTH_NO_LEADING_ZERO
+# Day Options: NUMERIC_DAY_LEADING_ZERO NUMERIC_DAY_NO_LEADING_ZERO DAY_OF_WEEK_ABBR DAY_OF_WEEK_FULL ENGLISH_SUFFIX
+# Year Options: 4_DIGIT_YEAR 2_DIGIT_YEAR
+# Time Options: HOURS_NO_LEADING_ZERO HOURS_LEADING_ZERO 24_HOURS_NO_LEADING_ZEROS 24_HOURS_LEADING_ZERO MINUTES SECONDS AM_PM_LOWERCASE AM_PM_UPPERCASE
+$pcrt_time = "HOURS_NO_LEADING_ZERO:MINUTES AM_PM_UPPERCASE";
+$pcrt_shortdate = "4_DIGIT_YEAR-NUMERIC_MONTH_LEADING_ZERO-NUMERIC_DAY_LEADING_ZERO";
+$pcrt_mediumdate = "ABBR_MONTH_NAME NUMERIC_DAY_NO_LEADING_ZERO, 4_DIGIT_YEAR";
+$pcrt_longdate = "FULL_MONTH_NAME NUMERIC_DAY_NO_LEADING_ZERO, 4_DIGIT_YEAR";
+
+# The day to start calendar weeks: Sunday or Monday.
+$pcrt_weekstart = "Sunday";
+
+# Units Setting: METRIC or IMPERIAL
+$pcrt_units = "IMPERIAL";
+
+
+
+
+>>>>>>>> Step 4
+
+Re-upload all php files EXCEPT FOR THE DEPS.PHP FILES in both the repair and store folders.
+Be careful to not re-upload any of the deps.php files or other files you may have customized for your
+own purposes.
+
+
+
+>>>>>>>> Step 5
+
+Make sure to do a browser refresh on all clients on any regular work order page, and on a printable page to get the updated versions of the stylesheets sent
+to the web browser.
+
+
+>>>>>>>> Step 6
+
+There are new user permissions that have been added as well:
+
+Refund Labor
+Browse Supplier Info
+Edit Supplier Info
+Browse Receipts
+View the Day Reports
+
+Set these in your user admin to your liking.
+
+>>>>>>>> Optional Step 7
+
+Install Timeclock
+
+You will need to run the database upgrade script "timeclock_databaseupgrade-1.38to1.39.php". Log into PCRT first,
+Then copy this file in your repair folder and run it from your browser by entering your system URL in the browser address
+bar like "http://myrepairsystem.com/mysystem/repair/timeclock_databaseupgrade-1.38to1.39.php". Click the "Upgrade" link.
+Once you see the upgrade finished message you are done. Delete the upgrade script from your repair folder when you are finished.
+
+You will need to copy the entire "timeclock" folder to the same folder that contains the repair and store folders. Do not put the timeclock folder inside the 
+repair or store folders, but at the same level
+
+Edit the timeclock/deps.php file with your database info, and you can also adjust other variables to your liking there.
+
+Be sure to first login as admin, to set permissions. Only the admin user will be able to access this at first.
+
+
+
+
+
+
+
+
+################################################
+Release 1.40
+################################################
+
+>>>>>>>>>> Change Log
+
+New Feature: Mobile web friendly version of PCRT. A new mobile interface that will allow you to do most things other than Settings 
+and PCRT admin manangement.
+
+Notes: 
+1. If you add a icon from your mobile browser to your home screen, it will appear in mobile web view without toolbars when you launch it from there. 
+2. I left the dymo label stuff in for people that might be using windows tablets, but of course dymo printing does not work on android/IOS
+3. Printing on Android can be setup using google cloud print on Chrome on a windows desktop.
+
+Feature: Support for the 1X5 non-backlit version of the Topaz USB hardware signature pad.
+Enhancement: Ability for users with report permissions to see daily reports for all stores combined in multistore
+Feature: Inventory Importer
+Enhancement: Day Report now shows totals per payment plugin that gives you the total plus deposits minus applied deposits. This will show you and accurate total
+of the amount of cash recieved per day as well as other plugins.
+Enhancement: Made the service requests module more mobile friendly.
+Enhancement: Add link to receipt on a work order as long as no invoices exist on the work order.
+Change: Webcam Asset photo feature: Now uses html5 canvas with a fall back to flash so that for most browsers flash will not be needed.
+Enhancement: Ability to browse history of "recent work list" further back.
+User Requested Feature: Support for importing UVK reports with an on the fly extract/view of the UVK system info report.
+
+
+
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+
+
+>>>>>>>> Step 1
+
+You will need to run the database upgrade script "databaseupgrade-1.39to1.40.php". Log into PCRT first,
+Then copy this file in your repair folder and run it from your browser by entering your system URL in the browser address
+bar like "http://myrepairsystem.com/mysystem/repair/databaseupgrade-1.39to1.40.php". Click the "Upgrade" link.
+Once you see the upgrade finished message you are done. Delete the upgrade script from your repair folder when you are finished.
+
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+
+
+
+>>>>>>>> Step 2
+
+Upload these files from the install package
+repair/images/d7.png
+repair/images/uvk.png
+repair/jq/topaz.js
+repair/webcam.js
+repair/webcam.swf
+
+Upload this entire new folder to the repair folder
+repair/favicon
+
+Upload this folder, replacing the folder and all the files that currently exists there.
+repair/fa
+
+
+
+>>>>>>>> Step 3
+
+Re-upload all php files EXCEPT FOR THE DEPS.PHP FILES in both the repair and store folders.
+Be careful to not re-upload any of the deps.php files or other files you may have customized for your
+own purposes.
+
+>>>>>>>> Step 4
+
+Upload these new folders to you the same folder that contains your repair and store folders:
+
+repairmobile
+storemobile
+
+Note if you load this with your Android or IOS device, and add a shortcut to the homescreen, it will go into 
+full screen webview mode when launched from this icon. Be sure to bookmark a good "landing page" like the sticky note view 
+or current cart.
+
+
+>>>>>>>> Optional Step 5
+
+The servicerequests and repairstatus folder has had updates to make it more mobile friendly. Re-upload the index.php files or 
+all of the files contained in these folders with the exception of the deps.php files which contain your database settings.
+
+
+>>>>>>>> Optional Step 6
+
+UVK Report Integration
+
+Copy this text to your repair/deps.php file and specify the ftp folder location that your UVK FTP's its reports to.
+
+#UVK Integration - Report Upload Folder
+$uvk_report_upload_directory = "../uvk/";
+
+
+
+>>>>>>>> Optional Step 7
+
+Topaz Signature Pad Integration
+
+You now have an additional setting for the signature pad settings in your deps.php files.
+
+no = No Signature Pad
+yes = Virtual Web Based Signature Pad
+topaz = topaz 1X5 hardware signature pad.
+
+To use the Topaz feature, you must purchase a Topaz 1X5 signature pad and install the special topaz client software.
+
+Topaz signature pads are manufactured in two configurations, one with LCD display and one with no LCD display. (User cannot see
+their signature as they sign)
+
+To download the installer, choose the link for the sigpad you have:
+For models ending in: -BSB-R and -BBSB-R
+http://www.topazsystems.com/software/sigwebbsb.exe
+
+For models ending in: -HSB-R, -BHSB-R, and -B-R
+http://www.topazsystems.com/Software/sigweb.exe
+
+Download links can also be found here: 
+http://www.topazsystems.com/sigweb.html
+
+
+
+
+
+
+
+################################################
+PCRT Release Version 2
+################################################
+
+>>>>>>>>>> Change Log
+
+Revamped Status List:
+Renamed "Status Box Styles" to "Status Configuration" and combined with the "Custom Status Styles"
+Geeky status style boxes and themes were removed and replaced with a simple color picker to set status color.
+You can now set the order of status display
+You can now turn on work areas for all statuses, not just "On the Bench"
+You can customise what information shows on both the badge and the expanded info area - Over 20 options per status.
+New Work order status picker - fixes problem of unpredictable color display on some browsers
+
+Service Contracts:
+Ability to create service contract belonging to a customer Group.
+Contracts can specify users and per user pricing.
+Contracts can add Group member Assets/Devices for pricing per Asset/Device
+Option to include a block of time contract on the Service Contract by first creating the block of time contract with a recurring invoice and attaching the recurring invoice to the contract.
+Option to attach existing group recurring invoice to the contract or create a new recurring invoice.
+Option to attach documents to the contract.
+Pre define per asset pricing plans in the Settings->Manage area to be applied to group asset/devices.
+Option to display in the status list if the asset/device is part of a service contract.
+Quick Editor: Quickly add or remove service line items to the recurring invoice right from the Contract Viewer.
+
+Show a link on the Recurring Invoice list viewer to block of time contracts or service contracts if they are attached to the recurring invoice.
+Show link to Service Contract from Block of time contract if a block of time contract is on the same recurring invoice as the Service Contract.
+Show link to service contract on the recurring invoice viewer if it is attached to a Service Contract.
+Show on work order if Asset/Device is included in a Service Contract and has overdue recurring invoices
+Option in Main Asset Type Definitions to designate a Device type as a "Managable Device" so that pricing can be defined, and devices can be added to service contracts.
+Added color pickers to Store Color themes, sticky notes, and workarea colors.
+Updated look of work order area putting things in tables.
+Option on Main Asset Type Definitions to hide the Scans, Actions, Installs and Notes section from the work order screen per Asset/Device type.
+Moved Repair Cart Controls into dropdown menu within the Repair Cart Area.
+Moved Group information pane into dropdown panel.
+Updated Stripe plugin to new library, added support for StripeJS and credit card tokenization.
+Added Support for PayPal REST library and the PayPal Vault for storing Credit Cards
+Added Support for the AuthorizeNet Customer Information Manager (CIM) for storing credit cards.
+PCRT now supports 3 plugins that can store credit cards on the server of the processor for later charges..... Stripe, Paypal, AuthorizeNet.	
+Change Card swipe code to turn off autocomplete so that hopefully the browser won't stick saved passwords in the swipe box.
+Added the Twilio plugin to the service requests module.
+Bug Fix: Fixed bug where a combined invoice for multiple work orders would not let you create a new invoice after the previous invoice was voided.
+Feature: Added services type report.
+Feature: Added an alternative printout for deposits to be used as a gift certificate.
+
+
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+
+
+
+
+>>>>>>>> Step 1
+
+You will need to run the database upgrade script "databaseupgrade-1.40to2.php". Log into PCRT first,
+Then copy this file in your repair folder and run it from your browser by entering your system URL in the browser address
+bar like "http://myrepairsystem.com/mysystem/repair/databaseupgrade-1.40to2.php". Click the "Upgrade" link.
+Once you see the upgrade finished message you are done. Delete the upgrade script from your repair folder when you are finished.
+
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+
+
+
+>>>>>>>> Step 2
+
+Add this line to your repair/deps.php file. It should be the same as what is currently in your store/deps.php file.
+# Number of days old an invoice is considered overdue
+$invoiceoverduedays = "21";
+
+
+
+>>>>>>>> Step 3
+
+Upload these image, javascript and stylesheet files:
+repair/images/contract.png
+repair/style.css
+repair/light.css
+repair/printstyle.css
+repair/jq/DYMO.Label.Framework.latest.js
+
+
+
+>>>>>>>> Step 4
+
+Upload the newer version of the fa folder from the package here:
+repair/fa/                
+
+You can	delete the existing fa folder and reupload the new one to the repair folder.
+
+
+
+>>>>>>>> Step 5
+
+Re-upload all php files EXCEPT FOR THE DEPS.PHP FILES in these folders.
+Be careful to not re-upload any of the deps.php files or other files you may have customized for your
+own purposes.
+
+repair/
+repairmobile/
+store/
+storemobile/
+
+
+>>>>>>>> Step 6
+
+There is one new permission that can be assigned to users: "Manage Service Contract Pricing"
+
+
+>>>>>>>> Step 7
+
+Visit "Status Configuration" in your settings menu to enable all the display options you want
+on the badges in the work order status list. You can also re-order them if you wish.
+
+
+>>>>>>>> Step 8
+
+Add this text to both the store/deps.php and repair/deps.php files. You must add it even you do not plan to use it.
+It is recommended to place it right below the existing $paymentplugins variable in the store/deps.php file.
+
+
+# Stored Credit Card Plugins - Must be an exaxt match of the values in the store/deps.php file
+# Possible Values:  = array('Stripe','PayPalRest','AuthorizeNetCIM');
+$storedpaymentplugins = array();
+
+
+
+
+###########################################################
+# Optional Steps
+###########################################################
+
+
+>>>>>>>> Optional Step 1
+
+If you plan on using the Stripe Credit Card System, you must add the new $stripe_api_key_public variable to your existing block for stripe
+
+# Stripe Settings
+$stripe_api_key = "sk_test_sdfgsdfgsdfgsdfgsdfg";
+$stripe_api_key_public = "pk_test_sdfgsdfgsdfgsdfg";
+$stripe_currency = "usd";
+
+Also remove the existing stripe folder from your installation and
+reupload this new updated version of the Stripe libraries:
+
+store/stripe/
+
+
+
+
+>>>>>>>> Optional Step 2
+
+If you plan on using the AuthorizeNet Customer Information Manager to store and process credit cards, add this to your store/deps.php file in the 
+payment plugins section.
+
+# AuthorizeNet XML CIM stored cards plugin.
+$AuthorizeNetCIM_apilogin = ""; // Keep this secure.
+$AuthorizeNetCIM_transactionkey = ""; // Keep this secure.
+$AuthorizeNetCIM_apihost = "api2.authorize.net";
+$AuthorizeNetCIM_apipath = "/xml/v1/request.api";
+
+
+
+>>>>>>>> Optional Step 3
+
+If you plan on using the PayPal "REST" api with any of the PayPal merchant services
+
+store/PayPal/
+storemobile/PayPal/
+
+Add this to your store/deps.php file.
+
+# PayPal REST Api Credentials
+$PaypalclientId = "";
+$PaypalclientSecret = "";
+$Paypalmode = "live";
+$PayPalRestCurrencyCode = "USD";    // or other currency ('GBP', 'EUR', 'JPY', 'CAD', 'AUD')
+
+
+
+>>>>>>>> Optional Step 4
+
+If you use the optional timeclock module, update these files:
+
+timeclock/header.php
+timeclock/footer.php
+timeclock/common.php
+timeclock/jq/DYMO.Label.Framework.latest.js
+
+
+
+
+
+################################################
+PCRT Release Version 3
+################################################
+
+>>>>>>>>>> Change Log
+
+Feature: Switched Database functions to use the mysqli extension. The old mysql extension is scheduled to be depreciated as of PHP 7
+Feature: Lots of work on Deposits: 
+	You can now attach deposits to invoices on a work order. 
+	They can be moved back and forth between the work order and other invoices on the work order.
+	You can remove a deposit from a work order which would free it up to apply to a different work order. 
+	Balances will show on the invoice and on the work order screen on open invoices.
+	You can take a previously "un-attached" deposit, and attach it to a work order, and move it to a work order invoice if you wish.
+	You can add a deposit to an invoice from the open invoice viewer, regardless if the invoice is attached to a work order.
+	The deposit total and balances now show on the open invoice viewer. 
+	You can attach un-attached deposits to invoices not attached to work orders.
+
+Enhancement: Invoice, Receipt, Deposit Receipt display enhancements
+Bug Fix: Fixed bug where contact information is not passed from group invoice list to checkout cart.
+Feature: Invoices can now be directly attached to a group contact without being attached to a work order. 
+	Invoices started from the group viewer invoice link 
+	or the search and pick on the current customer when a group is selected from the search result will attach to the group.
+
+Feature: Show invoice totals on the group viewer.
+Enhancements: Links to Group from Invoice List Viewer
+Feature: Service Reminders can now be set to recurring.
+Feature: Recurring Work Orders. You can now create a recurring task that will generate a work order on an existing asset. You can create them from an
+	existing work order, or add them to assets that are part of Service Contracts from the Contract Viewer.
+Feature: Stripe Users: Invoices will now have a link for customers to pay their invoices via Stripe. 
+	This was kind of a quick hack, you will still need to record the payment.
+Change: The link to "Ready to Sell" was moved to the top of the POS Categories and can now be browsed by asset type.
+        It also shows "cost" values for Assets designated as a saleable asset for inventory valuation purposes.
+Feature: New report "Payment Detail Report". Allows you to pull a report from a specified date range by payment type.
+Feature: Open invoice statement. You can now print or email a listing of unpaid invoices, complete with deposit balance information.
+Change: Added the google maps API back to the code after they reversed themselves an now require it unless your domain is grandfathered in.
+Feature: Support for the Square Credit Card processor, this does not support the reader, but you can use it with your Square account.
+Enhancement: You can now edit the store setting on invoices and recurring invoices in multistore.
+
+Note: The above new features have been added to the mobile interface as well. Features below are only in the Desktop Version.
+
+Enhancements: Lots of Visual Enhancements.
+Enhancement: A color swatch picker and the ability to save color swatches for the Store Color theme in the Store Admin.
+Feature: On the Asset list on the group viewer, you can now mass add new assets. Just specify the customer name, asset/device make, asset type and optional notes.
+Enhancement: On the recent work order list and work order browser, it now shows receipt and invoice totals, and if a work order is attached to a service contract,
+	     it will show the contract. Just one more way to make sure work orders are getting billed.
+Feature: 1-Click backup and upload of your database to Dropbox.
+Feature: Browsers for both Recurring Work Orders, and Service Reminders
+Enhancement: Auto Refresh of status list every 2 minutes, notifications every minute.
+Enhancement: Sticky Note browser to view all notes.
+Enhancement: In place search for Invoices, Quotes, Recurring Invoices, Receipts, Assets, Groups, Service Reminders, Service Requests, Recurring Work Orders,
+                Deposits, Service Contracts, Sticky Notes
+Enhancement: Revamped Check-in Screen. It now searches your existing Assets/Devices on the fly to make sure you do not enter a duplicate.
+
+
+
+
+UPGRADE PROCEDURE:
+
+
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+
+
+FOLLOW ALL STEPS IN ORDER!!!!!!!
+FOLLOW ALL STEPS IN ORDER!!!!!!!
+FOLLOW ALL STEPS IN ORDER!!!!!!!
+FOLLOW ALL STEPS IN ORDER!!!!!!!
+FOLLOW ALL STEPS IN ORDER!!!!!!!
+
+
+>>>>>>>> Step 1
+
+THIS IS A LITTLE DIFFERENT, PAY ATTENTION!
+
+If you have ever done a PCRT upgrade before, you know we normally do the database upgrade first. NOT THIS TIME!
+
+With the change to the newer MySQL functions we need to update the code files first, so the upgrade script will run.
+
+Normally in your deps.php files, specifically the ones inside PCRT folders that require authenticated access, there is a section at
+the bottom that says, "Do not modify anything below this line".
+
+Well, not this time. You need to open each deps.php file from the PCRT upgrade package, and copy and paste the text below
+that message in its entirety, and replace what is currently in your deps.php files.
+
+You need to do this to the deps.php files in these folders:
+
+repair/
+store/
+
+
+And these if you use the timeclock module:
+
+timeclock/
+
+
+
+
+
+
+>>>>>>>> Step 2
+
+Re-upload all php files EXCEPT FOR THE DEPS.PHP FILES in these folders.
+Be careful to not re-upload any of the deps.php files or other files you may have customized for your
+own purposes.
+
+repair/
+repairmobile/
+store/
+storemobile/
+
+
+
+And these folders if you use these modules:
+
+timeclock/
+servicerequests/
+repairstatus/
+
+
+
+
+
+
+
+>>>>>>>> Step 3
+
+Upload these updated stylesheet files and images:
+
+repair/style.css
+repair/light.css
+repair/printstyle.css
+
+repair/jq/facebox.js
+
+repairmobile/style.css
+
+repair/images/rwo.png
+repair/images/sr.png
+
+store/images/receipts.png
+
+>>>>>>>> Step 4
+
+You will need to run the database upgrade script "databaseupgrade-2to3.php". Log into PCRT first,
+Then copy this file in your repair folder and run it from your browser by entering your system URL in the browser address
+bar like "http://myrepairsystem.com/mysystem/repair/databaseupgrade-2to3.php". Click the "Upgrade" link.
+Once you see the upgrade finished message you are done. Delete the upgrade script from your repair folder when you are finished.
+
+
+
+
+
+>>>>>>>> Step 5
+
+Upload the newer version of the fa folder from the package here:
+repair/fa/
+
+You can delete the existing fa folder and reupload the new one to the repair folder.
+
+
+
+
+>>>>>>>> Optional Step 6
+
+If your google maps stop working, you will need to add this block to your repair/deps.php file.
+
+# Google Maps API Key:
+$googlemapsapikey = "";
+# You must signup for one to use this feature here:
+# https://developers.google.com/maps/documentation/javascript/get-api-key#get-an-api-key
+
+
+
+
+
+>>>>>>>> Optional Step 7
+
+To add support for database backup to Dropbox...
+
+Make sure to give your user account Dropbox backup permissions.
+
+Upload this folder to your repair folder:
+repair/dropbox-sdk/
+
+
+Add the following block of settings to your repair/deps.php file:
+
+
+# Your Dropbox Credentials
+# Must have a Dropbox Account
+# Go to "My Apps" at https://www.dropbox.com/developers/apps to create an "App"
+# Select "Create an App, pick "Dropbox API", pick "App Folder", give it a unique name.
+# Copy key and secret, generate token, enter info here as well as chosen App name
+# Make sure attachements folder is writable permissions wise.
+$dropboxaccessToken = "";
+$dropboxappkey = "";
+$dropboxappsecret = "";
+$dropboxappname = "";
+
+
+
+
+
+
+
+
+>>>>>>>> Optional Step 8
+
+To add support for Square...
+
+Add the following block of settings to your store/deps.php file:
+
+# Square
+# Must create an "App" at https://connect.squareup.com/apps
+# You will also find your Personal Access Token here.
+# Must run this from a linux command line to fetch your location ids:
+# curl -H "Authorization: Bearer PERSONAL ACCESS_TOKEN" https://connect.squareup.com/v2/locations
+$SquareApplicationId = "";
+$SquareLocationId = "";
+$SquareAccessToken = "";
+
+You also will need to add "Square" to your list of payment plugins.
+
+
+
+
+################################################
+PCRT Release Version 4
+################################################
+
+>>>>>>>>>> Change Log
+
+Feature: Added charts to monthly sales report, repair volume report,
+         device manufacturer report, service type sales report.
+Feature: Redesigned menu bar, main menu is now the same on both
+         the repair and store sides. Notifications were moved into the menu bar.
+Feature: Added fast user switching between logged in users.
+         You can now specify a 4 digit pin in the user manager.
+Feature: Cash counting and register closing procedures.
+Enhancement: Several Reports were cleaned up, better formatting,
+             improved printable views, added Net Income to several that were missing it.
+Enhancement: Revamped Current Repair Status report.
+Feature: Bench Sheet, get alot of requests for this, people that
+         like a sheet to printout to keep with the device while it is being serviced.
+Enhancement: You can now define a storage location for work orders.
+Enhancement: You can now switch the group id when editing a recurring invoice.
+Bug Fix: Email service reminders in utf8
+Bug Fix: Fix for duplicate strings in language table. This was largely an issue for new installs.
+Feature: Function in the language editor to search and delete duplicate strings.
+User Requested Feature: Add tel:// URI to phone numbers on work order screen in mobile.
+Enhancement: You can now link a timeclock user with a PCRT login user
+             and punch status will show in main PCRT interface.
+Feature: System Checks module. You can now define pass/fail checks per device type.
+Feature: In the group viewer you can search for unattached invoices
+         and recurring invoices and add them to the group.
+Enhancement: Added a button to un-discontinue an item in inventory.
+Bugfix: Fix in recurring invoice browser not advancing past the first page.
+Enhancement: More invoice detail on the technician sales report.
+Update: Updated Twilio SMS library to newest version.
+Change: Added settings to code to disable MySQL Strict mode
+        that alot of hosts are starting to turn on.
+Feature: Added support for adding RepairTech TechSuite reports to PCRT via a webhook from RT.
+Update: ScanCircle code updated to latest upstream version.
+Enhancement: Checkin process will show matched phone number when searching
+Enhancement: Sticky Notes and Dashboard tiles now display repsonsivly, user settings to set
+	     the tile width has been removed.
+Feature: Zapier Intergration
+Enhancement: Added support for clickatell rest api
+
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+BEFORE YOU PERFORM ANY UPGRADES MAKE SURE TO PERFORM ALL PREVIOUS UPGRADES FIRST!!!!!!!!
+
+
+
+
+>>>>>>>> Step 1
+
+You will need to run the database upgrade script "databaseupgrade-3to4.php". Log into PCRT first,
+Then copy this file in your repair folder and run it from your browser by entering your system URL in the browser address
+bar like "http://myrepairsystem.com/mysystem/repair/databaseupgrade-3to4.php". Click the "Upgrade" link.
+Once you see the upgrade finished message you are done. Delete the upgrade script from your repair folder when you are finished.
+
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+
+
+
+>>>>>>>> Step 2
+
+Upload these updated stylesheet files and images:
+
+repair/style.css
+repair/light.css
+repair/flat.css
+repair/printstyle.css
+repair/images/store.png
+repair/jq/topaz.js
+
+>>>>>>>> Step 3
+
+Upload the newer version of the fa folder from the package here:
+repair/fa/
+
+You can delete the existing fa folder and reupload the new one to the repair folder.
+
+
+
+
+>>>>>>>> Step 4
+
+Re-upload all php files EXCEPT FOR THE DEPS.PHP FILES in these folders.
+Be careful to not re-upload any of the deps.php files or other files you may have customized for your
+own purposes.
+
+repair/
+repairmobile/
+store/
+storemobile/
+
+
+And these folders if you use these modules:
+
+servicerequests/
+repairstatus/
+timeclock/
+
+
+
+
+>>>>>>>> New User Permissions:
+
+Permission for managing the register closing.
+Permission for managing storage locations.
+
+
+
+
+
+>>>>>>>> Optional Step 1 - Register Closing
+
+If you would like to use the new register closing system perform the following steps.
+
+Login as admin, go to the store config and define your registers or cash boxes.
+Also go to the user manager, and add permissions to the users that you want to be able to 
+change the register setting on a station or close the register.
+
+Then on each station, in each browser you plan on using, set the register it belongs to in the settings menu.
+
+Also under the admin settings, there is a new item for editing and defining your cash denominational values.
+
+Notice: There is one caveat with this feature. When refunds or returns are processed in PCRT, PCRT does not ask how the refund has occurred. 
+Some businesses give cash refunds for cash purchases, some give refunds strictly with company check. Some refunds might be a split refund, partially
+cash, partially some other payment method such as a credit card. We are still weighing options on this. Whether or not to assume a cash purchase was refunded
+with cash or to add additional procudures to add payments to the cart in reverse when refunds are performed to account for this. For now, any cash removed
+and given to a customer for a refund will need to be accounted for separately.
+
+>>>>>>>> Optional Step 2 - Checks System
+
+To use the checks system, login as admin, go to the admin area of the settings menu, and select the "Main Device/Asset Type Definitions.
+Then edit your checks to your liking, and for each device type select the checks that apply to the device.
+
+
+
+>>>>>>>> Optional Step 3 - RepairTech TechSuite Integration
+
+If you are a Repair Tech user, login as admin, go to the admin section of the settings menu.
+
+Go to the "Integrations" screen, copy the link shown for Repair Tech. Paste this link into the PCRT integration section in the TechSuite
+Control Panel. Make sure when running the TechSuite tool that you specify the PCRT work order number as the ticket number.
+
+
+>>>>>>>> Optional Step 4 - Twilio SMS
+
+If you use twilio for SMS, remove the twilio folder in the repair folder, and re-upload the new twilio folder from the 
+repair folder of the v4 package. It has been updated to the latest library.
+
+
+>>>>>>>> Optional Step 5 - Zapier Integration
+
+Zapier is a service that you can use to relay (but not sync) information from one web app to another.
+
+Triggers send information, while Actions receive information.
+
+We have created the following triggers for PCRT:
+
+New Customer Group
+Trigger	New Invoice
+Trigger	New Work Order
+Trigger	New Sticky Note
+
+We have create the following actions for PCRT:
+
+Create Service Request
+Action	Create Group Contact
+Action	Create Sticky Note
+
+Zapier allows for 5 zaps with their free account.
+
+To get started with this integration, make sure you have created a store hash from the admin settings menu.
+
+Then go to the Integrations page to view your hash and the invite-only link to Zapier.
+
+Once logged in to zapier, you can start to create Zaps.
+
+Here are some example Zaps you can create:
+
+PCRT Triggers:
+New PCRT Customer Group > Google Contact
+New PCRT Customer Group > Xero Customer
+New PCRT Customer Group > Quickbooks Online Customer
+New PCRT Invoice > Xero Draft Invoice with line items (you must set the taxes in xero)
+New PCRT Work Order > EMail or Gmail
+New PCRT Work Order > Google Keep Note
+New PCRT Work Order > Evernote
+New PCRT Sticky Note > Google Keep Note
+New PCRT Sticky Note > Google Calendar
+New PCRT Sticky Note > Evernote
+New PCRT Sticky Note > Slack Channel
+
+
+PCRT Actions:
+New GMail or IMAP EMail > Create PCRT Service Request
+New GMail or IMAP EMail > Create PCRT Sticky Note
+Twilio incoming SMS > Create PCRT Service Request
+Twilio/Clickatell incoming SMS > Create PCRT Sticky Note
+New Google Contact > Create PCRT Group Contact
+New GMail Calendar Event > Create PCRT Sticky Note
+
+Special Notes:
+New Invoice Trigger: Only serves up invoices once they have been marked as closed. This way you can modify them and they 
+		     won't been grabbed by zapier until you mark them closed.
+
+New Groups Trigger - Serves up most recent group contacts, except for most current one. 
+	     	     The way groups are created in PCRT, you enter the name, it creates the record and then sends you to the edit screen 
+	     	     to fill out the rest of the info. If the zap hit in between entering the name and the 
+	     	     rest of the address and contact info, you wouldn't get it all in the zap.
+
+You can do more, the rest is up to your imagination and which other services you use.
+
+
+
+
+
+################################################
+PCRT Release Version 5
+################################################
+
+>>>>>>>>>> Change Log
+Upgrade: Switched PCRT logins to use sessions and stronger encryption on database stored login passwords.
+Tweak: Search Device info fields on new checkin.
+Feature: Passwords (Credentials now) feature greatly expanded, including 3x3 patterns.
+Enhancement: Function in user accounts for admin user to clear login attempts instead of having to wait one hour.
+Enhancement: Revamped SMS feature into "Messages" area.
+        Take "Call Log" Notes, can be viewable by customer in customer portal.
+        Send SMS to any asset/group phone number.
+        Send messages from the Asset or the Group
+        Send Email
+        Receive incoming SMS - See Integrations page in PCRT for info.
+        With Zapier, You can receive incoming email into the messages system.
+Feature: Incoming SMS for Twilio, SMSGlobal. (Requires SMS Phone Number) (Clickatell, BulkSMS untested)
+Feature: Work Order toolbar to quickly jump to a section.
+Bug Fix: Error when checking out multiple invoices and customer name contains quote marks.
+Bug Fix: Fixed problem with translation databases growing large for non en-us languages.
+Feature: Customer Portal:
+        Customer can view invoices, receipts, work orders, view repair reports/progress, view recurring services.
+        Customers can pay invoices using credit cards with Stripe and AuthorizeNetCP
+        Customers can send internal messages to PCRT
+        You can upload files that are available for download for all portal users
+        You can upload files that are only availble to a specific user.
+        Supports customers with more than one Group account, they can switch back and forth right in the interface.
+Bugfix: Bug that would allow deposits to appear on unpaid emailed invoices that were not explicitly attached.
+Fix: Pull receipts into the group view that paid invoices that were generated from recurring invoices attached to the group.
+Enhancement: Ajaxified the system checks and Scans section on the work order screen.
+Enhancement: Create a Asset or Group from Service Requests without creating a work order.
+Feature: New Zapier Messages Action - See the Integrations page in PCRT for more info.
+Change: The status list in PCRT was designed so that things are always front and center and do not slip through the cracks. I.E. fixme, call me, 
+	come get me and pay for me.
+	There are a few people that never check anything out. I have seen installs with 300+ open work orders. This drastically kills performance. So now statuses
+	will display the total number of work orders in a status, but only display the first 12 work orders in a status. This can be overridden with a variable in 
+	the repair/deps.php file. Also, in the status style editor you can mark a status as a "collapsed" status. The status will still show, but you must click
+	a link to see the jobs in the status. This was added for some people that wish to place items in a long term type status but still an open work order.
+
+
+>>>>>>>> Step 1
+
+MAKE SURE YOU PERFORM ALL PREVIOUS UPGRADES FIRST.
+
+NOTE: PCRT NOW REQUIRES PHP 5.5 OR NEWER
+
+You will need to run the database upgrade script "databaseupgrade-4to5.php". Log into PCRT first,
+Then copy this file in your repair folder and run it from your browser by entering your system URL in the browser address
+bar like "http://myrepairsystem.com/mysystem/repair/databaseupgrade-4to5.php". Click the "Upgrade" link.
+Once you see the upgrade finished message you are done. Delete the upgrade script from your repair folder when you are finished.
+
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+
+
+
+
+
+
+>>>>>>>> Step 2
+
+THIS IS A LITTLE DIFFERENT, PAY ATTENTION!
+
+A change was made to move the PCRT login passwords to stronger security.
+
+Normally in your deps.php files, specifically the ones inside PCRT folders that require authenticated access, there is a section at
+the bottom that says, "Do not modify anything below this line".
+
+Well, not this time. Delete everthing in this section below the messages that says "Do not modify anything below this line" and
+replace it with this:
+
+
+require("dinit.php");
+
+
+
+You need to do this to the deps.php files in these folders:
+
+repair/
+store/
+
+And these if you use the timeclock module:
+
+timeclock/
+
+
+
+
+>>>>>>>> Step 4
+
+Re-upload all php files EXCEPT FOR THE DEPS.PHP FILES in these folders.
+Be careful to not re-upload any of the deps.php files or other files you may have customized for your
+own purposes.
+
+repair/
+repairmobile/
+store/
+storemobile/
+
+And if you use the Timeclock:
+
+timeclock/
+
+
+>>>>>>>> Step 5
+
+Upload these updated stylesheet files, images and javascript files:
+
+repair/style.css
+repair/light.css
+repair/flat.css
+repair/printstyle.css
+repair/fa/font-awesome-animation.min.css
+repair/jq/patternLock.js
+repair/jq/patternLock.css
+repair/jq/readmore.js
+repair/jq/howler.js
+repair/images/icon-arrow.png
+
+And a new folder:
+
+repair/sounds/
+
+
+
+>>>>>>>> New User Permissions:
+
+Permission for managing portal downloads.
+Permission for deleting and and all messages.
+Permission for techs viewing credentials on group contacts.
+
+>>>>>>>> New Status List Options:
+
+"Show Pattern Password in Status list"
+
+
+
+>>>>>>>> Optional Step 1 - Customer Portal
+
+If you would like to install the new customer portal, upload the "portal" folder from your PCRT package. 
+Edit the deps.php file contained in the folder to your liking. The folder should sit along side your PCRT repair folder.
+If you wish to use the portal download feature, you may need to adjust file permissions on the "download" folder inside the "portal" folder.
+
+>>>>>>>> Optional Step 2 - Incoming SMS
+
+Twilio: Tested and works well. You must purchase and SMS number to use it. (About $1 per month in the USA). Twilio is by far easiest to use, and most reliable 
+for message delivery, and not being near as fussy about the phone number formats.
+
+Other Providers: Did not test them all because many providers based outside of the USA charge hundreds of dollars to get an SMS number inside the USA.
+Clickatell: Untested - not sure if it will work.
+SMS Global: Untested - should work.
+BulkSMS: Untested
+
+On the integrations page, you will see the incoming URL/Rest Hook to paste into the SMS provider portal. Make sure you have the $domain variable specified correctly
+in your repair/deps.php file so that the WebHook is correct.
+
+
+
+
+
+################################################
+PCRT Release Version 6
+################################################
+
+>>>>>>>>>> Change Log
+Bug Fix: Fixed function that retrieved the register setting in mobile.
+Maintenance: Lots of stylesheet work, cleanup, removing depreciated font tags.
+Change: Added Quantities throughout PCRT.
+Feature: Tagging feature. Both Assets and Groups, will also display on status list and on checkin.
+User Requested Feature: Added option to show all open work orders on dashboard.
+Enhancements: Lots of stylesheet cleanup on the dashboard.
+Change: Reorganized a few menus, print and email buttons, and the status changer into a menu bar on work orders.
+	Moved work area switcher just under the storage location switcher.
+Change: Lengthened the twilio voice response timeout.
+Tweak: Add serial search on receipts to the main search.
+Enhancement: Pull return receipts into group receipt viewer and portal.
+Change: More lock downs with tax rate editor to prevent common problems on new installs.
+Enhancement: Added PO number field on restock.
+Feature: Added support for incoming sms photos on twilio.
+Feature: Browser for block of time contracts.
+Change: Removed permission settings for admin user, automatically applying all permissions.
+Feature: Point in time inventory report. See the report for caveats.
+Fix: Missing entries in store side main menu.
+Fix: Broken link in inventory report.
+Feature: Service Requests can be submitted in the portal.
+Fix: Work done to prevent a warning on PHP 7.1-7.2 from appearing due to a change made in PHP.
+Fix: Multiple checkouts to the cart now pass work order numbers to an invoice, if an invoice is created, so that when the invoice
+     is checked out it marks the work orders as checked out if they are still sitting in the status list.
+Feature: Added some stats to a dashboard for the repair side.
+Feature: On Monthly Sales report you can now show the previous years data.
+Feature: On Monthly Sales report you can now view cumulative sales data and compare it to the previous year.
+
+>>>>>>>> Step 1
+
+MAKE SURE YOU PERFORM ALL PREVIOUS UPGRADES FIRST.
+
+You will need to run the database upgrade script "databaseupgrade-5to6.php". Log into PCRT first,
+Then copy this file in your repair folder and run it from your browser by entering your system URL in the browser address
+bar like "http://myrepairsystem.com/mysystem/repair/databaseupgrade-5to6.php". Click the "Upgrade" link.
+Once you see the upgrade finished message you are done. Delete the upgrade script from your repair folder when you are finished.
+
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+
+
+>>>>>>>> Step 4
+
+Re-upload all php files EXCEPT FOR THE DEPS.PHP FILES in these folders.
+Be careful to not re-upload any of the deps.php files or other files you may have customized for your
+own purposes.
+
+repair/
+repairmobile/
+store/
+storemobile/
+
+The Portal
+
+portal/
+
+
+
+
+>>>>>>>> Step 5
+
+Upload these updated stylesheet files, images and javascript files:
+
+repair/style.css
+repair/light.css
+repair/flat.css
+repair/printstyle.css
+
+And a new folder:
+
+repair/images/tags/
+
+And replace this folder with the updated one
+
+repair/fa/
+
+
+>>>>>>>> New User Permissions:
+
+Permission for editing customer tags
+Permission for marking stock items as discontinued or un-discontining an item.
+
+
+
+################################################
+PCRT Release Version 7
+################################################
+
+>>>>>>>>>> Change Log
+Bug Fix: Performance fix for searching large inventories
+Compatibility Fix: Updated Dymo Javascript Code for compatibility with DLS 8.7.2+
+User Request: Internal Technician Chat Feature 
+Bug Fix: Fix for manual punch out in timeclock in certain timezones
+User Request: Added a setting to the repair/deps.php file to apply a filter to sms numbers to strip a leading digit from the number and other potential future needs.
+Bug Fix: Invoice notes lost when editing invoice contents.
+User Request: Added email and address to Bench Sheet
+User Request: Selectable fields on the Bench Sheet for the Main Asset/Device Info Field Options
+User Request: Ability to add printable item descriptions that show on invoices and receipts.
+Bug Fix: Fix stock level estimations that were broken when v6 added proper quantity support.
+User Request: Switching status on a job to Checked out that has never been checked out will set the checkout date.
+User Request: Option to unset checkout date and reopen a work order within 2 weeks of original close date.
+Enhancement: Upgraded to Font Awesome 5
+User Request: Ability to set multiple on call techs per store.
+User Request: Larger boxes for the city, state/province, postcode boxes on the POS cart.
+User Request: Added link to group page to send/reset portal password with login link.
+Bug Fix: Quantity not transferred when loading a kit.
+Bug Fix: Remove a serial from the list of available serials for a stock item if the serial currently resides in the POS cart.
+User Request: Ability the specify the serial number on a stock item that has available serials. This fixes the problem with kits and being able to apply a serial
+		after it has been copied from the kit.
+User Request: Show deposit totals on open invoice viewer.
+User Request: Based off another request for a quick overview of job progress, a Progress Counter/Indicator. 
+		This can be turned on per status in the status config. Expect a slight performance hit with this.
+Update: Updated Stripe POS plugin to use card tokenization just like the saved card feature.
+BugFix: Stop Cart from showing deposits that do not belong to a customer on mobile.
+Feature: Service Promises, ability to predefine promised service times and apply them to work orders.
+User Request: Show previous password on returning checkin.
+User Request: Added link in menu back to repair from timeclock.
+User Request: Tag selector put into two columns.
+User Request: Named Discounts - Predefine Discounts or name discounts
+Enhancement: When using the section selector at the bottom of the screen it will also now open the add to cart options and send message pane.
+Enhancement: Added several mobile phone brands to the status logos.
+User Request: Ability to send asset photos via SMS and Twilio.
+Bug Fix: Several cosmetic bugfixes related to the deposit receipt emailing function.
+User Request: Added method from inventory screen to mass add ready to sell items with prices in the repair cart.
+PHP 7.3 Compatibility: Removed all uses of each()
+Bug Fix: Fixed display problems when many asset photos are present on a work order.
+Feature: Added a pre-tax calculator.
+
+>>>>>>>> Step 1
+
+MAKE SURE YOU PERFORM ALL PREVIOUS UPGRADES FIRST.
+
+You will need to run the database upgrade script "databaseupgrade-6to7.php". Log into PCRT first,
+Then copy this file in your repair folder and run it from your browser by entering your system URL in the browser address
+bar like "http://myrepairsystem.com/mysystem/repair/databaseupgrade-6to7.php". Click the "Upgrade" link.
+Once you see the upgrade finished message you are done. Delete the upgrade script from your repair folder when you are finished.
+
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+
+
+>>>>>>>> Step 4
+
+Re-upload all php files EXCEPT FOR THE DEPS.PHP FILES in these folders.
+Be careful to not re-upload any of the deps.php files or other files you may have customized for your
+own purposes.
+
+repair/
+repairmobile/
+store/
+storemobile/
+
+And if you use these modules:
+
+timeclock/
+portal/
+
+
+>>>>>>>> Step 5
+
+Upload these updated stylesheet files, images and javascript files:
+
+repair/style.css
+repair/light.css
+repair/flat.css
+repair/printstyle.css
+repair/webcam.js
+repair/tooltip2.js
+
+repair/jq/DYMO.Label.Framework.latest.js
+repair/jq/selectize.js
+repair/jq/selectize.css
+
+repair/images/pcs/apple.png
+repair/images/pcs/google.png
+repair/images/pcs/htc.png
+repair/images/pcs/huawei.png
+repair/images/pcs/lg.png
+repair/images/pcs/motorola.png
+repair/images/pcs/ms.png
+repair/images/pcs/samsung.png
+repair/images/pcs/xiaomi.png
+repair/images/pcs/zte.png
+
+# And a new folder:
+
+repair/fa5/
+
+
+# If you use the portal:
+
+portal/style.css
+
+# If you use the timeclock:
+
+timeclock/webcam.js
+
+
+
+>>>>>>>> New User Permissions:
+
+Permission for Viewing All Tech Message Conversations
+Permission for Managing Service Promises
+Permission for Managing Discounts
+
+
+
+
+################################################
+PCRT Release Version 8
+################################################
+
+>>>>>>>>>> Change Log
+
+Feature: Option to display line items and subtotals on printables as tax inclusive.
+Enhancement: Cleanup on the status list
+Enhancement: Can now optionally display problem on the badge in the status list.
+Enhancement: Show upcoming sticky notes on repair home screen
+Enhancement: Auto search on Point of Sale inventory add box.
+Enhancement: Added pre tax calculator to Quick Labor and Service Contract Pricing.
+Enhancement: New Landing page for Point of Sale, Order Planing moved to inventory tools screen
+Major Feature: Forms. Create and build forms, attach them to work orders, groups, and service contracts.
+               Customers can view created contracts in the portal and sign them.
+Change: Display font changed to popular "Roboto" font.
+Enhancement: Tweaks to SMS number matching code.
+Feature: SMS Chat feature, you can now reply and send sms to customers without an open work order and 
+	 customers that are not yet entered in PCRT.
+Feature: Widget to more easily manage service requests at the top of the status list.
+Enhancement: Service Requests now pre-searches potential asset matches. 
+Enhancement: Icons on the payment methods.
+Feature: 2 Factor (SMS) Authentication
+
+
+>>>>>>>> Step 1
+
+MAKE SURE YOU PERFORM ALL PREVIOUS UPGRADES FIRST.
+
+You will need to run the database upgrade script "databaseupgrade-7to8.php". Log into PCRT first,
+Then copy this file in your repair folder and run it from your browser by entering your system URL in the browser address
+bar like "http://myrepairsystem.com/mysystem/repair/databaseupgrade-7to8.php". Click the "Upgrade" link.
+Once you see the upgrade finished message you are done. Delete the upgrade script from your repair folder when you are finished.
+
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+
+
+>>>>>>>> Step 2
+
+Re-upload all php files EXCEPT FOR THE DEPS.PHP FILES in these folders.
+Be careful to not re-upload any of the deps.php files or other files you may have customized for your
+own purposes.
+
+repair/
+repairmobile/
+store/
+storemobile/
+
+And if you use these modules:
+
+portal/
+timeclock/
+
+>>>>>>>> Step 3
+
+Upload these updated stylesheet files, images and javascript files:
+
+repair/style.css
+repair/light.css
+repair/flat.css
+repair/printstyle.css
+repair/jq/DYMO.Label.Framework.latest.js
+repair/sounds/notify.ogg
+repair/sounds/notify.mp3
+
+
+>>>>>>>> Step 4
+
+# Upload new Folder:
+
+/repair/fonts/
+
+
+
+>>>>>>>> Step 5
+
+Add this block of text to your repair/deps.php file, it is recommended to 
+place it near the other settings for signature pads.
+
+# Forms Signature Pad
+# Allowed values: yes, no, topaz
+$enablesignaturepad_forms = "no";
+
+
+
+>>>>>>>> Step 6
+
+If you use the portal:
+Add this block of text to your portal/deps.php file, it is recommended to
+place it near the other settings for signature pads.
+
+# Forms Signature Pad
+# Allowed values: yes, no, topaz
+$enablesignaturepad_forms = "no";
+
+
+
+>>>>>>>> Optional Step 7
+
+I you would like line items and subtotals to display on printable invoices and receipts as tax inclusive,
+add this block of text and set to 1"
+
+# Tax Inclusive Line Items
+# 0 = no, 1 = yes
+$taxinclusive = 0;
+
+
+>>>>>>>> New User Permission:
+
+Manage Form Templates - Enable this permission to edit and create form templates.
+
+
+
+
+################################################
+PCRT Release Version 9
+################################################
+
+>>>>>>>>>> Change Log
+
+Enhancement: Cleanup on invoice view button options
+Major Feature: Ledger
+Enhancement: Ability for techs that work regularly with the status view to only show jobs assigned 
+             to them to pick from the pool of available un-assigned "Waiting For Bench" jobs and
+   	     assign them to themselves and set status to "On the Bench" in one click
+Minor Enhancement: Added links to bench sheet from claim ticket and dymo label print screen.
+Minor Change: Some changes to the bottom work order floater. Removed old side floater.
+Change: You can now override the sms number on work orders.
+Feature: Non Inventoried Items Quick Entry
+Change: Quick Labor on work orders now prefills the labor box instead of adding it immediatley to allow you to 
+        edit the printed description, edit the price or change the quantity.
+Change: Added a search selector to the add deposit dropdown on work orders
+Change: Added a search selector to the new item inventory stock category 
+Minor Enhancement: Added filter on invoice viewer for multistore to only show one store.
+Feature: Absence tracker in timeclock
+Bug Fix: Fixed missing styles in timeclock
+Minor Enhancement: Show Hourly wage in Timeclock
+Enhancement: Added ajax in cart and work order form.
+Enhancement: Some redesign of Point of Sale Cart
+Change: Moved saved carts and kits to inventory list.
+Change: Updated Jquery Version for more performance.
+Feature: Added configurable per invoice terms with optional automatic late fees. Late fees can also have taxes
+        applied using the service tax rate on a given configured tax rate.
+
+>>>>>>>> Step 1
+
+MAKE SURE YOU PERFORM ALL PREVIOUS UPGRADES FIRST.
+
+You will need to run the database upgrade script "databaseupgrade-8to9.php". Log into PCRT first,
+Then copy this file in your repair folder and run it from your browser by entering your system URL in the browser address
+bar like "http://myrepairsystem.com/mysystem/repair/databaseupgrade-8to9.php". Click the "Upgrade" link. For this
+upgrade script you will need to choose the default terms for your existing invoices.
+Once you see the upgrade finished message you are done. Delete the upgrade script from your repair folder when you are finished.
+
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+DO NOT UPLOAD NEW CODE UNTIL THIS SCRIPT HAS BEEN RUN!!!!
+
+
+>>>>>>>> Step 2
+
+Re-upload all php files EXCEPT FOR THE DEPS.PHP FILES in these folders.
+Be careful to not re-upload any of the deps.php files or other files you may have customized for your
+own purposes.
+
+repair/
+repairmobile/
+store/
+storemobile/
+timeclock/
+
+
+>>>>>>>> Step 3
+
+Upload these updated stylesheet files, images and javascript files:
+
+repair/jq/select2.min.js
+repair/jq/select2.min.css
+repair/jq/facebox.js
+repair/jq/facebox.css
+repair/jq/closelabel.png
+repair/jq/jquery.js
+
+>>>>>>>> New User Permission:
+
+Ledger Access
+Create New Ledgers
+Wage info on Timeclock
+Manage Invoice Terms
+
+>>>>>>>> Optional Step 1
+
+If you want to use the new Ledger feature, upload the ledger folder and configure the deps.php file inside.

@@ -1,0 +1,53 @@
+d7 Report Integration - If you would like to be able to have d7 send its reports to PCRT as an attachment, do as follows:
+
+This feature also allows you to import activity log notes and machine specs from the d7 report. 
+
+# Setup:
+
+1. In PCRT copy the d7 folder to the location that you will use to FTP the reports to from d7. Preferably this would be a location that is not web accessible.
+
+2. Create a FTP account on your server that d7 can use to connect to. It should be locked down so that it has no access to folders other than the PCRT d7
+   folder. The FTP server root should be set to go directly to the PCRT d7 folder.
+
+3. Edit this variable to your repair/deps.php file:
+
+#d7 Integration - Report Upload Folder
+$d7_report_upload_directory = "../d7/";
+
+   This can be an absolute path on your server or a relative path. Make sure to set the permissions to 777 on this folder.
+   To allow PCRT to be able to delete and move the reports.
+
+4. Now in d7, go to Config->Reports and check the box for "Prompt for Client Name/Ticket/Work Order #". This will make d7 prompt on
+   start up for the client name and work order number. You should not use special character in the client name as this name will be
+   used to form the filename of the uploaded attachment. If you wish to change this after it is initially set, on the main d7 startup
+   screen, click on the set client name to modify it.
+
+5. On the Report config screen, you will probably want to specify the "Reports Directory Naming Convention" to:
+
+%number%_%name%_%date%
+
+6. Go to Config -> "dCloud/FTP Server" and enter your FTP server details. If you setup your special FTP account root folder to go
+   directly to the PCRT d7 folder, you should only have set the "Reports Directory" to "/". You will also need to check the box that
+   says "Zip Reports Before Upload"
+
+# Usage:
+
+1. Transferring the reports from d7 to PCRT: To transfer the reports, you can either choose "Move Reports to FTP" from the
+   top d7 FTP menu, or you can set it as a d7 "Shutdown Action" when closing d7.
+
+2. Once the reports have been sent to PCRT a link will appear at the top of the status menus that reports are ready. On the
+   following screen, you will have the option to attach them one at a time to an "open" work order, or as long as you have
+   specified the work order number in d7, that can be attached en masse.
+
+# Security Concerns
+
+1. The d7 Folder in the PCRT package contains a .htaccess file that should block any web access to the folder, but it is better
+   to not place it in a web accessible folder anyways.
+
+2. d7 has optional features to create reports with user web browser passwords and other sensitive information. While this
+   information can be vital during a repair, ask yourself if it is really necessary to store it in PCRT perminently.
+
+3. Make sure you create a special FTP account and change the password from time to time. If you were to forget and leave d7
+   on a customers computer, they could potential have access to your FTP server. But better yet, do not ever copy d7 to a
+   customers computer if not necessary.
+

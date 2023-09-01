@@ -1,0 +1,69 @@
+A new release of PC Repair Tracker is attached to this email.
+
+Whats NEW: 
+
+# Version Number: First off, after seeing some people call the last release 1.4, 1.40 or 1.04, I've decided to move away from decimal point version numbers
+to whole numbers, in case you were wondering why this release is being called v2 
+
+# More configurable statuses. You now have greater control on what info is shown in the status list, and you can reorder statuses.
+
+# UI Work: Alot of work has been done to improve the UI for the desktop version of PCRT.
+
+# Service Contracts: A new area has been added to the asset group area to specify service contracts.
+
+# Stored Credit Cards: You can now store credit cards for charging later using Stripe, Paypal or AuthorizeNet
+
+
+
+########################
+
+To UPGRADE PCRT, make sure you follow the directions IN ORDER in the update.txt file.
+-Luke
+
+
+Complete Changelog:
+
+################################################
+PCRT Release Version 2
+################################################
+
+Revamped Status List:
+Renamed "Status Box Styles" to "Status Configuration" and combined with the "Custom Status Styles"
+Geeky status style boxes and themes were removed and replaced with a simple color picker to set status color.
+You can now set the order of status display
+You can now turn on work areas for all statuses, not just "On the Bench"
+You can customise what information shows on both the badge and the expanded info area - Over 20 options per status.
+New Work order status picker - fixes problem of unpredictable color display on some browsers
+
+Service Contracts:
+Ability to create service contract belonging to a customer Group.
+Contracts can specify users and per user pricing.
+Contracts can add Group member Assets/Devices for pricing per Asset/Device
+Option to include a block of time contract on the Service Contract by first creating the
+block of time contract with a recurring invoice and attaching the recurring invoice to the contract.
+Option to attach existing group recurring invoice to the contract or create a new recurring invoice.
+Option to attach documents to the contract.
+Pre define per asset pricing plans in the Settings->Manage area to be applied to group asset/devices.
+Option to display in the status list if the asset/device is part of a service contract.
+Quick Editor: Quickly add or remove service line items to the recurring invoice right from the Contract Viewer.
+
+Show a link on the Recurring Invoice list viewer to block of time contracts or service contracts if they are attached to the recurring invoice.
+Show link to Service Contract from Block of time contract if a block of time contract is on the same recurring invoice as the Service Contract.
+Show link to service contract on the recurring invoice viewer if it is attached to a Service Contract.
+Show on work order if Asset/Device is included in a Service Contract and has overdue recurring invoices
+Option in Main Asset Type Definitions to designate a Device type as a "Managable Device" so that pricing can be defined, and devices can be added to service contracts.
+Added color pickers to Store Color themes, sticky notes, and workarea colors.
+Updated look of work order area putting things in tables.
+Option on Main Asset Type Definitions to hide the Scans, Actions, Installs and Notes section from the work order screen per Asset/Device type.
+Moved Repair Cart Controls into dropdown menu within the Repair Cart Area.
+Moved Group information pane into dropdown panel.
+Updated Stripe plugin to new library, added support for StripeJS and credit card tokenization.
+Added Support for PayPal REST library and the PayPal Vault for storing Credit Cards
+Added Support for the AuthorizeNet Customer Information Manager (CIM) for storing credit cards.
+PCRT now supports 3 plugins that can store credit cards on the server of the processor for later charges..... Stripe, Paypal, AuthorizeNet.
+Change Card swipe code to turn off autocomplete so that hopefully the browser won't stick saved passwords in the swipe box.
+Added the Twilio plugin to the service requests module.
+Bug Fix: Fixed bug where a combined invoice for multiple work orders would not let you create a new invoice after the previous invoice was voided.
+Feature: Added services type report.
+Feature: Added an alternative printout for deposits to be used as a gift certificate.
+

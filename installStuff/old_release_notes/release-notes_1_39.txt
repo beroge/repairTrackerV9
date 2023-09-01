@@ -1,0 +1,96 @@
+A new release of PC Repair Tracker is attached to this email.
+
+Whats NEW: 
+
+# Date Localization
+You can now setup how you would like your dates to appear, the order as well as the format. 
+You can also now translate the month and day of week names. There are a few places you will 
+not be able to re-order the date, this is mostly in text boxes where the date has to be used 
+in calculations.
+
+
+# Special Order feature
+You can now enter information about special order parts on work orders and view them all in 
+one central location.
+
+# Suppliers
+You can now define information about suppliers and then tag this information when adding 
+inventory items.
+
+# Stock Levels
+You can now setup stock level maintenance. It also includes a report for knowing what to re-order. 
+You can also request stock recounts so that your techs can double check current stock levels per stock location.
+
+# Expansion of the saved cart feature. It now shows current stock levels, with the option to update
+the price if it has changed since the cart was created or saved. Now also a separate area for saving
+carts as kits with a control to add kits to a work order.
+
+# Work order maps now also have driving directions.
+
+# Mileage log feature where you can keep track of travel. It will also automatically populate the
+mileage value with the distance from the store config address to the customer address.
+
+# Multiple Checkouts - Ability to checkout more than one work order or invoice at one onto the same
+receipt.
+
+# Simple Timeclock Feature (Beta)
+This is a new feature to PCRT. For now very little integration is in place between the repair tracker and
+the timeclock. It has been designed as a stand alone timeclock that can be used for all of your
+employees, even those that do not use or have access to the repair tracker.
+
+It can be accessed via any web browser or you could setup a device by a door for employees to punch as
+they come and go. The punch clock interface is touch friendly or you can print off employee badges with an 
+employee photo and setup a scan gun to scan the badge. Scan guns with a stand that can be screwed to the 
+wall run about $25 on ebay. You can also purchase badge holders and retractable lanyards dirt cheap on 
+ebay as well. The standard badge size uses the dymo 30374 business card stock. Dymo also makes a 
+visitor badge stock, but these are very flimsy and it is hard to find badge holders that fit these.
+
+The timeclock does share the user database with the repair tracker, but has its own admin page, with its
+own permissions that can be assigned. If you change a password from the timeclock side, it will change
+it for the repair tracking side as well.
+
+When accessing the timeclock for the first time, it will ask for a username and password. After a 
+sucessful login, it will add your IP address to the list of places that can access the time clock
+punching portion with out a password.
+
+
+########################
+
+
+
+
+To UPGRADE PCRT, make sure you follow the directions IN ORDER in the update.txt file.
+
+
+-Luke
+
+
+Complete Changelog:
+
+
+################################################
+Release 1.39
+################################################
+
+>>>>>>>>>> Change Log
+
+Feature: Start of Date localization
+Feature: Suppliers database - Allows you to specify a list of suppliers.
+Feature: Special Order feature - Allows you to better track special order parts on Work Orders.
+Feature: Ability to refund labor in the cart.
+Feature: Additions to the technician report to show assigned work orders and current status.
+Change: Minor rearrangement of repair cart area on work order screen.
+Feature: Ability to add multiple work order carts to one invoice. System will offer to add items to the cart of other open work orders in the same Group.
+Feature: Ability to checkout multiple work order carts on one receipt from Work Order Checkout Page
+Feature: Ability to checkout multiple invoices on one receipt from the open invoice viewer.
+User Requested Change: You can now translate the name of the payment plugin on the Cart.
+Feature: Stock management, Specify minimum and max stock levels, choose which inventory items to monitor, printable report on what needs to be reordered.
+Enhancement: Expansion of the Saved cart feature to be able to use it for kits. It now also shows current inventory, prices with totals.
+Enhancement: Option to show if price in saved cart has changed in inventory and update the price to the current price.
+Enhancement: Added driving directions from current store location to map from work order screen.
+Feature: Mileage log on work order. Calculates miles automatically using gmaps from store location.
+Enhancement: Ability to specify a custom return rate.
+Feature: Basic Timeclock
+Enhancement: Ability to filter the daily report based on user that performed the checkout.
+Change: Added permissions to restrict access to the receipt browser and day reports.
+Change: Added some ajax to the work order notes.

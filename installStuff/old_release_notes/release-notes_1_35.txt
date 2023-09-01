@@ -1,0 +1,95 @@
+A new release of PC Repair Tracker is attached to this email. 
+
+# Style Editor for Status Boxes:
+A new configuration screen was added edit CSS style for the colored status boxes. You can now tweak the color styles, dont worry, if you make a mistake
+one click will get a default style back. It includes 5 additional default styles to choose from. You can now also add custom status right from the PCRT admin menu,
+as well as have different colors for the custom status. If you want to expirament with various gradient color style, try the online gradient editor on colorzilla.com 
+You can see examples of some possiblities as well as some stock style choices you have here: http://www.pcrepairtracker.com/statusboxes/
+
+# Recurring Invoices
+You can now create recurring invoices. You can create a recurring invoice by adding items to the Current Cart, and clicking the button at the bottom to create one.
+If you do a search and pick and choose a group contact, it will associate the recurring invoice with that group. Recurring invoices can be standalone or attached to a 
+group. You can view the list of recurring invoices from the invoice viewer. When creating a recurring invoice, you can set an Invoiced Thru Date which represents the date
+the services are billed through, and a "terms" value which represents the number of days prior to the Invoice Thru date that the invoice will be created. You can also choose a 
+invoicing frequency of 1 week, 2 weeks, 1 month, 2 months, 3 months, 6 months, 1 year. When invoices are ready to be created a notice will appear at the top of the status boxes.
+When creating invoices, you can choose which invoices to process. You can choose whether to email them, print them or both. When multiple invoices are selected for printing
+it will print them in one shot, doing a page break at the end of each invoice.
+
+#Invoice Viewer:
+You can now print or resend multiple invoices in one shot from the open invoice list. 
+
+#Android Asset Photo Upload
+There is a new method for uploading asset photos. Just take your Android 3+ device and click the choose file button, your phone will ask you for a source, choose camera,
+take the picture, click the check, then click the upload button. Currently Android is the only platform that has the html5 support for this method.
+
+# Labor Quantity Shortcut
+You can enter labor quantity in the price box as hoursXmoney, hoursxmoney, or hours@money. 
+
+#Carbon Copy Email
+You can now specify an email address in the Store admin, to have email copies sent to the specified email address
+
+#Date Picker
+Date Picker added to several areas in PCRT
+
+# Paypal Payment Link on Emailed Invoices
+Added option to add PayPal payment link to bottom of all emailed invoices. The link sends the user to PayPal with the invoice number contained in the item description
+and the dollar amount filled in.
+
+To UPGRADE, make sure you follow the directions IN ORDER in the update.txt file.
+
+
+-Luke
+
+
+Complete Changelog:
+
+*Bug Fix: Made a slight change in repair/brandicon.php to avoid a warning on newer php versions.
+*Fix: Fixed permissions error message in repair/attachments.php
+*Enhancement: Show max file upload size configured on the server when uploading attachements in repair/attachments.php.
+*Bug Fix: Fixed warning when creating a new user account in repair/admin.php.
+*Minor Fix: Fix vertical alignment of pc info text in work order history in repair/pc.php
+*Minor Fix: Show PC Notes on work order history in repair/pc.php
+*Minor Fix: Put Monetary symbol variable on invoice totals in store/invoice.php
+*Feature: Added new asset image upload method that is currently only supported by Android 3.0+ in repair/pc.php
+*Feature: Added Datepicker to Sticky Notes and Invoice Editor in repair/sticky.php and store/invoice.php
+*Enhancement: Updated Stylesheet for Customer Status in repairstatus/index.php and repairstatus/style.css
+*Change: Added Signature enabling variable to repair/deps.php
+*Enhancement: Allow x X and @ for labor quantity symbols in repair/repcart.php and store/cart.php
+*Fix: Reactivate submit button on Check Plugin after failing to enter drivers license on large purchase in store/Check.php
+*Bug Fix: Our Cost not passing between an invoice and a receipt on checkout in store/invoice.php
+*Feature: Added ability to customize status box colors and add custom status in the admin interface in repair/style.css, repair/defaultstyles.php,
+        repair/index.php, repair/common.php, store/common.php, store/invoice.php, repairstatus/index.php
+*Enhancement: Added Overdue stamp to overdue emailed invoices in store/invoices.php
+*Enhancement: Add logins and logouts to user activity report and record IP address and browser agent in store/loglogin.php store/login.php
+        store/common.php repair/common.php store/reports.php store/logout.php repair/logout.php
+*Feature: Added ability to email or print multiple invoices from the invoice list in store/invoices.php.
+*Enhancement: Make invoice actions in group view return to group view instead of master invoice list in repair/group.php
+*Major Feature: Added Recurring Invoices in store/rinvoices.php, store/invoices.php, repair/group.php, store/cart.php, repair/header.php,
+        store/header.php, repair/common.php, store/common.php.
+*Change: Clear Cart after creating an Invoice in store/invoice.php
+*Enhancement: Add link to create new invoice from group viewer in repair/group.php
+*Bug Fix: Fixed PHP warning on applied invoice list in store/deposits.php
+*Changes: Updated some heading styles in repair/style.css
+*Enhancement: Added permission to delete recent invoices from the invoice list in repair/common.php, store/common.php, store/invoice.php
+*Enhancement: Show category on stock detail page in store/stock.php
+*Feature: You can now specify an email address in the Store Admin, to have all emailed invoices, receipts, and reports carbon copied to in
+        repair/common.php, store/common.php, store/invoice.php, store/deposits.php, store/receipts.php, repair/pc.php
+*Change: Only show a months worth of jobs Waiting for Pickup. Link to view them all at top of status. Changes in repair/common.php
+*Change: Allow spaces in the phone number in the repair status scripts in repairstatus/index.php
+*Change: Added button on the touchscreen to jump to the Point of Sale in repair/touch.php
+*Change: Add work order status changes to Work Order Action Log.
+*Enhancement: Added link to send Thank You emails from the Recent Work List.
+*Enhancement: Fixed a few vendor specific styles for the Opera Browser in repair/style.css
+*Enhancement: Show current store by checkout button, to help avoid processing sale in wrong store in store/cart.php
+*Change: Remove outline on some printed report, switch to different font style that looks better printed.
+*Enhancement: Add "Email" to preferred contact list in repair/pc.php, repair/group.php, repair/index.php
+*Bug Fix: Fixed some CSS/doctype oddities for IE in repair/style.css and store/login.php
+*Bug Fix: Fixed some php warnings in the email receipt function in store/receipt.php
+*Enhancement: Moved location of login failure message in store/login.php
+*Feature: Added the ability to add discounts to repair carts in repair/index.php, repair/repcart.php
+*Change: Show address2 field in group list viewer in repair/group.php
+*Change: Sort invoices by date in open invoice viewer in store/invoice.php
+*Change: Allow all asset photos to be printed on the report with a new button added in the toolbar in repair/pc.php
+*Bug Fix: Do not allow stock search feature to show discontinued items in store/stock.php Thanks to Silvano ;)
+*Feature: Option to add PayPal payment link to bottom of all emailed invoices with no deposits in store/invoice.php, store/deps.php
+*Bug Fix: Fixed	bug where improper call	status was logged to the user activity log.

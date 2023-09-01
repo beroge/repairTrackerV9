@@ -1,0 +1,41 @@
+A new release of PC Repair Tracker is attached to this email.
+
+Whats NEW: 
+
+# Support for 1X5 topaz signature pads.
+
+# The Big One: A new mobile web option for PCRT. The goal for this new mobile view, besides being more user friendly for mobile devices
+is to make sure you can perform most day to day tasks on your mobile device and not be a "second-class" citizen to the desktop version of PCRT.
+This is not a native app, but a mobile web version. The hope is that by keeping it a mobile web app, it will be easier to keep devoloping it to 
+keep pace with the desktop version.
+
+########################
+
+To UPGRADE PCRT, make sure you follow the directions IN ORDER in the update.txt file.
+-Luke
+
+
+Complete Changelog:
+
+
+>>>>>>>>>> Change Log
+
+New Feature: Mobile web friendly version of PCRT. A new mobile interface that will allow you to do most things other than Settings
+and PCRT admin manangement.
+
+Notes:
+1. If you add a icon from your mobile browser to your home screen, it will appear in mobile web view without toolbars when you launch it from there.
+2. I left the dymo label stuff in for people that might be using windows tablets, but of course dymo printing does not work on android/IOS
+3. Printing on Android can be setup using google cloud print on Chrome on a windows desktop.
+
+Feature: Support for the 1X5 non-backlit version of the Topaz USB hardware signature pad.
+Enhancement: Ability for users with report permissions to see daily reports for all stores combined in multistore
+Feature: Inventory Importer
+Enhancement: Day Report now shows totals per payment plugin that gives you the total plus deposits minus applied deposits. 
+This will show you and accurate total of the amount of cash recieved per day as well as other plugins.
+Enhancement: Made the service requests module more mobile friendly.
+Enhancement: Add link to receipt on a work order as long as no invoices exist on the work order.
+Change: Webcam Asset photo feature: Now uses html5 canvas with a fall back to flash so that for most browsers flash will not be needed.
+Enhancement: Ability to browse history of "recent work list" further back.
+User Requested Feature: Support for importing UVK reports with an on the fly extract/view of the UVK system info report.
+

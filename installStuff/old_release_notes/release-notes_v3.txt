@@ -1,0 +1,66 @@
+Attached to this email is the new v3 release of PC Repair Tracker. It Features:
+
+* Switched to the newer mysqli functions for compatibility with PHP 7
+* Numerous additions to the deposit system for more flexablity.
+* Numerous UI enhancements and enhancements to printables
+* Recurring Work Orders, also integrated with Service Contracts
+* Recurring Service Reminders
+* Open Invoice Statements
+* Mass adding of assets to a group
+* Database backup to dropbox
+* In place searching in many modules.
+* Support for Square, not the reader device, but the same account you use with your reader
+  can be used to process cards directly in PCRT with a usb card swiper.
+
+################################################
+PCRT Release Version 3
+################################################
+
+>>>>>>>>>> Change Log
+
+Feature: Switched Database functions to use the mysqli extension. The old mysql extension is scheduled to be depreciated as of PHP 7
+Feature: Lots of work on Deposits: 
+	You can now attach deposits to invoices on a work order. 
+	They can be moved back and forth between the work order and other invoices on the work order.
+	You can remove a deposit from a work order which would free it up to apply to a different work order. 
+	Balances will show on the invoice and on the work order screen on open invoices.
+	You can take a previously "un-attached" deposit, and attach it to a work order, and move it to a work order invoice if you wish.
+	You can add a deposit to an invoice from the open invoice viewer, regardless if the invoice is attached to a work order.
+	The deposit total and balances now show on the open invoice viewer. 
+	You can attach un-attached deposits to invoices not attached to work orders.
+
+Enhancement: Invoice, Receipt, Deposit Receipt display enhancements
+Bug Fix: Fixed bug where contact information is not passed from group invoice list to checkout cart.
+Feature: Invoices can now be directly attached to a group contact without being attached to a work order. 
+	Invoices started from the group viewer invoice link 
+	or the search and pick on the current customer when a group is selected from the search result will attach to the group.
+
+Feature: Show invoice totals on the group viewer.
+Enhancements: Links to Group from Invoice List Viewer
+Feature: Service Reminders can now be set to recurring.
+Feature: Recurring Work Orders. You can now create a recurring task that will generate a work order on an existing asset. You can create them from an
+	existing work order, or add them to assets that are part of Service Contracts from the Contract Viewer.
+Feature: Stripe Users: Invoices will now have a link for customers to pay their invoices via Stripe. 
+	This was kind of a quick hack, you will still need to record the payment.
+Change: The link to "Ready to Sell" was moved to the top of the POS Categories and can now be browsed by asset type.
+        It also shows "cost" values for Assets designated as a saleable asset for inventory valuation purposes.
+Feature: New report "Payment Detail Report". Allows you to pull a report from a specified date range by payment type.
+Feature: Open invoice statement. You can now print or email a listing of unpaid invoices, complete with deposit balance information.
+Feature: Support for the Square Credit Card processor, this does not support the reader, but you can use it with your Square account.
+Enhancement: You can now edit the store setting on invoices and recurring invoices in multistore.
+
+Note: The above new features have been added to the mobile interface as well. Features below are only in the Desktop Version.
+
+Enhancements: Lots of Visual Enhancements.
+Enhancement: A color swatch picker and the ability to save color swatches for the Store Color theme in the Store Admin.
+Feature: On the Asset list on the group viewer, you can now mass add new assets. Just specify the customer name, asset/device make, asset type and optional notes.
+Enhancement: On the recent work order list and work order browser, it now shows receipt and invoice totals, and if a work order is attached to a service contract,
+             it will show the contract. Just one more way to make sure work orders are getting billed.
+Feature: 1-Click backup and upload of your database to Dropbox.
+Feature: Browsers for both Recurring Work Orders, and Service Reminders
+Enhancement: Auto Refresh of status list every 2 minutes, notifications every minute.
+Enhancement: Sticky Note browser to view all notes.
+Enhancement: In place search for Invoices, Quotes, Recurring Invoices, Receipts, Assets, Groups, Service Reminders, Service Requests, Recurring Work Orders,
+                Deposits, Service Contracts, Sticky Notes
+Enhancement: Revamped Check-in Screen. It now searches your existing Assets/Devices on the fly to make sure you do not enter a duplicate.
+

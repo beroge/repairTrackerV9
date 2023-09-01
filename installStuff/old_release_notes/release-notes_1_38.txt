@@ -1,0 +1,112 @@
+A new release of PC Repair Tracker is attached to this email.
+
+Whats NEW: 
+
+# Device Types
+You can now define multiple device types, each with their own info fields, and list of asset accessories. 
+For those that use d7 several new available fields from the d7 report files have been added and you can
+now map these to asset info fields right in the admin control panel.
+
+
+# Receipt Printer Support
+An alternate view for Sales Receipts, Deposit Receipts and Claim Tickets are now available with a narrow template for printing on a thermal 
+receipt printer with 80mm paper rolls. If you use this feature be sure to set your paper width properly in the control panel for your receipt printer.
+
+# Scheduled Work Orders:
+You can now define a work order as scheduled with a date and time. Also new buttons were added to switch the status list view between in progress
+jobs and scheduled jobs.
+
+# Timers
+A new timer feature has been added to track billable time on work orders. You can also track time from the POS without a work order. You can then automatically
+apply hourly rates against the recorded time and add it directly to a repair cart or POS cart.
+
+#Tax Groups
+You can now apply multiple tax rates per item as long as they are defined as part of a tax group. A given tax rate can be applied to an item
+as an individual rate or as part of a group rate and the tax report will automatically separate the
+taxes by municipality in the tax report. 
+
+#Block of Time
+You can now keep track of Block of Time contracts on group contacts. You can apply hours from any PC work order associated with the group to these contracts. 
+You can create recurring invoices that add hours to the contract on a recurring basis or manually invoice more hours to the contract. 
+
+
+To UPGRADE, make sure you follow the directions IN ORDER in the update.txt file.
+
+
+-Luke
+
+
+Complete Changelog:
+
+
+################################################
+Release 1.38
+################################################
+
+>>>>>>>>>> Change Log
+
+*Enhancement: Added ability to add a customer without a work order.
+*Enhancement: Added more user friendly warning about missing pear library.
+*Enhancement: Changed the notification after email is sent - added to notification area at top of status list.
+*Fix - Remove serials from the list of available serials for items that linger in repair carts of open workorders and open invoices.
+*Enhancement: Search Customer Notes for Links
+*Enhancement: You can now define multiple asset/device types, each with their own list of asset accessores, and custom spec fields all in the admin interface.
+  You can also map these fields to fields in the d7 info report.
+  You can also choose which of the spec fields are displayed on the claim ticket, repair report, checkout receipt, and price cards.
+  This enhancement also means several changes away from "PC" centric terms. PCID's are now Asset Id's, Several places that used to be
+  labeled "Computer" or "PC" have been renamed to Asset/Device. Customer Items are now referred to as "Asset Accessories"
+
+*Feature: Support for Tax Groups, this feature allows you to apply multiple tax rates per item, as long as the rates are defined as part of a group rate.
+*Feature: Added support for Dymo Twin Turbo label printers. You can now choose whether to print from the left or right label, and also choose the print speed/quality.
+*Feature: Ability to specify a "Scheduled Date" for work orders as well as selector to choose which types of jobs to view.
+  This new selector is comprised of 4 buttons.
+  1st Button: Shows all jobs in the store with a job total.
+  2nd Button: Shows all jobs assigned to the logged in user in the store with a job total.
+  3rd Button: Shows all jobs in the store with a scheduled date. Job total does not include jobs from Waiting for Payment or Completed.
+  4th Button: Shows all jobs in the store assigned to the logged in user with a scheduled date. Job total does not include jobs from Waiting for Payment or Completed.
+
+  Job totals do not include jobs that have been in completed status for more than 30 days
+  Scheduled Jobs will start to appear the day prior to the scheduled date when the 1st or 2nd button is selected.
+
+*Change: Use basic time picker designed for Scheduled Jobs on sticky notes feature.
+*Bug Fix: Fixed comments in hover info in status list for Ready for Pickup/Completed and Waiting for Payment Status
+*Change: PC Make field is no longer a required field. This change made for people that are creating a work order with no device.
+*Enhancement: Show selector color swatch on status box editor.
+*Enhancement: Make status list popup titles use selector color for background for better readability
+*Enhancement: Add direct link to Sticky Calendar in main repair menu.
+*Enhancement: Show scheduled work orders on sticky calendar.
+*Enhancement: A link in the inventory system to show list of open work orders or open invoices that an inventoried item is attached to.
+*Enhancement: Narrow receipt option for printing sales receipts, deposit receipts and claim tickets on 80MM receipt printers.
+*Bug Fix: Redirect error after deleting quote.
+*Enhancement: A new routine, restricted by user permission, to allow you to move a receipt to a different store and adjust inventory accordingly.
+*Feature: New Timer feature that also allows you to bill it to the repair cart.
+*Feature: Map link on Work Order.
+*Feature: CSV Import feature to import customer contact info into PCRT.
+*Security Enhancement: After 4 failed login attempts, block attempts for a period of time.
+*Enhancement: Added 2 alternate image conversion methods to stock image upload. Enhanced error messages to better pinpoint the point of failure.
+*Enhancement: Allow stock recounting tool to use UPCs as well as stock id.
+*Change: Replace the stock in inventory when deleting a receipt.
+*Change: Removed all vendor specific CSS for gradients, box shadows, and border-radii
+*Change: Load work orders from status list via ajax for faster load.
+*Option: Added new "light" stylesheet option, looks best with a white store background theme.
+*Change: Added box border to "Flat" box style to complement the new "Light" stylesheet.
+*Enhancement: Show change on printed receipts and receipt viewer
+*Fix: Do not reset invoice date when modifying invoice items.
+*Major Feature: Block of Time Contracts for group contacts.
+*Bug Fix: When deleting notes from the touchscreen, clicking cancel on the confirm did not cancel.
+*Change: Show most recent password on asset touchscreen view. 
+*Bug Fix: Error on no charge items placed in the waiting for payment status.
+*Change: Store and maintain an average cost of goods value for more accurate reporting on stock items.
+*Change: Pass pc contact info when creating a new group.
+*Enhancement: Create new sticky from Group Page
+*Enhancement: New report that shows inventory based on average cost of goods.
+*Enhancement: Added FontAwesome icons to several buttons.
+*Enhancement: 2 New payment reports that show date range or monthly payment report by payment type.
+*Change: New light.css stylesheet changed to be the default PCRT stylesheet.
+*Enhancement: Added Cost of Goods figure to many reports.
+*Bug Fix: Added missing code for the Twilio option in the sms tech notification scripts
+*Enhancement: You can use the UPC field in Dymo templates for price tags
+*Enhancement: New inventory report, you can now search for a specific sold non inventory item.
+*Enhancement: New inventory report, you can now search a date range for all sold non-inventory items.
+*Enhancement: Show warning on current cart and repair cart if an added item is currently out of stock.
+

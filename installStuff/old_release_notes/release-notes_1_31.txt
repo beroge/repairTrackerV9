@@ -1,0 +1,49 @@
+A new release of PC Repair Tracker is attached to this email. This release contains alot of small enhancements.
+Notable new features are a vastly expanded Grouping feature for grouping PC's together under one umbrella, a optional
+QR code printed on claim tickets that customers can scan with their smart phone to easily check repair status, also added a clickable link
+to repair status on the claim ticket. Also a long requested feature, printed receipts now show the discount applied. Even though it stinks that
+android flash and ipods cannot use the cam to directly take asset photos and submit them, there is now a manual asset image upload feature.
+Also many people like to have the customers name visable all the time on a work order, so I added a kind of experimental floating bar along
+the right side of the page in work order view. It uses the newer CSS transform feature, I made it optional and it can be turned off per user
+in the settings menu. I am afraid it may get weird on smaller screen devices. Will keep it in future releases if I get at least a few people
+that say they like it.
+
+Be sure to read the update.txt file for upgrade instructions.
+
+Don't forget to refresh the browsers on your clients after upgrading to get the updated stylesheet.
+
+Complete changelog below.
+
+
+*Enhancement: Search UPC field when searching for a stocked item.
+*Bug Fix: Fixed variable in custom scan that in correctly recorded the person that entered the scan. (Thanks Corey)
+*Bug Fix: Do not show blank work order number on receipt_view
+*Feature: Added QR Code to printed claim ticket
+*Enhancement: Added link to repair status from claim ticket
+*Enhancement: Reworked Printed Claim ticket to accomodate QR Code, and added customer address and checkin date.
+*Fixed potential problem in asset label script
+*Major Feature: Expanded the Grouping Feature.
+*Enhancement: Parse custom PC info for hyperlinks
+*Enhancement: Added cellphone and work phone fields to csv customer list export
+*Enhancement: Show Repair Cart Total on Waiting for Payment Status
+*Enhancement: Add back button to touchscreen when you forget to select a scan.
+*Enhancement: Show checkmark by repair report, claim ticket and invoices if previously emailed.
+*Enhancement: Redirect after email is sucessfully sent after 2 seconds for claim tickets and repair reports.
+*Feature: Database Backup  - Click link in settings menu while logged in as admin to download your database.
+*Feature: Allow asset photos to be uploaded instead of using a webcam.
+*Bug Fix: Fixed missing closing tag on cart copy to repair cart feature which broke with FireFox4
+*Enhancement: User and Sticky Note Type filters on Calendar view.
+*Enhancement: Show discount on emailed and printed receipts and invoices.
+*Enhancement: Show Deposit Totals on Daily Report, hide totals for the day that are zero
+*Feature: Current Cart Customer Picker for those quick sales with no work order.
+*Enhancement: Show work order number on invoice if it exists.
+*Feature: Work Order Action History Viewer
+*Enhancement: Added CSS for Gradients for Opera and IE 10
+*Enhancement: Added CSS for Box Shadows in Opera
+*Feature: Floating bar that shows customer name in work order view. Can be turned off or on in Settings menu.
+*Feature: Allow quantity to be added to cart.
+
+
+
+
+

@@ -1,0 +1,100 @@
+Attached to this email is the new v4 release of PC Repair Tracker.
+
+# Highlights:
+
+* Incoming SMS support for twilio added. This is part of a revamped "Messages" area. 
+* Customer Portal - Customers can view billing information, repair report info, 
+	  	    send internal messages, download files and pay invoices.
+* Revamped Passwords/Credential manager including support for 3X3 patterns.
+* You can now send SMS from a group contact.
+* You can upload downloads that are available to all portal users or specific downloads for a specific portal user.
+
+
+# Messages Feature: 
+
+Alot of work went into the logic of this. The problem is, you don't always know which work order or group a incoming message
+pertains to. So on the work orders, it will display messages that match any of the customer phone numbers or email addresses
+on the asset or group contact. Another problem, when viewing an older work order with newest messages first, you might see 
+messages that are newer that do not pertain to that work order. So on the work orders, it will only show messages 
+sent or received within one week prior to the check in date and one week after the checkout date. You can still use 
+the "Browse Messages" button to see everything.
+
+The messages browser linked from the main menu or accessed from the new messages notification icon will show potential matches 
+to the phone number or email. It will show you groups, assets and work orders that were worked on during the timeframe 
+of when the message was received. The notification icon will only show new incoming messages.	
+
+If you use the outbound email feature it will add a line that says "Write your reply above this line". If you use Zapier
+to funnel your incoming email it will attempt to strip out the quoted text in the reply. In most cases what you will want
+to do is have your generic store config email (like info@ contact@ etc. )be the account to use for this so that personal 
+stuff is not mixed in. Or for instance with Gmail you could use a Zapier search to pickup on this line in emails sent from PCRT:
+
+##-## Please reply above this line. ##-##
+
+And only have it Zap those to PCRT.
+
+
+# The Customer Portal
+
+The customer portal uses the group email address as the login username. It will still work if you have more than one group with the same
+email address, it will let the customer switch between group accounts in the main user portal. If a customer does not have a group created, 
+but has assets with and email address specified, the first time they attempt to login, it will automatically create a new group and place all
+assets that match the email address in that group.
+
+When they register, it will send a temporary password via email to the portal user. If they do not have an email address on a group or asset,
+it will not send them and email or tell them that their account was not found. If a user requests a password reset, they will first be sent
+an email with a link to click for verification purposes before the password is reset. The new password will be emailed to them.
+They can change the password to something different in the portal.
+
+They can pay invoices using Stripe or AuthorizeNet. If there are deposits attached to the invoice, it will show the balance and offer them
+to pay just the balance. When paid, it will create a receipt and show as paid in PCRT. It will also mark any deposits attached as applied.
+
+For portal downloads, in the settings menu (after you apply the new user permission) you can upload attachments that will be available to 
+all portal users. On any group viewer page you can upload attachments that are only available to that specific group user.
+
+There is also a link in the group viewer to view that customers portal page without having to login. 
+
+
+Hope you enjoy this release!
+
+-Luke
+
+
+###############################################################################
+
+Be sure to follow the instuctions in the update.txt file to upgrade from v4.
+
+
+>>>>>>>>>> Change Log
+Upgrade: Switched PCRT logins to use sessions and stronger encryption on database stored login passwords.
+Tweak: Search Device info fields on new checkin.
+Feature: Passwords (Credentials now) feature greatly expanded, including 3x3 patterns.
+Enhancement: Function in user accounts for admin user to clear login attempts instead of having to wait one hour.
+Enhancement: Revamped SMS feature into "Messages" area.
+        Take "Call Log" Notes, can be viewable by customer in customer portal.
+        Send SMS to any asset/group phone number.
+        Send messages from the Asset or the Group
+        Send Email
+        Recieve incoming SMS - See Integrations page in PCRT for info.
+        With Zapier, You can receive incoming email into the messages system.
+Feature: Incoming SMS for Twilio, SMSGlobal. (Requires SMS Phone Number) (Clickatell, BulkSMS untested)
+Feature: Work Order toolbar to quickly jump to a section.
+Bug Fix: Error when checking out multiple invoices and customer name contains quote marks.
+Bug Fix: Fixed problem with translation databases growing large for non en-us languages.
+Feature: Customer Portal:
+        Customer can view invoices, receipts, work orders, view repair reports/progress, view recurring services.
+        Customers can pay invoices using credit cards with Stripe and AuthorizeNetCP
+        Customers can send internal messages to PCRT
+        You can upload files that are available for download for all portal users
+        You can upload files that are only availble to a specific user.
+        Supports customers with more than one Group account, they can switch back and forth right in the interface.
+Bugfix: Bug that would allow deposits to appear on unpaid emailed invoices that were not explicitly attached.
+Fix: Pull receipts into the group view that paid invoices that were generated from recurring invoices attached to the group.
+Enhancement: Ajaxified the system checks and Scans section on the work order screen.
+Enhancement: Create a Asset or Group from Service Requests without creating a work order.
+Feature: New Zapier Messages Action - See Integrations page in PCRT for info.
+Change: The status list in PCRT was designed so that things are always front and center and do not slip through the cracks. I.E. fixme, call me,
+        come get me and pay for me.
+        There are a few people that never check anything out. I have seen installs with 300+ open work orders. This drastically kills performance. So now statuses
+        will display the total number of work orders in a status, but only display the first 12 work orders in a status. This can be overridden with a variable in
+        the repair/deps.php file. Also, in the status style editor you can mark a status as a "collapsed" status. The status will still show, but you must click
+        a link to see the jobs in the status. This was added for some people that wish to place items in a long term type status but still an open work order.

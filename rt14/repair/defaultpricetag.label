@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DieCutLabel Version="8.0" Units="twips">
+	<PaperOrientation>Landscape</PaperOrientation>
+	<Id>Address</Id>
+	<PaperName>30252 Address</PaperName>
+	<DrawCommands>
+		<RoundRectangle X="0" Y="0" Width="1581" Height="5040" Rx="270" Ry="270" />
+	</DrawCommands>
+	<ObjectInfo>
+		<BarcodeObject>
+			<Name>Barcode</Name>
+			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+			<BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+			<LinkedObjectName></LinkedObjectName>
+			<Rotation>Rotation0</Rotation>
+			<IsMirrored>False</IsMirrored>
+			<IsVariable>True</IsVariable>
+			<Text>PCRTSTOCKID</Text>
+			<Type>Code39</Type>
+			<Size>Medium</Size>
+			<TextPosition>Bottom</TextPosition>
+			<TextFont Family="Arial" Size="12" Bold="True" Italic="False" Underline="False" Strikeout="False" />
+			<CheckSumFont Family="Arial" Size="7.3125" Bold="False" Italic="False" Underline="False" Strikeout="False" />
+			<TextEmbedding>None</TextEmbedding>
+			<ECLevel>0</ECLevel>
+			<HorizontalAlignment>Center</HorizontalAlignment>
+			<QuietZonesPadding Left="0" Top="0" Right="0" Bottom="0" />
+		</BarcodeObject>
+		<Bounds X="331" Y="817.403449717509" Width="4440.47265625" Height="675.596550282491" />
+	</ObjectInfo>
+	<ObjectInfo>
+		<TextObject>
+			<Name>Text</Name>
+			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+			<BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+			<LinkedObjectName></LinkedObjectName>
+			<Rotation>Rotation0</Rotation>
+			<IsMirrored>False</IsMirrored>
+			<IsVariable>True</IsVariable>
+			<HorizontalAlignment>Left</HorizontalAlignment>
+			<VerticalAlignment>Top</VerticalAlignment>
+			<TextFitMode>ShrinkToFit</TextFitMode>
+			<UseFullFontHeight>True</UseFullFontHeight>
+			<Verticalized>False</Verticalized>
+			<StyledText>
+				<Element>
+					<String>PCRT_STORE_NAME</String>
+					<Attributes>
+						<Font Family="Arial" Size="14" Bold="True" Italic="False" Underline="False" Strikeout="False" />
+						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+					</Attributes>
+				</Element>
+			</StyledText>
+		</TextObject>
+		<Bounds X="331" Y="88" Width="3175.42918454936" Height="289.51932535458" />
+	</ObjectInfo>
+	<ObjectInfo>
+		<TextObject>
+			<Name>TEXT</Name>
+			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+			<BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+			<LinkedObjectName></LinkedObjectName>
+			<Rotation>Rotation0</Rotation>
+			<IsMirrored>False</IsMirrored>
+			<IsVariable>False</IsVariable>
+			<HorizontalAlignment>Left</HorizontalAlignment>
+			<VerticalAlignment>Top</VerticalAlignment>
+			<TextFitMode>ShrinkToFit</TextFitMode>
+			<UseFullFontHeight>True</UseFullFontHeight>
+			<Verticalized>False</Verticalized>
+			<StyledText>
+				<Element>
+					<String>PCRT_STOCK_NAME</String>
+					<Attributes>
+						<Font Family="Arial" Size="12" Bold="False" Italic="False" Underline="False" Strikeout="False" />
+						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+					</Attributes>
+				</Element>
+			</StyledText>
+		</TextObject>
+		<Bounds X="331" Y="402.103004291845" Width="3286.8025751073" Height="278.819742489271" />
+	</ObjectInfo>
+	<ObjectInfo>
+		<TextObject>
+			<Name>TEXT_1</Name>
+			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+			<BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+			<LinkedObjectName></LinkedObjectName>
+			<Rotation>Rotation0</Rotation>
+			<IsMirrored>False</IsMirrored>
+			<IsVariable>False</IsVariable>
+			<HorizontalAlignment>Left</HorizontalAlignment>
+			<VerticalAlignment>Top</VerticalAlignment>
+			<TextFitMode>ShrinkToFit</TextFitMode>
+			<UseFullFontHeight>True</UseFullFontHeight>
+			<Verticalized>False</Verticalized>
+			<StyledText>
+				<Element>
+					<String>PCRT_PRICE</String>
+					<Attributes>
+						<Font Family="Arial" Size="16" Bold="False" Italic="False" Underline="False" Strikeout="False" />
+						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+					</Attributes>
+				</Element>
+			</StyledText>
+		</TextObject>
+		<Bounds X="3677.60944206009" Y="110.407725321888" Width="1241.330472103" Height="576.759656652361" />
+	</ObjectInfo>
+</DieCutLabel>

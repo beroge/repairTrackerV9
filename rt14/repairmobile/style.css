@@ -1,0 +1,353 @@
+/*        @media only screen and (min-width: 500px){
+            .ui-page {
+                width: 500px !important;
+                margin: 0 auto !important;
+                position: relative !important;
+            }
+	.ui-overlay-a {background: #333;}
+
+        }
+*/
+
+
+
+.bold {FONT-WEIGHT: bold;}
+.em75 { FONT-SIZE: .75em;}
+.em90 { FONT-SIZE: .9em;}
+.textred { color: #ff0000;}
+
+.textwhiteregular {BACKGROUND: none; COLOR: white; FONT-SIZE: 1em; FONT-WEIGHT: normal; FONT-FAMILY: Helvetica, Sans; TEXT-DECORATION: none;       text-shadow: -1px 0px #333333, 0px 1px #333333, 1px 0px #333333, 0px -1px #333333, -1px -1px #333333, 1px 1px #333333, -1px 1px #333333, 1px -1px #333333;}
+
+
+
+.statusboxtop {
+        padding: 4px;
+        text-align: left;
+        width: 100%;
+	background:#000000;
+	border: #000000 1px solid;
+	box-sizing: border-box;
+
+}
+
+.statusbox {
+        padding: 4px;
+        text-align: left;
+        width: 100%;
+        background:#ffffff;
+        border: #000000 1px solid;
+	box-sizing: border-box;
+}
+
+
+.notify {BACKGROUND: #FFE8E8; border: 1px solid red; border-radius:3px; width:100%; padding:3px 5px;}
+
+A.notifybutton:link    {display:block; text-decoration: none; color: #ff0000; FONT-SIZE: 12px;
+FONT-WEIGHT: bold; FONT-FAMILY: Helvetica, Sans;border-bottom:none;border-radius:3px; padding:5px;}
+A.notifybutton:visited {display:block; text-decoration: none; color: #ff0000;
+FONT-SIZE: 12px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica, Sans;border-bottom:none;border-radius:3px; padding:5px;}
+A.notifybutton:active  {display:block; text-decoration: none; color: #ff0000;
+FONT-SIZE: 12px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica, Sans;border-bottom:none;border-radius:3px; padding:5px;}
+A.notifybutton:hover   {display:block; text-decoration: none; color: #ffffff;
+FONT-SIZE: 12px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica, Sans;background:#ff0000;border-bottom:none;border-radius:3px; padding:5px;}
+
+
+
+
+/* this is the style for standard list tables */
+table.standard {
+        border-collapse: collapse;
+	width:100%;
+}
+
+table.standard th {
+        padding: 8px 8px 8px 8px;
+        background: #cccccc;
+        text-align: left;
+        border: 1px solid #cccccc;
+ 	border-top-left-radius:3px; border-top-right-radius:3px;
+	
+}
+table.standard td {
+        padding: 8px;
+	border: 1px solid #eeeeee;
+}
+
+table.standard tr:nth-child(odd) {
+       background: #eeeeee;
+}
+
+table.standard tr:nth-child(even) {
+       background: #ffffff;
+}
+
+
+/* this is the style for standard list tables */
+table.doublestandard {
+        border-collapse: collapse;
+        width:100%;
+        margin:auto;
+}
+table.doublestandard th {
+        padding: 8px 8px 8px 8px;
+        background: #cccccc;
+        text-align: left;
+        border: 1px solid #cccccc;
+	border-top-left-radius:3px; border-top-right-radius:3px;
+}
+table.doublestandard td {
+        padding: 8px;
+        border: 1px solid #cccccc;
+}
+
+table.doublestandard tr:nth-child(4n-1), tr:nth-child(4n-2) {
+       background: #eeeeee;
+}
+
+table.doublestandard tr:nth-child(4n-3), tr:nth-child(4n-4) {
+       background: #ffffff;
+}
+
+
+/* this is the style for styleless tables */
+table.nostyle {
+        border: none;
+        border-collapse: collapse;
+        width:100%;
+        margin:auto;
+}
+table.nostyle th {
+        padding: 3px 20px 3px 3px;
+        background: #dddddd;
+}
+table.nostyle td {
+        padding: 5px;
+        border: none;
+}
+
+
+table.scalendar {
+        border-width: 0px;
+        border-collapse: collapse;
+        width:100%;
+        margin:auto;
+}
+table.scalendar th {
+        padding: 3px 3px 3px 3px;
+        background: #cccccc;
+        text-align: center;
+        border: 1px solid #cccccc;
+}
+table.scalendar td {
+        padding: 5px;
+        text-align: center;
+}
+
+table.scalendar tr:nth-child(odd) {
+       background: #eeeeee;
+        border-bottom: 1px solid #333333;
+}
+
+table.scalendar tr:nth-child(even) {
+       background: #ffffff;
+	border-bottom: 1px solid #333333;
+}
+
+
+
+.calendar {
+        font-family: 'Trebuchet MS', Tahoma, Verdana, Arial, sans-serif;
+        font-size: 0.9em;
+        background-color: #999999;
+        color: #333;
+        border: 2px solid #333;
+        border-radius: 4px;
+        padding: 0.2em;
+        width: 14em;
+        box-shadow: #000000 4px 4px 4px;
+}
+.calendar a {
+        outline: none;
+}
+.calendar .months {
+        background-color: #333333;
+        border: 1px solid #000000;
+        border-radius: 4px;
+        color: #FFF;
+        padding: 0.2em;
+        text-align: center;
+}
+.calendar .prev-month, .calendar .next-month {
+        padding: 0;
+}
+.calendar .prev-month {
+        float: left;
+}
+.calendar .next-month {
+        float: right;
+}
+.calendar .current-month {
+        margin: 0 auto;
+}
+.calendar .months a {
+        color: #FFF;
+        text-decoration: none;
+        padding: 0 0.4em;
+        border-radius: 4px;
+}
+.calendar .months a:hover {
+        background-color: #555555;
+        color: #ffffff;
+}
+.calendar table {
+        border-collapse: collapse;
+        padding: 0;
+        font-size: 0.8em;
+        width: 100%;
+}
+.calendar th {
+        text-align: center;
+}
+.calendar td {
+        text-align: right;
+        padding: 1px;
+        width: 14.3%;
+}
+.calendar td a {
+        border-radius:5px;
+        display: block;
+        color: #07009d;
+        background-color: #f4f4f4;
+        border: 1px solid #666666;
+        text-decoration: none;
+        padding: 0.2em;
+}
+.calendar td a:hover {
+        color: #ffffff;
+        background-color: #2058FF;
+        border: 1px solid #000000;
+}
+
+/* this is the style for standard list tables */
+table.cart {
+        border-width: 0px;
+        border-collapse: collapse;
+        width:100%;
+        margin:auto;
+}
+table.cart th {
+        padding: 3px 20px 3px 3px;
+        background: #eeeeee;
+        text-align: left;
+        border-top: 1px solid #cccccc;
+        border-left: 1px solid #cccccc;
+        border-right: 1px solid #cccccc;
+        border-bottom: 5px solid #333333;
+}
+table.cart td {
+        padding: 5px;
+        border: 1px solid #eeeeee;
+	background: #ffffff;
+}
+
+.floatright {
+        float: right;
+}
+
+
+.colormered {
+color:#ff0000;
+}
+.colormegreen {
+color:#30B53E;
+}
+.colormeblue {
+color:#0050EF;
+}
+.colormegray {
+color:#cccccc;
+}
+
+
+.nopointerevents {
+pointer-events:none;
+}
+
+
+table.passbadge {
+        border-collapse: separate;
+        border-spacing:0px 5px;
+        width:100%;
+}
+
+table.passbadge td:nth-child(odd) {
+        padding: 3px;
+        box-sizing:border-box;
+        background:#cccccc;
+        vertical-align:middle;
+        text-align:center;
+        width:30px;
+        color:#777777;
+        border-radius:3px 0px 0px 3px;
+}
+
+table.passbadge td:nth-child(even) {
+        padding: 5px 5px 5px 10px;
+        border: none;
+        background:#eeeeee;
+        vertical-align:top;
+        border-radius:0px 3px 3px 0px;
+}
+
+
+
+table.passbadge2 {
+        border-collapse: separate;
+        border-spacing:0px 5px;
+        width:100%;
+}
+
+table.passbadge2 td:nth-child(odd) {
+        padding: 3px;
+        box-sizing:border-box;
+        background:#000000;
+        vertical-align:middle;
+        text-align:center;
+        width:30px;
+        color:#cccccc;
+        border-radius:3px 0px 0px 3px;
+}
+
+table.passbadge2 td:nth-child(even) {
+        padding: 5px 5px 5px 10px;
+        border: none;
+        background:#eeeeee;
+        vertical-align:top;
+        border-radius:0px 3px 3px 0px;
+}
+
+
+.radiusleft {
+ border-top-left-radius:3px; border-bottom-left-radius:3px;
+}
+
+.radiusright {
+ border-top-right-radius:3px; border-bottom-right-radius:3px;
+}
+
+.radiustop {
+ border-top-left-radius:3px; border-top-right-radius:3px;
+}
+
+.radiusbottom {
+ border-bottom-left-radius:3px; border-bottom-right-radius:3px;
+}
+
+.radiusall {
+ border-radius:3px;
+}
+
+.vam {
+vertical-align:middle;
+}
+

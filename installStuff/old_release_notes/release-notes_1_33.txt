@@ -1,0 +1,97 @@
+A new release of PC Repair Tracker is attached to this email. 
+This release contains alot of smaller requested features and other small refinements.
+
+# Footer texts moved to Admin area in Settings:
+This was necessary to accomodate thankyou letters but also other footer texts so that you 
+can have different versions per store for multistore users.
+
+# Thank You Notes:
+You can now email and print thankyou notes. 
+
+#Inventory:
+You can now edit previously entered inventory to change a mistyped quantity or alter the 
+paid price.
+
+#You are being watched!
+For those that use the repair status scripts, PCRT now tracks when and how many times
+a customer has checked in on your progress and displays an icon in the status list
+when this happens. This will help you give more attention to those customers who
+do not seem to have any patience!
+
+#Colors
+You can now go into the store admin and set the color of the thin strip and back ground color.
+This setting is per store, so that multistore users also have another quick way of identifing 
+which store they are currently set to.
+
+#Printing
+Most customer printables now have a print bar and also have the links removed from inside the page
+for a cleaner appearance.
+
+#Assigning Users
+You can now assign a work order to a user and toggle the status list view to show just your
+assigned work orders or all work orders like it currently does.
+
+#Signature Pad
+Their is now an expiramental Signature pad on the claim ticket. This feature will probably need
+more work.
+
+Make sure you follow the directions IN ORDER in the update.txt file.
+
+-Luke
+
+
+Complete Changelog:
+
+*Enhancement: Pass stock id to shop list from out of stock report.
+*Enhancement: Go back to work order after creating a sticky from a work order.
+*Enhancement: prefill field with email address when emailing a receipt.
+*Feature: Offer to record cost of non inventoried items
+*Feature: Record most recent stock cost with each item sold for future reporting purposes
+*Feature: Show estimated net sales on daily report if sales report permissions are assigned to your user.
+*Feature: Show stocking history on stock detail page if inventory permissions are assigned to your user.
+*Feature: Show estimated net sales on day range report
+*User Requested Feature: Ability to do a No Charge Invoice and Sale
+*Enhancement: Make search feature on left side also search Group Information.
+*Fix: Make Work Order Invoice print links return to the work order after printing.
+*User Requested Feature: Allow Invoicing System to be used for Quotes.
+*User Requested: Show Credit Card Transaction ID on receipts and receipt viewer
+*Enhancement: Pass PC Name as default name when creating a new group.
+*Bug Fix: Clear return receipt id on receipt when admin deletes a receipt with items returned.
+*Enhancement: Allow you to disable item return buttons if the sale day has been over X number of days ago for all users but the admin user.
+*Customer Request: Search PC Make field when using the "Search for Computer" box.
+*Feature: Modified Work Order Lookup box to also be Search box that searches the Problem, Customer Notes, Tech Note fields of Work Orders.
+*Enhancement: Display product name on restock/transfer stock screens.
+*Enhancement: Checkbox to create PC group with new checkin.
+*Feature: Record Date and Time a work order is placed in the Ready for Pickup status for future reporting.
+*Feature: Show Average time in days from when a work order is created and when it is placed in the Ready for Pickup Status
+*Change: Show Grand total plus received deposits minus applied deposits to give more accurate total of what was taken in.
+*Change: Make Empty Cart feature also clear the current customer.
+*Bug Fix: Fixed bug that broke email link from printable claim ticket
+*Experimental Feature: Signature pad on claim ticket.
+*Enhancement: Use new HTML required attribute on several fields
+*Enhancement: Refactored ordering code on Scan admin
+*Enhancement: Allow you to arrange the sorting order of the Quick Labor items.
+*Change: Sort Stickies in order of duedate not the order they were added.
+*Feature: Show how many times a customer has checked repair status, and the last time they checked.
+*Feature: Show eyeball icon in status list if the customer has checked repair status at lease once.
+*Enhancement: Show notice on receipt viewer if items are in cart ready for return to prompt user to go to the Current Cart
+*Enhancement: Allow you to choose which Common Problems get printed on customer sheets so that you can also specify
+              technician only internal actions in the common problems list.
+*User Requested Feature: Add Notes field to groups
+*Enhancement: Allow Work orders to be assigned to a technician, allow status list to display whole store or only a technicians assigned jobs.
+*Enhancement: New "Technician Sales Report" that shows total sales, invoices and assigned work orders per user.
+*Feature: External Tools, a new thing to add iframed links to commonly used tools on the web.
+*Enhancement: If un-applied deposits exist on a work order, show balance due on final invoice.
+*Enhancement: Thank You letters.
+*Enhancement: Added warning to Admin page if your server is running with php magic quotes turned on
+*Enhancement: Pass WO problem description to sticky note field from work order.
+*User Requested Enhancement: Display both Work Order Number and PCID Number on status list for people that prefer to work from the work order number.
+*Change: Re-orginized the work order viewer to keep customer contact details on the left, and work order details on the right.
+*Change: Refactored status list shop time to show hours and minutes.
+*User Requested Feature: Notes field on PC (in addition to the existing note field on the work order)
+*User Requested Change: Hide Refund total on receipt if it is zero
+*Feature: Basic Color themes per store that can be set in the Store Admin.
+*Feature: New print bar on customer printables, removed visable links from printouts.
+*Change: Moved footer texts from deps files to Store config.
+*Enhancement: Added PC Make, PC	Phone, and Work Order id as variables passed to the asset label	script that can	be used	in customizing the label.
+

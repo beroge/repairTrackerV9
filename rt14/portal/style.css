@@ -1,0 +1,19 @@
+table.restables-clone {
+    display: none;
+}
+
+@media (max-width: 991px) {
+    table.restables-origin {
+        display: none;
+    }
+    
+    table.restables-clone {
+        display: table;
+    }
+}
+
+.leftindent {
+border-left: 7px #dddddd solid;
+padding-left: 5px;
+}
+

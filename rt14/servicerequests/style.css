@@ -1,0 +1,137 @@
+.box {
+margin-left:auto;
+margin-right:auto;
+background-color:#f7f7f7;
+color:#777777;
+font-size:small;
+border: 1px solid #cccccc;
+border-radius: 3px;
+padding:5px;
+}
+
+
+        A:link    {text-decoration: none; color: #010d57; FONT-SIZE: 12px; FONT-FAMILY: Helvetica; border-bottom: 1px solid #669d5f;}
+        A:visited {text-decoration: none; color: #010d57; FONT-SIZE: 12px; FONT-FAMILY: Helvetica; border-bottom: 1px solid #669d5f;}
+        A:active  {text-decoration: none; color: #2863d9; FONT-SIZE: 12px; FONT-FAMILY: Helvetica; border-bottom: 1px solid #ff0000;}
+        A:hover   {text-decoration: none; color: #ff0000; FONT-SIZE: 12px; FONT-FAMILY: Helvetica; border-bottom: 1px solid #ff0000;}
+
+.button, A.linkbutton:link, A.linkbutton:visited  {
+color:#333333;
+border:#cccccc 1px solid;
+background: #ffffff;
+box-shadow: 0 3px 2px -3px #333333;
+border-radius:3px;
+padding:5px 5px;
+font-size:14px;
+        display:inline-block;
+        font-weight:normal;
+        margin:2px;
+transition: all 0.3s ease 0s;
+}
+
+.button:hover, A.linkbutton:hover, A.linkbutton:active   {
+	background: #333333;
+	color:#ffffff;
+	border:#000000 1px solid;
+}
+.button:active {
+        position:relative;
+        top:1px;
+}
+.button:disabled {
+	background: #818181;
+        color:#eeeeee;
+	border:#333333 1px solid;
+}
+
+
+input[type=text], textarea {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+font:Verdana,Arial,Helvetica;
+font-weight:bold;
+ outline: none;
+  padding: 5px 0px 5px 5px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #585858;
+border-radius: 2px;
+}
+ 
+input[type=text]:focus, textarea:focus {
+  box-shadow: 0 0 5px #0090FF;
+  padding: 5px 0px 5px 5px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #0090FF;
+}
+
+.text10 {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 10px; FONT-WEIGHT: normal; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.text10i {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 10px; font-style: italic; FONT-WEIGHT: normal; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.text12 {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 12px; FONT-WEIGHT: normal; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.text12b {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 12px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.text12bu {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 12px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none; font-style: underline;}
+.text14b {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 14px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.text14 {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 14px; FONT-WEIGHT: normal; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.text16b {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 16px; FONT-WEIGHT: bold;FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.text20b {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 20px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.text30b {BACKGROUND: none; COLOR: #000000; FONT-SIZE: 30px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+
+.textred10 {BACKGROUND: none; COLOR: #ff0000; FONT-SIZE: 10px; FONT-WEIGHT: normal; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.textblue10 {BACKGROUND: none; COLOR: #0000ff; FONT-SIZE: 10px; FONT-WEIGHT: normal; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.textred12 {BACKGROUND: none; COLOR: #ff0000; FONT-SIZE: 12px; FONT-WEIGHT: normal; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.textred12b {BACKGROUND: none; COLOR: #ff0000; FONT-SIZE: 12px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.textred14b {BACKGROUND: none; COLOR: #ff0000; FONT-SIZE: 14px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.textred20b {BACKGROUND: none; COLOR: #ff0000; FONT-SIZE: 20px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.textred30b {BACKGROUND: none; COLOR: #ff0000; FONT-SIZE: 30px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.textgreen12b {BACKGROUND: none; COLOR: green; FONT-SIZE: 12px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+.textblue12b {BACKGROUND: none; COLOR: 0000ff; FONT-SIZE: 12px; FONT-WEIGHT: bold; FONT-FAMILY: Helvetica; TEXT-DECORATION: none}
+
+.text16bu {
+background-color:#555555;
+font-family:Verdana,Arial,Helvetica;
+font-weight:bold;
+color:#ffffff;
+font-size:14px;
+border: 3px solid #000000;
+border-radius: 5px;
+padding:5px;
+}
+
+
+.noticebox {
+margin-left:auto;
+margin-right:auto;
+background-color:#E5F6FF;
+color:#777777;
+font-size:small;
+border: 1px solid rgba(81, 203, 238, 1);
+border-radius: 4px;
+padding:10px;
+}
+
+
+.boxwide {
+margin-left:auto;
+margin-right:auto;
+width:90%;
+background-color:#dddddd;
+color:#777777;
+font-size:small;
+border: 3px solid #585858;
+border-radius: 2px;
+padding:5px;
+}
+
+.boxwidelight {
+margin-left:auto;
+margin-right:auto;
+width:95%;
+background-color:#f1f1f1;
+color:#777777;
+font-size:small;
+border: 5px solid #aaaaaa;
+border-radius: 5px;
+padding:5px;
+}
+

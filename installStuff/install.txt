@@ -1,0 +1,224 @@
+PC Repair Tracker installation instructions.
+
+NOTE: PCRT NOW REQUIRES PHP 5.5 OR NEWER
+
+1. Unpack the distribution file.
+
+2. There are several main folders, repair, store, pcphotos, attachments and productphotos which are contained
+in the PCRT folder. Upload these folders to either the root folder of your website or a subfolder. 
+All folders must be contained within the same folder.
+
+For the Mobile version, upload the "repairmobile", and "storemobile" folders
+
+For the Service Requests module, upload the "servicerequests" folder.
+
+For the Employee Timeclock, upload the "timeclock" folder.
+
+For the Customer Portal, Upload the "portal" folder.
+
+3. Set permissions on the productphotos folder, pcphotos folder, attachments folder, and the ~/repair/images/scans folder to be writable.
+
+4. Using your hosting control panel, create a new database and database user. Give the database user account permissions on the new empty database.
+Using what ever tool your webhost provides for managing a MySQL databases (almost always MyPHPAdmin), 
+import the pcrepairtracker.sql file in the distrubution package into your newly created database.
+
+5. Edit the deps.php files in both the repair and store directory to your liking. You can also change your monetary symbol
+in this file from dollars to pounds, euros or whatever symbol you need in the $money variable. You will need to 
+specify your database name, username and passwords in each of these two files at a bare minimum to get PCRT running. 
+Some of the settings in these files are arrays, be careful to preserve the syntax.
+
+6. At this point you should be able to load the site for the first time by going to either the store or repair
+ folder in your browser. Login given the suppled admin password. Only the admin user can modify store definitions,
+define workareas, add new users or 
+change other users passwords.  Click the "Settings" option in the main menu to add new users, set tax rates, 
+and setup your store contact info, scans, installs, actions, and notes, and other options.
+
+7. There is also a repairstatus folder. This contains a simple script to allow your customers to check the
+status of their	repairs. Only upload this folder if you	wish to	use this feature. You can place	this folder 
+anywhere on your website, separate from	the main PC Repair Tracker Installation. You must edit the settings 
+in the deps.php file in this folder for the script to work. Some fairly empty header and footer files are also
+provided so that you can customize it with your own websites template to make it integrate nicely. There is also
+a separate stylesheet. You must also specify the location of these scripts in the repair/deps.php file.
+
+8. There is also a servicerequest folder. This script allows you to collect service requests from your website.
+You can place this folder anywhere on your website, separate from the main 
+PC Repair Tracker Installation. You must edit the settings in the deps.php file in this folder for the script to work. Some fairly empty header and 
+footer files are also provided so that you can customize it with your own websites template to make it 
+integrate nicely. There is also a separate stylesheet. 
+
+8. There is also a portal folder. This script allows your customers to view billing and repair information as
+well as pay invoices. You must edit the settings in the deps.php file in this folder for the script to work. 
+
+
+9. If you would like to set up a custom payment method, there is a "CustomPayment.php" script. You can rename and make multiple copies 
+of this file. For instance, you could rename it to Bank.php, open it up and edit the two variables at the top of the file. 
+Edit the scriptname variable to match what you named the PHP file minus the php extension. Then enter the extra fields 
+you wish to collect info for. Then in your store/deps.php file enter the your name for the payment plugin into the payment methods array.
+
+10. For mobile access, access the repairmobile folder with your mobile device. If you add a shortcut to your homescreen it will
+launch in fullscreen webview mode.
+
+11. If you have customer lists in CSV format, you can use the importer tool in the admin menu to import them into PCRT.
+    You can also import inventory, one store at a time.
+
+12. If you use a dymo printer, you must install the latest version of the Dymo Labelwriter Software which should include the "DYMO Web Service Installer"
+
+General FAQ
+
+Q: Does PCRT support cash drawers?
+A: No, as it is a web app, it is limited to what hardware it can access on a client machine.
+
+Q: What label printers are supported?
+A: I personally use a Dymo LabelWriter 400, but any dymo printer with a recent version of the 
+   Dymo label software for the Windows platform should work.
+
+Q: Do other label printers work?
+A: No, I can only write support for printers that use XML label file formats. 
+
+Q: What barcode scanners are supported?
+A: Any barcode scanner that inputs things as if they were typed in at the keyboard should work.
+   Ebay has several for less than $30USD
+
+Q: Can PCRT import or export to Quickbooks
+A: No, and there are no plans to do so. PCRT manages invoicing and receipts internally. Personally,
+   my accountant does use QB but just import totals from PCRT as well as use it to keep track of 
+   the bank account and write checks
+
+Q: Does it run with XAMPP?
+A: Yes there are a few people that run it on XAMPP.
+
+Q: Can I run this on Windows hosting or on my own Windows server?
+A: I do not recommend it and cannot fully support it, but there are people that do. But also they
+   tend to have way more installation problems and issues with the email functions in the app.
+
+Q: Are there any issues running on IIS
+A: Yes, there are several known issues.
+
+Q: Does it support any payment gateways?
+A: There is AuthorizeNet,PayPay Payments Pro, and Sage Payments support. 
+   The link between PCRT and the gateway is secure, but it is
+   up to you make sure your link between the browser and PCRT is secure. (https). Also the payment
+   plugins only supports debit cards when run as a signature card. There is no support for PIN code keypads.
+
+Q: Can I make modifications to the code?
+A: Yes, but we cannot provide support for this or support you if you break things.
+
+Q: Does the software shut down if I do not renew it?
+A: No, you can continue to use it with no problems, you just will no longer receive free
+   updates or support.
+
+Q: Does the software phone home?
+A: No
+
+Q: Can I change the monetary symbol?
+A: Yes, you can use any monetary symbol you want. 
+
+Q: Can I import customer lists from my old system?
+A: Yes, if you can get a CSV file from your old system, you can use the builtin CSV importer. 
+
+Q: Do you offer a trial version?
+A: No, just an online demo, offering a trial version would tie up to much of my time with installation support for people that are not necessarily serious  
+   about purchasing. I would rather spend time writing new code than providing support to people installing a trial version.
+
+
+Usage FAQ
+
+Q: Why is the Customer Repair Sheet links greyed out on a repair page?
+A: You must type some basic notes for the customer before the button comes available. Our techs got in the 
+   habit of only adding the canned responses. We felt it was important to give a least a general statement about
+   the work done to a PC.
+
+
+Q: Why can I not set the status on a PC to "ready for pickup"?
+A: You must add charges or "NO CHARGE" to a PC. We had a problem in our shop where technicians would put PC's 
+   in the ready for pickup status without setting the prices, which resulted in the customer not getting charged for
+   everything.
+
+Q: How do I add scan icons when my webserver doesn't have the ImageMagick "convert" command available, 
+   what can I do?
+A: Add your scans like normal, but fill in the image filename field with the name of your icon that is 
+   24X24 pixels large. Also create a copy of the image 84X84 pixels and prefix the filename with a l_, and create
+   another icon 84X84 pixels that is grayscale and faded and prefix it with a gl_ and place these 3 icons in
+   your scans folder. 
+
+Q: Why can I not create a printable quote or copy a current cart to a repair cart.
+A: You cannot perform this action while items are staged for return are in the cart.
+
+Q: How do you identify store inventory?
+A: As we enter items to inventory, they are assigned a stock ID number which we used to enter on the top line of a 2-line
+   price tagger. But now we use a dymo printer and the price tag printing feature that prints our price tags complete
+   with a scanable code 39 bar code.
+
+
+Q: How do I use the asset label - price tag printing function?
+A: This function is written to use a dymo thermal printer with 1-1/8 x 3-1/2 (28 x 89 mm) address labels. If you 
+   have your dymo printer and software installed, the PCRT will offer up a download of your label, and you can 
+   just open it and click print. 
+
+Q: How do webcam asset image upload feature to stop asking me to allow access to the camera?. 
+A: Click the settings button and check the box to "Remember" your webhost.
+
+Q: Why does the webcam not reset for taking more pictures after taking a picture?
+A: Some versions of Flash on Linux and other systems have issues. Just click the link to reload the applet to 
+   reset it.
+
+Q: Can I perminently delete work orders or customers?
+A: Yes, but you must be logged in as admin to be able to access the function.
+
+Installation FAQ
+
+Q: Why do I get an error that says something about an error with header.php, output already started.
+A: You edited your deps.php scripts with and editor that introduced extra line returns or spaces and the
+   end of the deps.php file. Delete these extra spaces all the way to the final ?> php closing tag
+   and re-upload the file.
+
+Q: Why do I just get a blank page when loading the system?
+A: Your host may default to php3. You need to create an .htaccess file that contains the line
+   "AddType x-mapp-php5 .php" and place it in your main folder so that the proper php version is used. 
+
+Q: How do I start PCID, Invoice, Receipt, PC Work Order Numbers from something other than "1"?
+A: In your database management tool, probably phpMyAdmin
+
+	type in the SQL box:
+
+	Invoice Number:
+	ALTER TABLE invoices AUTO_INCREMENT = 1234;
+
+	Pcid Number:
+	ALTER TABLE pc_owner AUTO_INCREMENT = 1234;
+
+	Receipt Number
+	ALTER TABLE receipts AUTO_INCREMENT = 1234;
+
+	PC Work Order Number:
+	ALTER TABLE pc_wo AUTO_INCREMENT = 1234;
+
+	Where 1234 is the number you want to start with.
+
+Q: Why do I have issues/php warnings when I entering info with quotation marks?
+A: It is recommended to run with magic quotes off. If your server has this on place the following
+   in a .htaccess file to turn it off. Magic Quotes are problematic and being depreciated in future
+   versions of PHP
+
+        php_flag magic_quotes_gpc Off
+
+Q: Where do I download the web drivers for Topaz Signature Pads?
+
+To use the Topaz feature, you must purchase a Topaz 1X5 signature pad and install the special topaz client software.
+
+Topaz signature pads are manufactured in two configurations, one with LCD display and one with no LCD display. (User cannot see
+their signature as they sign)
+
+To download the installer, choose the link for the sigpad you have:
+For models ending in: -BSB-R and -BBSB-R
+
+http://www.topazsystems.com/software/sigwebbsb.exe
+
+For models ending in: -HSB-R, -BHSB-R, and -B-R
+
+http://www.topazsystems.com/Software/sigweb.exe
+
+Download links can also be found here:
+
+http://www.topazsystems.com/sigweb.html
+

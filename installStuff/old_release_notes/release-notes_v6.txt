@@ -1,0 +1,50 @@
+Attached to this email is the new v6 release of PC Repair Tracker.
+
+# Highlights:
+
+* Service Requests can be submitted in the portal.
+* The long standing issues with quantities in PCRT has been fixed.
+* Redesign of the print and email work order functions in to a dropdown menu.
+* Browser for block of time contracts.
+* Fixes for PHP 7.1, 7.2 warning (Non-Numeric Value Encountered error).
+
+
+
+Hope you enjoy this release!
+
+-Luke
+
+
+###############################################################################
+
+Be sure to follow the instuctions in the update.txt file to upgrade from v5.
+
+
+>>>>>>>>>> Change Log
+Bug Fix: Fixed function that retrieved the register setting in mobile.
+Maintenance: Lots of stylesheet work, cleanup, removing depreciated font tags.
+Change: Added Quantities throughout PCRT.
+Feature: Tagging feature. Both Assets and Groups, will also display on status list and on checkin.
+User Requested Feature: Added option to show all open work orders on dashboard.
+Enhancements: Lots of stylesheet cleanup on the dashboard.
+Change: Reorganized a few menus, print and email buttons, and the status changer into a menu bar on work orders.
+        Moved work area switcher just under the storage location switcher.
+Change: Lengthened the twilio voice response timeout.
+Tweak: Add serial search on receipts to the main search.
+Enhancement: Pull return receipts into group receipt viewer and portal.
+Change: More lock downs with tax rate editor to prevent common problems on new installs.
+Enhancement: Added PO number field on restock.
+Feature: Added support for incoming sms photos on twilio.
+Feature: Browser for block of time contracts.
+Change: Removed permission settings for admin user, automatically applying all permissions.
+Feature: Point in time inventory report. See the report for caveats.
+Fix: Missing entries in store side main menu.
+Fix: Broken link in inventory report.
+Feature: Service Requests can be submitted in the portal.
+Fix: Work done to prevent a warning on PHP 7.1-7.2 from appearing due to a change made in PHP.
+Fix: Multiple checkouts to the cart now pass work order numbers to an invoice, if an invoice is created, so that when the invoice
+     is checked out it marks the work orders as checked out if they are still sitting in the status list.
+Feature: Added some stats to a dashboard for the repair side.
+Feature: On Monthly Sales report you can now show the previous years data.
+Feature: On Monthly Sales report you can now view cumulative sales data and compare it to the previous year.
+

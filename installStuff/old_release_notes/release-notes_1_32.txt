@@ -1,0 +1,93 @@
+A new release of PC Repair Tracker is attached to this email. This release contains two major new features, support for
+the php pear mailing library and multi store support.
+
+Pear Mailer:
+############
+
+Not all server hosts allow use of their servers for relaying email. Many hosts do allow it, but have 
+firewalls in place or other hoops to jump through in order to allow the relay of email. Pear is something
+many hosts include support for. With this new feature you can specify an smtp host with or without
+authentication to relay email. Use of the pear library also makes it easier to attach inline images. So if
+you use the pear library to send email, it will attach your logo and display it inline on receipts and invoices.
+I have tested it with Evolution, Outlook, Windows Mail, and Gmail, and the logo image displays fine. This new
+feature will also be great for people that run inhouse servers that have previously been unable to relay mail.
+As long as you can get pear installed, you can use and alternate smtp server to send email with a username
+and password.
+
+Multi Store Support:
+####################
+
+The new multistore support is intended for computer repair shops that operate under the same business name
+but have more than one location. It allows you to keep work orders separate on the repair side of PCRT and
+track sales and inventory separately on the Point of Sale side of PCRT.
+
+Adding support for this required modifications to almost all of the php files. Before you upgrade as always
+it is a good idea to backup your files and database.
+
+####################
+
+Also fairly noteable is there is now a stylesheet for most printables in PCRT, this should help
+allow you to tweak fonts and font sizes easier.
+
+You can also now edit items on invoices, basically you use the same function you use to checkout an invoice,
+but instead of completing a sale, you can modify the items, and then click the link at the bottom of the
+current cart to save the invoice.
+
+Be sure to read and follow the update.txt file for upgrade instructions. Make sure to perform all previous 
+upgrades before applying this upgrade.
+
+Make sure you only run the database upgrade script once. The script when run will add your default store
+set all your users as well as all work orders, invoices, receipts, stickies, and inventory to the default
+store.
+
+Don't forget to refresh the browsers on your clients after upgrading to get the updated stylesheet.
+
+Some of you have asked in the past if you can skip versions, if you wish to try this, you still need to
+follow the upgrade instructions for each release, but you can skip the step where you upload all of the 
+php files (except for the deps.php file) until the end using the php files from the most current release 
+you are upgrading to.
+
+Also I would like to note, there are alot of great feature suggestions in the forums, but the amount
+of time it took to add the multi store support I did not want to push this release back any further.
+
+Thank you all for your support and encouragement, it is truly appreciated.
+-Luke
+
+
+Complete Changelog:
+
+*Enhancement: Show user on work order action report
+*Enhancement: New variable to set Tax label
+*Feature: Support for the PHP Pear Mail function
+*Enhancement: Addition of stylesheet for printables.
+*Feature: New Sage Payments plugin
+*Feature: Invoice Notes
+*Enhancement: Show Applied Deposits and a Grand Total Total less Applied Deposits in the Day Report.
+*Enhancement: Added ability for admin user to delete groups that do not contain any PC's
+*Enhancement: Allow items to be added to repair cart using product upc.
+*Enhancement: Added phone number to floating bar.
+*Change: Receipt Search now shows newest receipts first.
+*Enhancement: Ability to edit items on an invoice. 
+*Bug Fix: Fixed bug in refunded tax total on date range span report
+*Enhancement: Several updates to POS reports.
+*Enhancement: Change the default of all users tax rate to a current rate if only one rate is configured or a rate is disabled.
+*Enhancement: Set default dates on reports if left empty to avoid potential issue.
+*Bug Fix: Fixed bug where invoice contact information was not passed the the current cart from the invoice search feature.
+*Enhancement: Show stock counts of items on open invoices when browsing inventory categories.
+*Enhancement: Allow sorting of printable inventory list by stock id
+*Enhancement: Replaced javascript that grows the work order notes boxes with a better one.
+
+*Major Feature: Multi Store Support
+* Manage Store definitions and Workarea definitions in Admin Settings
+* Added logic to shift user default stores to active stores if a given store gets disabled.
+* Keep Work Orders Separate by Store in Status List and Touchscreen
+* Track Store on receipts and invoices.
+* Ability to Edit the assigned store on the work order.
+* Show store on invoice list viewer
+* Allow POS reports to show report by store or all stores.
+* Track inventory by store.
+* Allow Sticky Notes to view by store or all stores
+
+
+
+

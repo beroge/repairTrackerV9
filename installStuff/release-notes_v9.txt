@@ -1,0 +1,43 @@
+Attached to this email is the new v9 release of PC Repair Tracker.
+
+# Highlights:
+
+* New Optional Ledger Feature - And option to keep track of expenses and compare them to sales
+* More Ajax - Less complete page reloads on work order and cart
+* Non-Inventoried Items - You can now predefine common non-inventoried items
+* Invoice Terms - You can now have different invoice terms per invoice and apply late fees.
+
+
+Hope you enjoy this release!
+
+-Luke
+
+
+################################################
+PCRT Release Version 9
+################################################
+
+>>>>>>>>>> Change Log
+
+Enhancement: Cleanup on invoice view button options
+Major Feature: Ledger
+Enhancement: Ability for techs that work regularly with the status view to only show jobs assigned
+             to them to pick from the pool of available un-assigned "Waiting For Bench" jobs and
+             assign them to themselves and set status to "On the Bench" in one click
+Minor Enhancement: Added links to bench sheet from claim ticket and dymo label print screen.
+Minor Change: Some changes to the bottom work order floater. Removed old side floater.
+Change: You can now override the sms number on work orders.
+Feature: Non Inventoried Items Quick Entry
+Change: Quick Labor on work orders now prefills the labor box instead of adding it immediatley to allow you to
+        edit the printed description, edit the price or change the quantity.
+Change: Added a search selector to the add deposit dropdown on work orders
+Change: Added a search selector to the new item inventory stock category
+Minor Enhancement: Added filter on invoice viewer for multistore to only show one store.
+Feature: Absence tracker in timeclock
+Bug Fix: Fixed missing styles in timeclock
+Minor Enhancement: Show Hourly wage in Timeclock
+Enhancement: Added ajax in cart and work order form.
+Enhancement: Some redesign of Point of Sale Cart
+Change: Moved saved carts and kits to inventory list.
+Change: Updated Jquery Version for more performance.
+Feature: Added configurable per invoice terms with optional automatic late fees.

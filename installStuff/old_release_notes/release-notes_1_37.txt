@@ -1,0 +1,86 @@
+A new release of PC Repair Tracker is attached to this email. Due to the addition of utf8 support and translations,
+almost every file in PCRT has had modifications done. 
+
+Whats NEW: 
+
+# Translations & UTF-8
+PCRT is now easily translatable and supports utf-8 encoding. This was a very large task, there may still be a few strings that were missed or other 
+tweaks that are needed. For those that already speak English, this feature will allow you to tweak or rename just about every string in the interface.  
+
+# Checkout/Collection Receipt
+For those that like a checkout receipt to prove that a customer has picked up/collected an item, it is now available.
+
+# Set Work Order Status on Checkout:
+If you are processing a receipt, you can choose which status a work order switches to.
+
+# Search
+The search feature has been rewritten and much more user friendly for both the store and repair.
+
+# Dymo Labels
+Dymo labels can now be previewed and printed inline without opening the dymo software. You can also now save templates right in the PCRT interface.
+
+# Price Markups
+Basic controls were added to calculate price markups.
+
+# Work Order Notes
+Work order notes have been rewritten to allow timestamps and multiple note entries
+ 
+# d7 Integration
+Thanks to some awesome collaboration with Nick from d7, you can now easily transfer reports via FTP to PCRT! This feature requires d7 version
+9.6 our newer. I am sure I do not need to explain what d7 is, unless you live under a rock..... lol ;)
+
+To UPGRADE, make sure you follow the directions IN ORDER in the update.txt file.
+
+
+-Luke
+
+
+Complete Changelog:
+
+
+################################################
+Release 1.37
+################################################
+
+>>>>>>>>>> Change Log
+
+*Bug Fix: Fixed bug in PayPal.php plugin that would cause wrong plugin to be called when attempting to void a payment.
+*Bug Fix: Allow Current Customer to be edited without losing ability to save the Recurring Invoice
+*Bug Fix: Fix ability to delete a canned service reminder entry.
+*Bug Fix: Fix pickup date not getting set correctly in some circumstances.
+*Enhancement: Added experimental resize code for the scan icon creator.
+*Bug Fix: Fixed bug that completely broke the csv export of the quarterly report in store/reports.php
+*Bug Fix: Fix bug in display of store address in printed deposit receipt in store/deposit.php
+*Major Feature: Added translation system that allows for translation of the interface as well as customization of all strings.
+*Major Feature: Added support for UTF-8 Encoding
+*Enhancement: Added JQuery function to load work order screen prior to status list.
+*Enhancement: Added some indexes to the database to help increase speed for systems with large amounts of userlog data.
+*Enhancement: Added number formatting function for formatting numbers to make it easier to change.
+*Enhancement: Increased precision of tax calculations to reduce rounding discrepencies in totals.
+*Fix: Clear invoice number from receipt if invoice is converted to quote and then deleted.
+*Enhancement: Added Deposit button to claim ticket.
+*Enhancement: Added box to search again for a PC.
+*Fix: Urlencode the price before sending to the price tag script
+*Customer Request: Add company name to status list
+*Enhancement: Search group company field when searching for a PC/Customer.
+*Enhancement: Change method for loading inventory images so that external access can be blocked.
+*Fix: Un-apply an applied deposit when admin deletes a receipt.
+*Enhancement: Show total count of returning computers checked in on Repair volume report.
+*Enhancement: Added permissions to hide delete and edit links on sticky notes for notes not assigned to the logged in user.
+*Feature: Script to figure markups when adding or editing inventory.
+*Feature: Show markup percentage if the user has Inventory permissions.
+*Feature: Foldable price card for inventory items.
+*Feature: Added optional Checkout/Collection Receipt
+*Feature: Ability to choose what status a work order switches to when processing a payment through the current cart.
+*Enhancement: Re-written work order notes allowing multiple notes with timestamp.
+*Feature Request: Show individual deposits on work order invoice.
+*Feature Request: Added support for FreeSMSGateway.com, unable to recieve any messages with it, even though it says they were sent.
+*Customer Request: Added links to mark service requests as sent or delete service requests from the process service requests list.
+*Feature Request: Ability to renotify assigned tech via sms or email.
+*Enhancement: Revamped search feature on POS and Repair sides
+*Enhancement: Added ajax search inventory search on work order screen.
+*Enhancement: Added support for Dymo Javascript API
+*Enhancement: You can now set a custom labor price discount.
+*Feature Request: Untested, experimental pluging for MyVirtualMerchant (elevon)
+*Feature Request: Added support for MyMobileAPI SMS Gateway
+*New Feature: d7 Report Integration
