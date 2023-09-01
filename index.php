@@ -56,6 +56,18 @@
 
                     return true;
                 }
+
+                document.querySelectorAll(".learn-more").forEach(function (item) {
+  item.addEventListener("click", function () {
+    // Remove active class from all elements with the same class name
+    document.querySelectorAll(".learn-more").forEach(function (el) {
+      el.classList.remove("active");
+    });
+
+    // Toggle active class for the clicked element
+    this.classList.toggle("active");
+  });
+});
             </script>
 
             <!-- Hidden input fields for values -->

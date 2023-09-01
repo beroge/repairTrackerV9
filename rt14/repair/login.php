@@ -224,7 +224,7 @@ function sf(){document.loginbox.username.focus();}
 
 
 </head>
-<body onLoad=sf()>
+<body onLoad=sf() style="display:none;">
 <br><br><br>
 <form name="loginbox" action="login.php" method="post">
 <table style=" margin-left: auto; margin-right: auto;">

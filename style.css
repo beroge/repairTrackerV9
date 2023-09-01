@@ -201,16 +201,18 @@ body {
        text-transform: uppercase;
   }
   
-   button:hover .circle {
+   button:hover .circle, button.active .circle {
        width: 100%;
   }
-   button:hover .circle .icon.arrow {
+   button:hover .circle .icon.arrow, button.active .circle .icon.arrow {
        background: #fff;
        transform: translate(1rem, 0);
   }
-   button:hover .button-text {
-       color: #fff;
-  }
+  button:hover .button-text,
+button.active .button-text{
+  color: #fff;
+}
+
   .push {
     margin-left:45px!important;
   } 
