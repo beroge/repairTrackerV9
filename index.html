@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
-        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="login">
@@ -15,73 +13,21 @@
         </div>
         <!-- Fix: Add the closing tag for the img element -->
 
-        <div class="login-form" name="loginbox" action="" method="post" onsubmit="return setAction()">
+        <div class="login-form">
             <div class="wrapper">
-                <button class="learn-more active" type="button" onclick="setAction('repair')">
+                <button class="learn-more" type="button" onClick="window.location.href = 'rt14/repair/index.html';">
                     <span class="circle" aria-hidden="true">
                         <span class="icon arrow"></span>
                     </span>
                     <span class="push button-text">Repair Tracker</span>
                 </button>
-                <button class="learn-more" type="button" onclick="setAction('time')">
+                <button class="learn-more" onClick="window.location.href = 'rt14/timeclock/index.html';">
                     <span class="circle" aria-hidden="true">
                         <span class="icon arrow"></span>
                     </span>
                     <span class="button-text">Time Clock</span>
                 </button>
             </div>
-            <br />
-
-            <!-- Fix: Move the script tag before the form element -->
-            <!-- <script>
-                function setAction(option) {
-                    var form = document.forms['loginbox'];
-                    var nameInput = form.querySelector('#nameInput');
-                    var passwordInput = form.querySelector('#passwordInput');
-                    var selectedOption = option;
-
-                    // Fix: Use a hidden input field to store the selected option value
-                    var buttonValueInput = form.querySelector('#buttonValue');
-                    buttonValueInput.value = selectedOption;
-                    console.log(buttonValueInput.value);
-
-                    var username = nameInput.value;
-                    var password = passwordInput.value;
-
-                    if (selectedOption === 'repair') {
-                        form.action = 'rt14/repair/login.php?username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(password);
-                    } else if (selectedOption === 'time') {
-                        form.action = 'rt14/timeclock/index.php?username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(password);
-                    }
-
-                    return true;
-                }
-
-                document.querySelectorAll(".learn-more").forEach(function (item) {
-  item.addEventListener("click", function () {
-    // Remove active class from all elements with the same class name
-    document.querySelectorAll(".learn-more").forEach(function (el) {
-      el.classList.remove("active");
-    });
-
-    // Toggle active class for the clicked element
-    this.classList.toggle("active");
-  });
-});
-            </script> -->
-
-            <!-- Hidden input fields for values -->
-            <!-- <input type="hidden" name="button" id="buttonValue" value="">
-            <input type="text" name="name" id="nameInput" placeholder="Username" /><br />
-            <input type="password" name="password" id="passwordInput" placeholder="Password" /><br />
-            <input type="hidden" name="RURI" value="<?php echo $ruri; ?>" />
-            <input type="hidden" name="METHOD" value="<?php echo $method; ?>" /><br />
-            <button class="learn-more" type="submit" id="submitButton">
-                <span class="circle" aria-hidden="true">
-                    <span class="icon arrow"></span>
-                </span>
-                <span class="button-text">Submit</span>
-            </button> -->
         </div>
 
     </div>
