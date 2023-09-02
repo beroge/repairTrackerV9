@@ -10,7 +10,7 @@
 include("deps.php");
 require_once("common.php");
 
-$message = "<span class=\"sizemelarge boldme colormered\">".pcrtlang("You are logged out")."</span><br><br><a href=./ class=\"linkbuttonmedium linkbuttonred radiusall\">".pcrtlang("Login")."</a>";
+$message = "<span class=\"sizemelarge boldme colormered\">".pcrtlang("You are logged out")."</span><br><br><a href=../.. class=\"linkbuttonmedium linkbuttonred radiusall\">".pcrtlang("Login")."</a>";
 
 if(isset($ipofpc)) {
 userlog(31,'','',pcrtlang("Logged Out"));

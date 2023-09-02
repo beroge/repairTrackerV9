@@ -15,7 +15,7 @@
         </div>
         <!-- Fix: Add the closing tag for the img element -->
 
-        <form class="login-form" name="loginbox" action="" method="post" onsubmit="return setAction()">
+        <div class="login-form" name="loginbox" action="" method="post" onsubmit="return setAction()">
             <div class="wrapper">
                 <button class="learn-more active" type="button" onclick="setAction('repair')">
                     <span class="circle" aria-hidden="true">
@@ -33,7 +33,7 @@
             <br />
 
             <!-- Fix: Move the script tag before the form element -->
-            <script>
+            <!-- <script>
                 function setAction(option) {
                     var form = document.forms['loginbox'];
                     var nameInput = form.querySelector('#nameInput');
@@ -68,10 +68,10 @@
     this.classList.toggle("active");
   });
 });
-            </script>
+            </script> -->
 
             <!-- Hidden input fields for values -->
-            <input type="hidden" name="button" id="buttonValue" value="">
+            <!-- <input type="hidden" name="button" id="buttonValue" value="">
             <input type="text" name="name" id="nameInput" placeholder="Username" /><br />
             <input type="password" name="password" id="passwordInput" placeholder="Password" /><br />
             <input type="hidden" name="RURI" value="<?php echo $ruri; ?>" />
@@ -81,8 +81,8 @@
                     <span class="icon arrow"></span>
                 </span>
                 <span class="button-text">Submit</span>
-            </button>
-        </form>
+            </button> -->
+        </div>
 
     </div>
 </body>
