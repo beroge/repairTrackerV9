@@ -16,8 +16,7 @@ $value2 = trim($value);
    return mysqli_real_escape_string($rs_connect, $value2);
 }
 
-$username = $_GET['username'];
-$password = $_GET['password'];
+
 
 
 
@@ -219,33 +218,25 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"../repair/$pcrt_styleshe
 <script>
 <!--
 function sf(){document.loginbox.username.focus();}
-
+// -->
 </script>
 
 
 </head>
-<body onLoad=sf() style="display:none;">
+<body onLoad=sf()>
 <br><br><br>
 <form name="loginbox" action="login.php" method="post">
 <table style=" margin-left: auto; margin-right: auto;">
 <tr><td><img src="<?php echo "$logo"; ?>" class="animated bounceIn" alt="logo"><br><br></td></tr>
 <tr><td style="text-align:center">
 <table style="width:100%"><tr><td>
-<span class=boldme><?php echo pcrtlang("Username"); ?>:</span></td><td><input type="text" name="username" class="textbox" value="<?php echo $username;?>"></td></tr>
-<tr><td><span class=boldme><?php echo pcrtlang("Password"); ?>:</span></td><td><input type="password" name="password" class="textbox" value="<?php echo $password; ?>"></td></tr>
+<span class=boldme><?php echo pcrtlang("Username"); ?>:</span></td><td><input type="text" name="username" class="textbox"></td></tr>
+<tr><td><span class=boldme><?php echo pcrtlang("Password"); ?>:</span></td><td><input type="password" name="password" class="textbox"></td></tr>
 <tr><td colspan=2 style="text-align:center;"><input type="hidden" name="RURI" value="<?php echo "$ruri"; ?>">
 <input type="hidden" name="METHOD" value="<?php echo "$method"; ?>"><br>
 <input type="submit" value="<?php echo pcrtlang("Login"); ?>" class="button">
 </td></tr></table>
 </td></tr></table></form>
-
-<script>
-    window.onload = function() {
-        document.forms["loginbox"].submit();
-    }
-</script>
-
-
 
 <?php
 
